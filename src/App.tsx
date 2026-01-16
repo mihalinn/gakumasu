@@ -7,7 +7,7 @@ import { PDrinkView } from './components/PDrinkView'
 import { StatusView } from './components/StatusView'
 import { PresetListView } from './components/PresetListView'
 import { NavButton, SummaryCard } from './components/UI'
-import { useSimulation } from './hooks/useSimulation'
+import { ProduceView } from './components/ProduceView'
 
 const TABS = {
     PRODUCE: 'produce',
@@ -86,6 +86,7 @@ function App() {
     const [hand, setHand] = useState<Card[]>([]);
     // View Mode State (Global)
     const [viewMode, setViewMode] = useState<'detail' | 'compact'>('detail');
+    const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(true);
 
     // Reset Logic
     const handleResetAll = () => {
@@ -197,6 +198,7 @@ function App() {
     // Derived state
     const selectedGroup = characterGroups.find(g => g.name === selectedCharName);
     const selectedProfile = selectedGroup?.profiles.find(p => p.id === selectedProfileId);
+
     return (
         <div className="flex h-screen bg-slate-950 text-slate-100 font-sans selection:bg-blue-500/30">
             {/* Left Sidebar */}
@@ -223,17 +225,19 @@ function App() {
                     <NavButton label="手札" active={activeTab === TABS.HAND} onClick={() => setActiveTab(TABS.HAND)} />
                     <NavButton label="Pアイテム" active={activeTab === TABS.P_ITEM} onClick={() => setActiveTab(TABS.P_ITEM)} />
                     <NavButton label="Pドリンク" active={activeTab === TABS.P_DRINK} onClick={() => setActiveTab(TABS.P_DRINK)} />
-                    <NavButton label="保存データ" active={activeTab === TABS.PRESETS} onClick={() => setActiveTab(TABS.PRESETS)} />
+                </div>
+                <div className="flex flex-col space-y-1">
+                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 px-3 mt-2">保存データ</p>
+                    <NavButton label="保存データ一覧" active={activeTab === TABS.PRESETS} onClick={() => setActiveTab(TABS.PRESETS)} />
                     <button
                         onClick={handleAddNewPreset}
-                        className="mx-3 mt-3 py-2 rounded-lg bg-blue-600/20 text-blue-300 hover:bg-blue-600/30 border border-blue-500/30 transition-all flex items-center justify-center gap-2 group"
+                        className="mx-3 mt-1 py-2 rounded-lg bg-blue-600/20 text-blue-300 hover:bg-blue-600/30 border border-blue-500/30 transition-all flex items-center justify-center gap-2 group"
                     >
                         <svg className="w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" /></svg>
                         <span className="text-[10px] font-bold">現在の構成を保存</span>
                     </button>
                 </div>
                 <div className="flex-1 flex flex-col space-y-4 pt-4 border-t border-white/5 overflow-hidden">
-                    {/* Danger Zone */}
                     <div className="mt-auto pt-4">
                         <div className="p-4 rounded-xl border border-red-500/10 bg-red-500/5 opacity-40 hover:opacity-100 transition-opacity">
                             <p className="text-[9px] font-bold text-red-500/50 uppercase tracking-widest mb-3 text-center">Danger Zone</p>
@@ -247,8 +251,9 @@ function App() {
                     </div>
                 </div>
             </div>
+
             {/* Main Content */}
-            <div className="flex-1 overflow-hidden relative bg-slate-950 flex flex-col">
+            <div className="flex-1 overflow-hidden relative bg-slate-950 flex flex-col transition-all duration-500">
                 <div className="flex-1 overflow-auto p-8">
                     <div className="max-w-6xl mx-auto h-full">
                         {activeTab === TABS.PRODUCE && (
@@ -319,240 +324,141 @@ function App() {
                         )}
                     </div>
                 </div>
+                {/* Show Right Sidebar Button */}
+                {!isRightSidebarOpen && (
+                    <div className="absolute right-0 top-6 z-50 animate-in fade-in slide-in-from-right-2 duration-300">
+                        <button
+                            onClick={() => setIsRightSidebarOpen(true)}
+                            className="bg-slate-800 border-l border-t border-b border-white/10 rounded-l-lg p-3 text-slate-400 hover:text-white shadow-xl hover:bg-slate-700 transition-all"
+                            title="設定を表示"
+                        >
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" /></svg>
+                        </button>
+                    </div>
+                )}
             </div>
-            {/* Right Sidebar */}
-            <div className="w-80 bg-slate-900/30 border-l border-white/5 p-6 flex-shrink-0 flex flex-col overflow-y-auto animate-in slide-in-from-right-10 duration-300">
-                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-6">現在の設定</h3>
-                <div className="space-y-6">
-                    {/* Status Summary (Vo/Da/Vi row + HP row) */}
-                    <div className="flex flex-col gap-1.5">
-                        <div className="grid grid-cols-3 gap-1.5">
-                            <div className="flex flex-col items-center justify-center gap-0.5 bg-slate-800/50 rounded px-1 py-1.5 border border-white/5">
-                                <span className="text-[9px] font-bold text-pink-400">Vo</span>
-                                <span className="text-sm font-mono font-bold text-white">{status.vocal}</span>
-                            </div>
-                            <div className="flex flex-col items-center justify-center gap-0.5 bg-slate-800/50 rounded px-1 py-1.5 border border-white/5">
-                                <span className="text-[9px] font-bold text-blue-400">Da</span>
-                                <span className="text-sm font-mono font-bold text-white">{status.dance}</span>
-                            </div>
-                            <div className="flex flex-col items-center justify-center gap-0.5 bg-slate-800/50 rounded px-1 py-1.5 border border-white/5">
-                                <span className="text-[9px] font-bold text-yellow-400">Vi</span>
-                                <span className="text-sm font-mono font-bold text-white">{status.visual}</span>
-                            </div>
-                        </div>
-                        <div className="flex items-center gap-3 bg-slate-800/50 rounded px-3 py-1.5 border border-white/5">
-                            <span className="text-[10px] font-bold text-green-400">HP</span>
-                            <span className="text-sm font-mono font-bold text-white ml-auto">{status.hp}</span>
-                            <span className="text-[9px] text-slate-500 font-mono">/ {status.maxHp}</span>
-                        </div>
-                    </div>
 
-                    <SummaryCard
-                        title="アイドル" onClick={() => setActiveTab(TABS.CHARACTER)}
-                        value={selectedProfile ? selectedProfile.name : "（未設定）"}
-                        sub={selectedGroup ? selectedGroup.name : "--"}
-                        badge={selectedProfile?.plan}
-                        highlight={!!selectedProfile}
-                        imageUrl={selectedProfile?.image && selectedGroup ? `${import.meta.env.BASE_URL}images/characters/${selectedGroup.id}/${selectedProfile.image}` : undefined}
-                    />
-                    <div className="flex justify-end -mt-5 pr-2 relative z-20">
-                        <button onClick={resetCharacter} className="text-[9px] text-zinc-600 hover:text-red-400 transition-colors px-1 uppercase tracking-tighter cursor-pointer">Clear Selection</button>
+            {/* Right Sidebar */}
+            <div className={`${isRightSidebarOpen ? 'w-80' : 'w-0'} bg-slate-900/30 border-l border-white/5 flex-shrink-0 flex flex-col overflow-hidden transition-all duration-500 ease-in-out relative`}>
+                <div className="w-80 h-full flex flex-col p-6 overflow-y-auto">
+                    <div className="flex items-center justify-between mb-6 sticky top-0 bg-slate-900/95 py-2 -my-2 z-10 backdrop-blur w-full">
+                        <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">現在の設定</h3>
+                        <button onClick={() => setIsRightSidebarOpen(false)} className="text-slate-500 hover:text-white transition-colors">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" /></svg>
+                        </button>
                     </div>
-                    <div
-                        className="cursor-pointer hover:bg-white/5 p-2 -m-2 rounded-lg transition-colors group"
-                        onClick={() => setActiveTab(TABS.HAND)}
-                    >
-                        <div className="flex justify-between items-center mb-2">
-                            <span className="text-xs text-slate-500 uppercase font-bold group-hover:text-slate-300 transition-colors">手札</span>
-                            <div className="flex items-center gap-2 underline-offset-4">
-                                <button onClick={resetHand} className="text-[10px] text-slate-600 hover:text-red-400 transition-colors px-1 cursor-default">Clear</button>
-                                <span className="text-xs text-slate-400">{hand.length}/25</span>
+                    <div className="space-y-6">
+                        {/* Status Summary */}
+                        <div className="flex flex-col gap-1.5">
+                            <div className="grid grid-cols-3 gap-1.5">
+                                <div className="flex flex-col items-center justify-center gap-0.5 bg-slate-800/50 rounded px-1 py-1.5 border border-white/5">
+                                    <span className="text-[9px] font-bold text-pink-400">Vo</span>
+                                    <span className="text-sm font-mono font-bold text-white">{status.vocal}</span>
+                                </div>
+                                <div className="flex flex-col items-center justify-center gap-0.5 bg-slate-800/50 rounded px-1 py-1.5 border border-white/5">
+                                    <span className="text-[9px] font-bold text-blue-400">Da</span>
+                                    <span className="text-sm font-mono font-bold text-white">{status.dance}</span>
+                                </div>
+                                <div className="flex flex-col items-center justify-center gap-0.5 bg-slate-800/50 rounded px-1 py-1.5 border border-white/5">
+                                    <span className="text-[9px] font-bold text-yellow-400">Vi</span>
+                                    <span className="text-sm font-mono font-bold text-white">{status.visual}</span>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-3 bg-slate-800/50 rounded px-3 py-1.5 border border-white/5">
+                                <span className="text-[10px] font-bold text-green-400">HP</span>
+                                <span className="text-sm font-mono font-bold text-white ml-auto">{status.hp}</span>
+                                <span className="text-[9px] text-slate-500 font-mono">/ {status.maxHp}</span>
                             </div>
                         </div>
-                        <div className="grid grid-cols-5 gap-1 mb-2">
-                            {hand.map((card, i) => (
-                                <div key={`${card.id}-${i}`} className="aspect-square bg-slate-800 rounded border border-white/10 overflow-hidden relative group">
-                                    {card.image && card.image !== 'default.png' && (
-                                        <>
-                                            <img src={`${import.meta.env.BASE_URL}images/cards/${card.image.split('/').map(s => encodeURIComponent(s)).join('/')}`} className="w-full h-full object-contain opacity-100 group-hover:opacity-100 transition-opacity" />
-                                            <div className="w-full h-full flex items-center justify-center text-[8px] text-slate-500 font-bold">
+
+                        <SummaryCard
+                            title="アイドル" onClick={() => setActiveTab(TABS.CHARACTER)}
+                            value={selectedProfile ? selectedProfile.name : "（未設定）"}
+                            sub={selectedGroup ? selectedGroup.name : "--"}
+                            badge={selectedProfile?.plan}
+                            highlight={!!selectedProfile}
+                            imageUrl={selectedProfile?.image && selectedGroup ? `${import.meta.env.BASE_URL}images/characters/${selectedGroup.id}/${selectedProfile.image}` : undefined}
+                        />
+                        <div className="flex justify-end -mt-5 pr-2 relative z-20">
+                            <button onClick={resetCharacter} className="text-[9px] text-zinc-600 hover:text-red-400 transition-colors px-1 uppercase tracking-tighter cursor-pointer">Clear Selection</button>
+                        </div>
+
+                        <div className="cursor-pointer hover:bg-white/5 p-2 -m-2 rounded-lg transition-colors group" onClick={() => setActiveTab(TABS.HAND)}>
+                            <div className="flex justify-between items-center mb-2">
+                                <span className="text-xs text-slate-500 uppercase font-bold group-hover:text-slate-300 transition-colors">手札</span>
+                                <div className="flex items-center gap-2">
+                                    <button onClick={resetHand} className="text-[10px] text-slate-600 hover:text-red-400 transition-colors px-1">Clear</button>
+                                    <span className="text-xs text-slate-400">{hand.length}/25</span>
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-5 gap-1 mb-2">
+                                {hand.map((card, i) => (
+                                    <div key={`${card.id}-${i}`} className="aspect-square bg-slate-800 rounded border border-white/10 overflow-hidden relative group">
+                                        {card.image && card.image !== 'default.png' && (
+                                            <img src={`${import.meta.env.BASE_URL}images/cards/${card.image.split('/').map(s => encodeURIComponent(s)).join('/')}`} className="w-full h-full object-contain" />
+                                        )}
+                                        {(!card.image || card.image === 'default.png') && (
+                                            <div className="absolute inset-0 flex items-center justify-center text-[6px] text-center bg-black/50 text-white truncate px-0.5">
                                                 {card.name[0]}
-                                            </div>
-                                        </>
-                                    )}
-                                    {(!card.image || card.image === 'default.png') && (
-                                        <div className="absolute bottom-0 w-full text-[6px] text-center bg-black/50 text-white truncate px-0.5">
-                                            {card.name}
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
-                            {[...Array(Math.max(0, 25 - hand.length))].map((_, i) => (
-                                <div key={`empty-${i}`} className="aspect-square bg-slate-800/50 rounded border border-white/5 border-dashed"></div>
-                            ))}
-                        </div>
-                    </div>
-                    <div
-                        className="cursor-pointer hover:bg-white/5 p-2 -m-2 rounded-lg transition-colors group"
-                        onClick={() => setActiveTab(TABS.P_ITEM)}
-                    >
-                        <div className="flex justify-between items-center mb-2">
-                            <span className="text-xs text-slate-500 uppercase font-bold group-hover:text-slate-300 transition-colors">Pアイテム</span>
-                            <div className="flex items-center gap-2 underline-offset-4">
-                                <button onClick={resetPItems} className="text-[10px] text-slate-600 hover:text-red-400 transition-colors px-1 cursor-default">Clear</button>
-                                <span className="text-xs text-slate-400">{selectedPItems.length}個</span>
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-5 gap-1 mb-2">
-                            {selectedPItems.map((item, i) => (
-                                <div key={`${item.id}-${i}`} className="aspect-square bg-slate-800 rounded border border-white/10 overflow-hidden relative group" title={item.name}>
-                                    {item.image && item.image !== 'default.png' ? (
-                                        <div className="relative w-full h-full">
-                                            <img src={`${import.meta.env.BASE_URL}images/items/${item.image}`} className="w-full h-full object-cover" />
-                                            <div className={`absolute top-0 right-0 w-1.5 h-1.5 rounded-bl-sm ${item.plan === 'logic' ? 'bg-blue-500' :
-                                                item.plan === 'sense' ? 'bg-orange-500' :
-                                                    item.plan === 'anomaly' ? 'bg-purple-500' :
-                                                        'bg-slate-500'
-                                                }`} />
-                                        </div>
-                                    ) : (
-                                        <div className="w-full h-full flex items-center justify-center text-[8px] text-slate-500 font-bold">
-                                            {item.name[0]}
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
-                            {[...Array(Math.max(0, 5 - selectedPItems.length))].map((_, i) => (
-                                <div key={`empty-pitem-${i}`} className="aspect-square bg-slate-800/50 rounded border border-white/5 border-dashed"></div>
-                            ))}
-                        </div>
-                    </div>
-                    <div
-                        className="cursor-pointer hover:bg-white/5 p-2 -m-2 rounded-lg transition-colors group"
-                        onClick={() => setActiveTab(TABS.P_DRINK)}
-                    >
-                        <div className="flex justify-between items-center mb-2">
-                            <span className="text-xs text-slate-500 uppercase font-bold group-hover:text-slate-300 transition-colors">Pドリンク</span>
-                            <div className="flex items-center gap-2 underline-offset-4">
-                                <button onClick={resetPDrinks} className="text-[10px] text-slate-600 hover:text-red-400 transition-colors px-1 cursor-default">Clear</button>
-                                <span className="text-xs text-slate-400">{selectedPDrinks.length}/3</span>
-                            </div>
-                        </div>
-                        <div className="flex gap-2 mb-2">
-                            {[...Array(3)].map((_, i) => {
-                                const drink = selectedPDrinks[i];
-                                return (
-                                    <div key={`pdrink-slot-${i}`} className="w-12 h-12 bg-slate-800 rounded border border-white/10 overflow-hidden relative group" title={drink?.name}>
-                                        {drink ? (
-                                            drink.image && drink.image !== 'default.png' ? (
-                                                <div className="relative w-full h-full">
-                                                    <img src={`${import.meta.env.BASE_URL}images/drinks/${drink.image}`} className="w-full h-full object-cover" />
-                                                    <div className={`absolute top-0 right-0 w-1.5 h-1.5 rounded-bl-sm ${drink.plan === 'logic' ? 'bg-blue-500' :
-                                                        drink.plan === 'sense' ? 'bg-orange-500' :
-                                                            drink.plan === 'anomaly' ? 'bg-purple-500' :
-                                                                'bg-slate-500'
-                                                        }`} />
-                                                </div>
-                                            ) : (
-                                                <div className="w-full h-full flex items-center justify-center text-[8px] text-slate-500 font-bold">
-                                                    {drink.name[0]}
-                                                </div>
-                                            )
-                                        ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-slate-700">
-                                                <span className="text-xs">+</span>
                                             </div>
                                         )}
                                     </div>
-                                );
-                            })}
+                                ))}
+                                {[...Array(Math.max(0, 25 - hand.length))].map((_, i) => (
+                                    <div key={`empty-${i}`} className="aspect-square bg-slate-800/50 rounded border border-white/5 border-dashed"></div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="cursor-pointer hover:bg-white/5 p-2 -m-2 rounded-lg transition-colors group" onClick={() => setActiveTab(TABS.P_ITEM)}>
+                            <div className="flex justify-between items-center mb-2">
+                                <span className="text-xs text-slate-500 uppercase font-bold group-hover:text-slate-300 transition-colors">Pアイテム</span>
+                                <div className="flex items-center gap-2">
+                                    <button onClick={resetPItems} className="text-[10px] text-slate-600 hover:text-red-400 transition-colors px-1">Clear</button>
+                                    <span className="text-xs text-slate-400">{selectedPItems.length}個</span>
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-5 gap-1 mb-2">
+                                {selectedPItems.map((item, i) => (
+                                    <div key={`${item.id}-${i}`} className="aspect-square bg-slate-800 rounded border border-white/10 overflow-hidden relative group">
+                                        {item.image && item.image !== 'default.png' ? (
+                                            <img src={`${import.meta.env.BASE_URL}images/items/${item.image}`} className="w-full h-full object-cover" />
+                                        ) : (
+                                            <div className="w-full h-full flex items-center justify-center text-[8px] text-slate-500 font-bold">{item.name[0]}</div>
+                                        )}
+                                    </div>
+                                ))}
+                                {[...Array(Math.max(0, 5 - selectedPItems.length))].map((_, i) => (
+                                    <div key={`empty-pitem-${i}`} className="aspect-square bg-slate-800/50 rounded border border-white/5 border-dashed"></div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="cursor-pointer hover:bg-white/5 p-2 -m-2 rounded-lg transition-colors group" onClick={() => setActiveTab(TABS.P_DRINK)}>
+                            <div className="flex justify-between items-center mb-2">
+                                <span className="text-xs text-slate-500 uppercase font-bold group-hover:text-slate-300 transition-colors">Pドリンク</span>
+                                <div className="flex items-center gap-2">
+                                    <button onClick={resetPDrinks} className="text-[10px] text-slate-600 hover:text-red-400 transition-colors px-1">Clear</button>
+                                    <span className="text-xs text-slate-400">{selectedPDrinks.length}/3</span>
+                                </div>
+                            </div>
+                            <div className="flex gap-2 mb-2">
+                                {[...Array(3)].map((_, i) => {
+                                    const drink = selectedPDrinks[i];
+                                    return (
+                                        <div key={`pdrink-slot-${i}`} className="w-12 h-12 bg-slate-800 rounded border border-white/10 overflow-hidden relative" title={drink?.name}>
+                                            {drink ? (
+                                                <img src={`${import.meta.env.BASE_URL}images/drinks/${drink.image}`} className="w-full h-full object-cover" />
+                                            ) : (
+                                                <div className="w-full h-full flex items-center justify-center text-slate-700 text-xs">+</div>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    );
-}
-
-interface ProduceViewProps {
-    initialHand: Card[];
-    initialPItems: PItem[];
-    initialPDrinks: PDrink[];
-    status: { vocal: number; dance: number; visual: number; hp: number; maxHp: number };
-    turnAttributes: LessonAttribute[];
-}
-
-function ProduceView({ initialHand: _initialHand, initialPItems: _initialPItems, initialPDrinks: _initialPDrinks, status, turnAttributes }: ProduceViewProps) {
-    const { state, endTurn } = useSimulation(status, turnAttributes);
-
-    return (
-        <div className="h-full flex flex-col gap-4 animate-in fade-in duration-500">
-            {/* Header: Turn & Score */}
-            <div className="flex items-center justify-between bg-slate-900/50 p-4 rounded-xl border border-white/5">
-                <div className="flex items-center gap-6">
-                    <div className="flex flex-col items-center">
-                        <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">TURN</span>
-                        <div className="text-3xl font-bold font-mono text-white">
-                            {state.turn} <span className="text-sm text-slate-600">/ {state.maxTurns}</span>
-                        </div>
-                    </div>
-                    {/* Current Turn Attribute Display */}
-                    {state.currentTurnAttribute && (
-                        <div className={`
-                        flex flex-col items-center justify-center w-12 h-12 rounded-full border-2 
-                        ${state.currentTurnAttribute === 'vocal' ? 'border-pink-500 bg-pink-500/10 text-pink-400' : ''}
-                        ${state.currentTurnAttribute === 'dance' ? 'border-blue-500 bg-blue-500/10 text-blue-400' : ''}
-                        ${state.currentTurnAttribute === 'visual' ? 'border-yellow-500 bg-yellow-500/10 text-yellow-400' : ''}
-                    `}>
-                            <span className="text-[10px] font-bold uppercase">{state.currentTurnAttribute.slice(0, 2)}</span>
-                        </div>
-                    )}
-                    <div className="h-8 w-px bg-white/10"></div>
-                    <div className="flex flex-col">
-                        <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">SCORE</span>
-                        <div className="text-3xl font-bold font-mono text-cyan-400 tabular-nums">
-                            {state.score.toLocaleString()}
-                        </div>
-                    </div>
-                </div>
-                <button
-                    onClick={endTurn}
-                    className="px-6 py-2 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-lg border border-white/10 transition-colors"
-                >
-                    ターン終了
-                </button>
-            </div>
-
-            {/* Main Stage Area */}
-            <div className="flex-1 bg-slate-900/30 rounded-xl border border-white/5 relative overflow-hidden flex items-center justify-center">
-                {/* Character Status Overlay */}
-                <div className="absolute top-4 left-4 flex flex-col gap-2">
-                    <div className="p-3 bg-black/60 backdrop-blur rounded-lg border border-white/10 min-w-[120px]">
-                        <div className="flex justify-between items-end mb-1">
-                            <span className="text-xs font-bold text-slate-400">HP</span>
-                            <span className="text-xl font-bold text-white font-mono">{state.hp}</span>
-                        </div>
-                        <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                            <div className="h-full bg-green-500" style={{ width: `${(state.hp / state.maxHp) * 100}%` }}></div>
-                        </div>
-                    </div>
-                    <div className="p-3 bg-black/60 backdrop-blur rounded-lg border border-white/10 min-w-[120px]">
-                        <div className="flex justify-between items-end">
-                            <span className="text-xs font-bold text-slate-400">元気</span>
-                            <span className="text-xl font-bold text-blue-400 font-mono">{state.genki}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="text-center opacity-30">
-                    <p className="font-bold text-2xl text-slate-500">STAGE VIEW</p>
-                    <p className="text-sm text-slate-600 mt-2">（スキルエフェクト・アイドル表示予定地）</p>
-                </div>
-            </div>
-
-            {/* Hand Area (Placeholder for now) */}
-            <div className="h-40 bg-slate-900/50 rounded-xl border border-white/5 p-4 flex items-center justify-center text-slate-600">
-                <p>手札エリア (Coming Soon)</p>
             </div>
         </div>
     );
