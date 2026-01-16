@@ -1,6 +1,6 @@
 学マス　最終オーディション　シュミレーター　
 
-テスト
+今のところPCタブレッド専用
 
 https://mihalinn.github.io/gakumasu/
 
