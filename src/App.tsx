@@ -5,6 +5,7 @@ import { HandView } from './components/HandView'
 import { PItemView } from './components/PItemView'
 import { PDrinkView } from './components/PDrinkView'
 import { StatusView } from './components/StatusView'
+import { PresetListView } from './components/PresetListView'
 import { NavButton, SummaryCard } from './components/UI'
 import { useSimulation } from './hooks/useSimulation'
 
@@ -15,6 +16,7 @@ const TABS = {
     P_ITEM: 'p_item',
     P_DRINK: 'p_drink',
     STATUS: 'status',
+    PRESETS: 'presets',
 } as const;
 type Tab = typeof TABS[keyof typeof TABS];
 
@@ -109,9 +111,6 @@ function App() {
         setSelectedProfileId(null);
     };
 
-
-
-
     const [savedConfigs, setSavedConfigs] = useState<SavedConfig[]>(() => {
         const saved = localStorage.getItem("gakumas_sim_presets_v2");
         if (saved) {
@@ -141,7 +140,8 @@ function App() {
                 selectedPItems,
                 selectedPDrinks,
                 status,
-                producePlan
+                producePlan,
+                turnAttributes
             }
         };
         const newConfigs = [newPreset, ...savedConfigs];
@@ -158,7 +158,8 @@ function App() {
                 selectedPItems,
                 selectedPDrinks,
                 status,
-                producePlan
+                producePlan,
+                turnAttributes
             }
         } : cfg);
         setSavedConfigs(newConfigs);
@@ -222,38 +223,27 @@ function App() {
                     <NavButton label="手札" active={activeTab === TABS.HAND} onClick={() => setActiveTab(TABS.HAND)} />
                     <NavButton label="Pアイテム" active={activeTab === TABS.P_ITEM} onClick={() => setActiveTab(TABS.P_ITEM)} />
                     <NavButton label="Pドリンク" active={activeTab === TABS.P_DRINK} onClick={() => setActiveTab(TABS.P_DRINK)} />
+                    <NavButton label="保存データ" active={activeTab === TABS.PRESETS} onClick={() => setActiveTab(TABS.PRESETS)} />
+                    <button
+                        onClick={handleAddNewPreset}
+                        className="mx-3 mt-3 py-2 rounded-lg bg-blue-600/20 text-blue-300 hover:bg-blue-600/30 border border-blue-500/30 transition-all flex items-center justify-center gap-2 group"
+                    >
+                        <svg className="w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" /></svg>
+                        <span className="text-[10px] font-bold">現在の構成を保存</span>
+                    </button>
                 </div>
                 <div className="flex-1 flex flex-col space-y-4 pt-4 border-t border-white/5 overflow-hidden">
-                    <div className="px-3">
-                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3">保存済み構成</p>
-                        <button
-                            onClick={handleAddNewPreset}
-                            className="w-full py-2.5 px-3 rounded-xl bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 border border-blue-500/20 transition-all flex items-center justify-center gap-2 group"
-                        >
-                            <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" /></svg>
-                            <span className="text-[11px] font-bold">現在の構成を保存</span>
-                        </button>
-                    </div>
-                    <div className="flex-1 overflow-y-auto space-y-3 px-3 custom-scrollbar pb-4">
-                        <div className="space-y-1">
-                            {savedConfigs.map((cfg) => (
-                                <PresetCard
-                                    key={cfg.id}
-                                    cfg={cfg}
-                                    characterGroups={characterGroups}
-                                    onLoad={handleLoadPreset}
-                                    onSaveOver={handleSaveToExisting}
-                                    onDelete={handleDeletePreset}
-                                    onUpdateName={handleUpdatePresetName}
-                                />
-                            ))}
+                    {/* Danger Zone */}
+                    <div className="mt-auto pt-4">
+                        <div className="p-4 rounded-xl border border-red-500/10 bg-red-500/5 opacity-40 hover:opacity-100 transition-opacity">
+                            <p className="text-[9px] font-bold text-red-500/50 uppercase tracking-widest mb-3 text-center">Danger Zone</p>
+                            <button
+                                onClick={handleResetAll}
+                                className="w-full py-2 rounded-lg border border-red-500/20 text-red-400 text-xs font-bold hover:bg-red-500/30 hover:border-red-500/40 transition-all active:scale-[0.98] cursor-pointer relative z-50"
+                            >
+                                全ての選択をリセット
+                            </button>
                         </div>
-                        {savedConfigs.length === 0 && (
-                            <div className="flex flex-col items-center justify-center py-8 opacity-20">
-                                <svg className="w-8 h-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" /></svg>
-                                <p className="text-[10px]">保存された構成はありません</p>
-                            </div>
-                        )}
                     </div>
                 </div>
             </div>
@@ -316,37 +306,47 @@ function App() {
                                 setTurnAttributes={setTurnAttributes}
                             />
                         )}
+                        {activeTab === TABS.PRESETS && (
+                            <PresetListView
+                                savedConfigs={savedConfigs}
+                                characterGroups={characterGroups}
+                                onLoad={handleLoadPreset}
+                                onSaveOver={handleSaveToExisting}
+                                onDelete={handleDeletePreset}
+                                onUpdateName={handleUpdatePresetName}
+                                onCreateNew={handleAddNewPreset}
+                            />
+                        )}
                     </div>
                 </div>
             </div>
             {/* Right Sidebar */}
             <div className="w-80 bg-slate-900/30 border-l border-white/5 p-6 flex-shrink-0 flex flex-col overflow-y-auto animate-in slide-in-from-right-10 duration-300">
-                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-6">現在の設定 (構成)</h3>
+                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-6">現在の設定</h3>
                 <div className="space-y-6">
                     {/* Status Summary (Vo/Da/Vi row + HP row) */}
-                    {selectedProfile && (
-                        <div className="flex flex-col gap-1.5">
-                            <div className="grid grid-cols-3 gap-1.5">
-                                <div className="flex flex-col items-center justify-center gap-0.5 bg-slate-800/50 rounded px-1 py-1.5 border border-white/5">
-                                    <span className="text-[9px] font-bold text-pink-400">Vo</span>
-                                    <span className="text-sm font-mono font-bold text-white">{status.vocal}</span>
-                                </div>
-                                <div className="flex flex-col items-center justify-center gap-0.5 bg-slate-800/50 rounded px-1 py-1.5 border border-white/5">
-                                    <span className="text-[9px] font-bold text-blue-400">Da</span>
-                                    <span className="text-sm font-mono font-bold text-white">{status.dance}</span>
-                                </div>
-                                <div className="flex flex-col items-center justify-center gap-0.5 bg-slate-800/50 rounded px-1 py-1.5 border border-white/5">
-                                    <span className="text-[9px] font-bold text-yellow-400">Vi</span>
-                                    <span className="text-sm font-mono font-bold text-white">{status.visual}</span>
-                                </div>
+                    <div className="flex flex-col gap-1.5">
+                        <div className="grid grid-cols-3 gap-1.5">
+                            <div className="flex flex-col items-center justify-center gap-0.5 bg-slate-800/50 rounded px-1 py-1.5 border border-white/5">
+                                <span className="text-[9px] font-bold text-pink-400">Vo</span>
+                                <span className="text-sm font-mono font-bold text-white">{status.vocal}</span>
                             </div>
-                            <div className="flex items-center gap-3 bg-slate-800/50 rounded px-3 py-1.5 border border-white/5">
-                                <span className="text-[10px] font-bold text-green-400">HP</span>
-                                <span className="text-sm font-mono font-bold text-white ml-auto">{status.hp}</span>
-                                <span className="text-[9px] text-slate-500 font-mono">/ {status.maxHp}</span>
+                            <div className="flex flex-col items-center justify-center gap-0.5 bg-slate-800/50 rounded px-1 py-1.5 border border-white/5">
+                                <span className="text-[9px] font-bold text-blue-400">Da</span>
+                                <span className="text-sm font-mono font-bold text-white">{status.dance}</span>
+                            </div>
+                            <div className="flex flex-col items-center justify-center gap-0.5 bg-slate-800/50 rounded px-1 py-1.5 border border-white/5">
+                                <span className="text-[9px] font-bold text-yellow-400">Vi</span>
+                                <span className="text-sm font-mono font-bold text-white">{status.visual}</span>
                             </div>
                         </div>
-                    )}
+                        <div className="flex items-center gap-3 bg-slate-800/50 rounded px-3 py-1.5 border border-white/5">
+                            <span className="text-[10px] font-bold text-green-400">HP</span>
+                            <span className="text-sm font-mono font-bold text-white ml-auto">{status.hp}</span>
+                            <span className="text-[9px] text-slate-500 font-mono">/ {status.maxHp}</span>
+                        </div>
+                    </div>
+
                     <SummaryCard
                         title="アイドル" onClick={() => setActiveTab(TABS.CHARACTER)}
                         value={selectedProfile ? selectedProfile.name : "（未設定）"}
@@ -374,7 +374,7 @@ function App() {
                                 <div key={`${card.id}-${i}`} className="aspect-square bg-slate-800 rounded border border-white/10 overflow-hidden relative group">
                                     {card.image && card.image !== 'default.png' && (
                                         <>
-                                            <img src={`${import.meta.env.BASE_URL}images/cards/${card.image}`} className="w-full h-full object-contain opacity-100 group-hover:opacity-100 transition-opacity" />
+                                            <img src={`${import.meta.env.BASE_URL}images/cards/${card.image.split('/').map(s => encodeURIComponent(s)).join('/')}`} className="w-full h-full object-contain opacity-100 group-hover:opacity-100 transition-opacity" />
                                             <div className="w-full h-full flex items-center justify-center text-[8px] text-slate-500 font-bold">
                                                 {card.name[0]}
                                             </div>
@@ -469,32 +469,11 @@ function App() {
                         </div>
                     </div>
                 </div>
-                {/* Danger Zone */}
-                <div className="pt-12 mt-auto">
-                    <div className="p-4 rounded-xl border border-red-500/10 bg-red-500/5 opacity-40 hover:opacity-100 transition-opacity">
-                        <p className="text-[9px] font-bold text-red-500/50 uppercase tracking-widest mb-3 text-center">Danger Zone</p>
-                        <button
-                            onClick={handleResetAll}
-                            className="w-full py-2 rounded-lg border border-red-500/20 text-red-400 text-xs font-bold hover:bg-red-500/30 hover:border-red-500/40 transition-all active:scale-[0.98] cursor-pointer relative z-50"
-                        >
-                            全ての選択をリセット
-                        </button>
-                    </div>
-                </div>
             </div>
         </div>
     );
 }
 
-// --- Views ---
-
-// --- Views ---
-
-
-
-
-
-// --- Views ---
 interface ProduceViewProps {
     initialHand: Card[];
     initialPItems: PItem[];
@@ -520,11 +499,11 @@ function ProduceView({ initialHand: _initialHand, initialPItems: _initialPItems,
                     {/* Current Turn Attribute Display */}
                     {state.currentTurnAttribute && (
                         <div className={`
-                            flex flex-col items-center justify-center w-12 h-12 rounded-full border-2 
-                            ${state.currentTurnAttribute === 'vocal' ? 'border-pink-500 bg-pink-500/10 text-pink-400' : ''}
-                            ${state.currentTurnAttribute === 'dance' ? 'border-blue-500 bg-blue-500/10 text-blue-400' : ''}
-                            ${state.currentTurnAttribute === 'visual' ? 'border-yellow-500 bg-yellow-500/10 text-yellow-400' : ''}
-                        `}>
+                        flex flex-col items-center justify-center w-12 h-12 rounded-full border-2 
+                        ${state.currentTurnAttribute === 'vocal' ? 'border-pink-500 bg-pink-500/10 text-pink-400' : ''}
+                        ${state.currentTurnAttribute === 'dance' ? 'border-blue-500 bg-blue-500/10 text-blue-400' : ''}
+                        ${state.currentTurnAttribute === 'visual' ? 'border-yellow-500 bg-yellow-500/10 text-yellow-400' : ''}
+                    `}>
                             <span className="text-[10px] font-bold uppercase">{state.currentTurnAttribute.slice(0, 2)}</span>
                         </div>
                     )}
@@ -575,91 +554,6 @@ function ProduceView({ initialHand: _initialHand, initialPItems: _initialPItems,
             <div className="h-40 bg-slate-900/50 rounded-xl border border-white/5 p-4 flex items-center justify-center text-slate-600">
                 <p>手札エリア (Coming Soon)</p>
             </div>
-        </div>
-    );
-}
-
-// PresetCard Component
-interface PresetCardProps {
-    cfg: SavedConfig;
-    characterGroups?: CharacterGroup[];
-    onLoad: (id: string) => void;
-    onSaveOver: (id: string) => void;
-    onDelete: (id: string) => void;
-    onUpdateName: (id: string, name: string) => void;
-}
-function PresetCard({ cfg, characterGroups = [], onLoad, onSaveOver, onDelete, onUpdateName }: PresetCardProps) {
-    const [confirmMode, setConfirmMode] = useState<'overwrite' | 'delete' | null>(null);
-    const charGroup = characterGroups.find(g => g.name === cfg.data?.selectedCharName);
-    const charIcon = charGroup?.profiles.find(p => p.id === cfg.data?.selectedProfileId)?.image || charGroup?.profiles[0]?.image;
-    return (
-        <div className="bg-slate-800/40 rounded-xl border border-white/5 p-2 hover:border-white/10 transition-all group">
-            <div className="flex items-center gap-2 mb-2">
-                <div className="w-8 h-8 rounded-lg bg-slate-900 border border-white/10 overflow-hidden flex-shrink-0">
-                    {charIcon ? (
-                        <img src={`${import.meta.env.BASE_URL}images/characters/${charGroup?.id}/${charIcon}`} className="w-full h-full object-cover object-[50%_15%]" />
-                    ) : (
-                        <div className="w-full h-full flex items-center justify-center text-[10px] text-slate-600 font-bold">?</div>
-                    )}
-                </div>
-                <input
-                    type="text"
-                    value={cfg.name}
-                    onChange={(e) => onUpdateName(cfg.id, e.target.value)}
-                    className="flex-1 bg-transparent text-[11px] font-bold text-slate-200 outline-none focus:text-blue-400 transition-colors min-w-0"
-                    placeholder="名称未設定"
-                    disabled={confirmMode !== null}
-                />
-            </div>
-
-            {confirmMode === null ? (
-                // Normal Mode
-                <div className="grid grid-cols-3 gap-1">
-                    <button
-                        onClick={() => onLoad(cfg.id)}
-                        className="py-1.5 rounded bg-green-500/10 text-green-400 hover:bg-green-500/20 text-[10px] font-bold transition-colors border border-green-500/10"
-                    >
-                        読込
-                    </button>
-                    <button
-                        onClick={() => setConfirmMode('overwrite')}
-                        className="py-1.5 rounded bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 text-[10px] font-bold transition-colors border border-blue-500/10"
-                    >
-                        上書き...
-                    </button>
-                    <button
-                        onClick={() => setConfirmMode('delete')}
-                        className="py-1.5 rounded bg-red-500/5 text-red-400/60 hover:bg-red-500/20 text-[9px] font-bold transition-colors border border-red-500/5"
-                    >
-                        削除...
-                    </button>
-                </div>
-            ) : (
-                // Confirmation Mode
-                <div className="grid grid-cols-2 gap-1 animate-in fade-in duration-200">
-                    <button
-                        onClick={() => setConfirmMode(null)}
-                        className="py-1.5 rounded bg-slate-700/50 text-slate-400 hover:bg-slate-600/50 text-[9px] font-bold transition-colors border border-white/5"
-                    >
-                        キャンセル
-                    </button>
-                    {confirmMode === 'overwrite' ? (
-                        <button
-                            onClick={() => { onSaveOver(cfg.id); setConfirmMode(null); }}
-                            className="py-1.5 rounded bg-blue-500 text-white hover:bg-blue-400 text-[9px] font-bold transition-colors shadow-lg shadow-blue-500/20"
-                        >
-                            上書き実行
-                        </button>
-                    ) : (
-                        <button
-                            onClick={() => { onDelete(cfg.id); setConfirmMode(null); }}
-                            className="py-1.5 rounded bg-red-500 text-white hover:bg-red-400 text-[9px] font-bold transition-colors shadow-lg shadow-red-500/20"
-                        >
-                            削除実行
-                        </button>
-                    )}
-                </div>
-            )}
         </div>
     );
 }
