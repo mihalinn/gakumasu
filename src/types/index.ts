@@ -111,6 +111,7 @@ export interface GameState {
     deck: Card[];
     hand: Card[];
     discard: Card[];
+    cardsPlayed: number; // そのターンに使用したカード枚数
 
     // アイテム・ドリンク
     pItems: PItem[];

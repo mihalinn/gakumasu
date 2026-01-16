@@ -9,8 +9,8 @@ interface ProduceViewProps {
   turnAttributes: LessonAttribute[];
 }
 
-export function ProduceView({ initialHand: _initialHand, initialPItems: _initialPItems, initialPDrinks: _initialPDrinks, status, turnAttributes }: ProduceViewProps) {
-  const { state, endTurn, resetSimulation } = useSimulation(status, turnAttributes);
+export function ProduceView({ initialHand, initialPItems: _initialPItems, initialPDrinks: _initialPDrinks, status, turnAttributes }: ProduceViewProps) {
+  const { state, endTurn, resetSimulation, playCard } = useSimulation(status, turnAttributes, initialHand);
 
   return (
     <div className="h-full grid grid-cols-[240px_1fr_240px] gap-2 animate-in fade-in duration-500 p-2">
@@ -93,9 +93,48 @@ export function ProduceView({ initialHand: _initialHand, initialPItems: _initial
           </div>
         </div>
 
-        {/* Hand Area (Placeholder for now) */}
-        <div className="h-40 bg-slate-900/50 rounded-xl border border-white/5 p-4 flex items-center justify-center text-slate-600">
-          <p>手札エリア (Coming Soon)</p>
+        {/* Hand Area */}
+        <div className="h-48 bg-slate-900/50 rounded-xl border border-white/5 p-4 flex items-center justify-center gap-3 overflow-x-auto custom-scrollbar">
+          {state.hand.length === 0 ? (
+            <p className="text-slate-600 text-sm font-medium">No Cards in Hand</p>
+          ) : (
+            state.hand.map((card, idx) => {
+              const canPlay = state.cardsPlayed < 1;
+              return (
+                <button
+                  key={`${card.id}-${idx}`}
+                  onClick={() => canPlay && playCard(card.id)}
+                  disabled={!canPlay}
+                  className={`
+                        w-24 h-32 rounded-lg border p-1 flex flex-col items-center justify-between shrink-0 transition-all duration-300 shadow-lg
+                        ${canPlay
+                      ? 'bg-slate-800 border-white/10 hover:scale-105 hover:border-white/30 hover:shadow-blue-500/10 cursor-pointer'
+                      : 'bg-slate-900/50 border-white/5 opacity-50 cursor-not-allowed grayscale shadow-none'
+                    }
+                    `}
+                >
+                  <div className="w-full aspect-square bg-black/40 rounded overflow-hidden relative flex items-center justify-center">
+                    {card.image ? (
+                      <img
+                        src={`${import.meta.env.BASE_URL}images/cards/${card.image.split('/').map(part => encodeURIComponent(part)).join('/')}`}
+                        alt={card.name}
+                        className="w-full h-full object-contain"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-[10px] text-slate-500 font-bold bg-slate-800/50">
+                        カード画像なし
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-1 flex items-center justify-center w-full px-0.5">
+                    <div className="text-[9px] font-black tracking-tight text-center line-clamp-1 leading-tight text-slate-200 truncate">
+                      {card.name}
+                    </div>
+                  </div>
+                </button>
+              );
+            })
+          )}
         </div>
       </div>
 
@@ -137,8 +176,8 @@ export function ProduceView({ initialHand: _initialHand, initialPItems: _initial
         <div>
           <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">DECK INFO</h3>
           <div className="bg-slate-800/50 p-2 rounded text-xs text-slate-400">
-            <div className="flex justify-between mb-1"><span>Remaining</span><span>15</span></div>
-            <div className="flex justify-between"><span>Discard</span><span>3</span></div>
+            <div className="flex justify-between mb-1"><span>Remaining</span><span className="text-white font-mono">{state.deck.length}</span></div>
+            <div className="flex justify-between"><span>Discard</span><span className="text-white font-mono">{state.discard.length}</span></div>
           </div>
         </div>
 
