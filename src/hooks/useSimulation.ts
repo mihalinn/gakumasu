@@ -135,6 +135,12 @@ export function useSimulation(
         });
     }, [initialStatus, turnAttributes, targetDeck]);
 
+    // 入力プロップス（デッキ、ステータス、属性）が変更されたら、シミュレーションを初期化/リセットする
+    // これにより、キャラ選択や手札追加時に自動的に初期ドローが行われるようになる
+    useEffect(() => {
+        resetSimulation();
+    }, [resetSimulation]);
+
     // そのターンのカード使用枚数が上限に達したら、1秒後に自動でターン終了する
     useEffect(() => {
         if (state.cardsPlayed >= 1 && state.turn < state.maxTurns) {

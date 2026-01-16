@@ -8,6 +8,7 @@ import { StatusView } from './components/StatusView'
 import { PresetListView } from './components/PresetListView'
 import { NavButton, SummaryCard } from './components/UI'
 import { ProduceView } from './components/ProduceView'
+import { useSimulation } from './hooks/useSimulation'
 
 const TABS = {
     PRODUCE: 'produce',
@@ -86,6 +87,9 @@ function App() {
     const [hand, setHand] = useState<Card[]>([]);
     // View Mode State (Global)
     const [viewMode, setViewMode] = useState<'detail' | 'compact'>('detail');
+
+    // Simulation State (LIFTED)
+    const { state: simState, endTurn, resetSimulation, playCard } = useSimulation(status, turnAttributes, hand);
 
     // Reset Logic
     const handleResetAll = () => {
@@ -263,10 +267,10 @@ function App() {
                     <div className="max-w-6xl mx-auto h-full">
                         {activeTab === TABS.PRODUCE && (
                             <ProduceView
-                                initialHand={hand}
-                                initialPItems={selectedPItems}
-                                initialPDrinks={selectedPDrinks}
-                                status={status}
+                                state={simState}
+                                endTurn={endTurn}
+                                resetSimulation={resetSimulation}
+                                playCard={playCard}
                                 turnAttributes={turnAttributes}
                             />
                         )}
@@ -351,7 +355,7 @@ function App() {
                     </div>
 
                     {activeSidebarTab === 'settings' ? (
-                        <div className="space-y-6">
+                        <div className="space-y-6 text-slate-100">
                             {/* Status Summary */}
                             <div
                                 className="flex flex-col gap-1.5 cursor-pointer hover:bg-white/5 p-2 -m-2 mb-2 rounded-lg transition-colors group"
@@ -414,7 +418,7 @@ function App() {
                                     {hand.map((card, i) => (
                                         <div key={`${card.id}-${i}`} className="aspect-square bg-slate-800 rounded border border-white/10 overflow-hidden relative group">
                                             {card.image && card.image !== 'default.png' && (
-                                                <img src={`${import.meta.env.BASE_URL}images/cards/${card.image.split('/').map(s => encodeURIComponent(s)).join('/')}`} className="w-full h-full object-contain" />
+                                                <img src={`${import.meta.env.BASE_URL}images/cards/${card.image.split('/').map(s => encodeURIComponent(s)).join('/')}`} className="w-full h-full object-contain" alt="" />
                                             )}
                                             {(!card.image || card.image === 'default.png') && (
                                                 <div className="absolute inset-0 flex items-center justify-center text-[6px] text-center bg-black/50 text-white truncate px-0.5">
@@ -424,7 +428,7 @@ function App() {
                                         </div>
                                     ))}
                                     {[...Array(Math.max(0, 25 - hand.length))].map((_, i) => (
-                                        <div key={`empty-${i}`} className="aspect-square bg-slate-800/50 rounded border border-white/5 border-dashed"></div>
+                                        <div key={`empty-hand-${i}`} className="aspect-square bg-slate-800/50 rounded border border-white/5 border-dashed"></div>
                                     ))}
                                 </div>
                             </div>
@@ -441,7 +445,7 @@ function App() {
                                     {selectedPItems.map((item, i) => (
                                         <div key={`${item.id}-${i}`} className="aspect-square bg-slate-800 rounded border border-white/10 overflow-hidden relative group">
                                             {item.image && item.image !== 'default.png' ? (
-                                                <img src={`${import.meta.env.BASE_URL}images/items/${item.image}`} className="w-full h-full object-cover" />
+                                                <img src={`${import.meta.env.BASE_URL}images/items/${item.image}`} className="w-full h-full object-cover" alt="" />
                                             ) : (
                                                 <div className="w-full h-full flex items-center justify-center text-[8px] text-slate-500 font-bold">{item.name[0]}</div>
                                             )}
@@ -467,7 +471,7 @@ function App() {
                                         return (
                                             <div key={`pdrink-slot-${i}`} className="w-12 h-12 bg-slate-800 rounded border border-white/10 overflow-hidden relative" title={drink?.name}>
                                                 {drink ? (
-                                                    <img src={`${import.meta.env.BASE_URL}images/drinks/${drink.image}`} className="w-full h-full object-cover" />
+                                                    <img src={`${import.meta.env.BASE_URL}images/drinks/${drink.image}`} className="w-full h-full object-cover" alt="" />
                                                 ) : (
                                                     <div className="w-full h-full flex items-center justify-center text-slate-700 text-xs">+</div>
                                                 )}
@@ -478,10 +482,66 @@ function App() {
                             </div>
                         </div>
                     ) : (
-                        <div className="space-y-4">
-                            <div className="p-4 bg-slate-800/50 rounded-lg border border-white/5 text-center text-xs text-slate-500">
-                                <p>プロデュース中画面（仮）</p>
-                                <p className="mt-2 text-[10px]">手札等の情報をここに表示します</p>
+                        <div className="flex-1 flex flex-col min-h-0 min-w-0 -mx-2">
+                            <div className="flex-1 overflow-y-auto custom-scrollbar px-2 space-y-6">
+                                {/* Sidebar Hand */}
+                                <section>
+                                    <div className="flex justify-between items-center mb-2 px-1">
+                                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">HAND</span>
+                                        <span className="text-[10px] font-mono text-slate-500">{simState.hand.length}</span>
+                                    </div>
+                                    <div className="grid grid-cols-4 gap-1.5">
+                                        {simState.hand.map((card: Card, i: number) => (
+                                            <div key={`side-hand-${i}`} className="aspect-square bg-slate-800 rounded border border-white/10 overflow-hidden relative group" title={card.name}>
+                                                {card.image && card.image !== 'default.png' ? (
+                                                    <img src={`${import.meta.env.BASE_URL}images/cards/${card.image.split('/').map((s: string) => encodeURIComponent(s)).join('/')}`} className="w-full h-full object-contain" alt="" />
+                                                ) : (
+                                                    <div className="absolute inset-0 flex items-center justify-center text-[8px] text-center bg-black/50 text-white truncate px-0.5">{card.name[0]}</div>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
+
+                                {/* Sidebar Deck */}
+                                <section>
+                                    <div className="flex justify-between items-center mb-2 px-1">
+                                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">DECK (REMAINING)</span>
+                                        <span className="text-[10px] font-mono text-slate-500">{simState.deck.length}</span>
+                                    </div>
+                                    <div className="grid grid-cols-4 gap-1.5">
+                                        {simState.deck.map((card: Card, i: number) => (
+                                            <div key={`side-deck-${i}`} className="aspect-square bg-slate-900 rounded border border-white/5 overflow-hidden relative" title={card.name}>
+                                                {card.image && card.image !== 'default.png' ? (
+                                                    <img src={`${import.meta.env.BASE_URL}images/cards/${card.image.split('/').map((s: string) => encodeURIComponent(s)).join('/')}`} className="w-full h-full object-contain" alt="" />
+                                                ) : (
+                                                    <div className="absolute inset-0 flex items-center justify-center text-[8px] text-center text-slate-600 truncate px-0.5">{card.name[0]}</div>
+                                                )}
+                                            </div>
+                                        ))}
+                                        {simState.deck.length === 0 && <p className="col-span-4 text-[10px] text-slate-600 text-center py-4 italic">No cards remaining</p>}
+                                    </div>
+                                </section>
+
+                                {/* Sidebar Discard */}
+                                <section>
+                                    <div className="flex justify-between items-center mb-2 px-1">
+                                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">DISCARD PILE</span>
+                                        <span className="text-[10px] font-mono text-slate-500">{simState.discard.length}</span>
+                                    </div>
+                                    <div className="grid grid-cols-4 gap-1.5">
+                                        {simState.discard.map((card: Card, i: number) => (
+                                            <div key={`side-discard-${i}`} className="aspect-square bg-slate-900 rounded border border-white/5 overflow-hidden relative" title={card.name}>
+                                                {card.image && card.image !== 'default.png' ? (
+                                                    <img src={`${import.meta.env.BASE_URL}images/cards/${card.image.split('/').map((s: string) => encodeURIComponent(s)).join('/')}`} className="w-full h-full object-contain" alt="" />
+                                                ) : (
+                                                    <div className="absolute inset-0 flex items-center justify-center text-[8px] text-center text-slate-700 truncate px-0.5">{card.name[0]}</div>
+                                                )}
+                                            </div>
+                                        ))}
+                                        {simState.discard.length === 0 && <p className="col-span-4 text-[10px] text-slate-600 text-center py-4 italic">Empty</p>}
+                                    </div>
+                                </section>
                             </div>
                         </div>
                     )}
@@ -491,4 +551,4 @@ function App() {
     );
 }
 
-export default App
+export default App;

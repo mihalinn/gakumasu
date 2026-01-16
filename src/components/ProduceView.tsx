@@ -1,16 +1,14 @@
-import type { Card, PItem, PDrink, LessonAttribute } from '../types/index'
-import { useSimulation } from '../hooks/useSimulation'
+import type { Card, LessonAttribute } from '../types/index'
 
 interface ProduceViewProps {
-  initialHand: Card[];
-  initialPItems: PItem[];
-  initialPDrinks: PDrink[];
-  status: { vocal: number; dance: number; visual: number; hp: number; maxHp: number };
+  state: any; // Ideally this would be GameState from types
+  endTurn: () => void;
+  resetSimulation: () => void;
+  playCard: (cardId: string) => void;
   turnAttributes: LessonAttribute[];
 }
 
-export function ProduceView({ initialHand, initialPItems: _initialPItems, initialPDrinks: _initialPDrinks, status, turnAttributes }: ProduceViewProps) {
-  const { state, endTurn, resetSimulation, playCard } = useSimulation(status, turnAttributes, initialHand);
+export function ProduceView({ state, endTurn, resetSimulation, playCard, turnAttributes }: ProduceViewProps) {
 
   return (
     <div className="h-full grid grid-cols-[240px_1fr_240px] gap-2 animate-in fade-in duration-500 p-2">
@@ -98,7 +96,7 @@ export function ProduceView({ initialHand, initialPItems: _initialPItems, initia
           {state.hand.length === 0 ? (
             <p className="text-slate-600 text-sm font-medium">No Cards in Hand</p>
           ) : (
-            state.hand.map((card, idx) => {
+            state.hand.map((card: Card, idx: number) => {
               const canPlay = state.cardsPlayed < 1;
               return (
                 <button
@@ -116,7 +114,7 @@ export function ProduceView({ initialHand, initialPItems: _initialPItems, initia
                   <div className="w-full aspect-square bg-black/40 rounded overflow-hidden relative flex items-center justify-center">
                     {card.image ? (
                       <img
-                        src={`${import.meta.env.BASE_URL}images/cards/${card.image.split('/').map(part => encodeURIComponent(part)).join('/')}`}
+                        src={`${import.meta.env.BASE_URL}images/cards/${card.image.split('/').map((part: string) => encodeURIComponent(part)).join('/')}`}
                         alt={card.name}
                         className="w-full h-full object-contain"
                       />
@@ -138,15 +136,16 @@ export function ProduceView({ initialHand, initialPItems: _initialPItems, initia
         </div>
       </div>
 
-      {/* Right Column: Other Info */}
-      <div className="bg-slate-900/50 rounded-xl border border-white/5 p-4 flex flex-col gap-4">
+      {/* Right Column: Turn Info Summary */}
+      <div className="bg-slate-900/50 rounded-xl border border-white/5 p-4 flex flex-col gap-4 overflow-hidden">
+        {/* Turn Attributes Summary */}
         <div>
           <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">TURN ATTRIBUTES</h3>
           <div className="grid grid-cols-6 gap-1">
             {turnAttributes.map((attr, index) => {
               const turnNumber = index + 1;
-              const isCurrent = turnNumber === state.turn;
-              const isPast = turnNumber < state.turn;
+              const isCurrent = turnNumber === (state.turn ?? 1);
+              const isPast = turnNumber < (state.turn ?? 1);
 
               return (
                 <div
@@ -173,15 +172,16 @@ export function ProduceView({ initialHand, initialPItems: _initialPItems, initia
             })}
           </div>
         </div>
+
         <div>
-          <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">DECK INFO</h3>
-          <div className="bg-slate-800/50 p-2 rounded text-xs text-slate-400">
-            <div className="flex justify-between mb-1"><span>Remaining</span><span className="text-white font-mono">{state.deck.length}</span></div>
-            <div className="flex justify-between"><span>Discard</span><span className="text-white font-mono">{state.discard.length}</span></div>
+          <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">DECK SUMMARY</h3>
+          <div className="bg-slate-800/50 p-2 rounded text-xs text-slate-400 space-y-1">
+            <div className="flex justify-between"><span>Remaining Deck</span><span className="text-white font-mono">{state.deck.length}</span></div>
+            <div className="flex justify-between"><span>Discard Pile</span><span className="text-white font-mono">{state.discard.length}</span></div>
           </div>
         </div>
 
-        <div className="mt-auto pt-4">
+        <div className="mt-auto">
           <button
             onClick={resetSimulation}
             className="w-full py-2 bg-slate-800 hover:bg-red-500/20 hover:text-red-400 text-slate-500 text-xs font-bold rounded border border-white/5 hover:border-red-500/30 transition-all duration-200"
