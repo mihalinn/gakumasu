@@ -1,0 +1,9 @@
+[
+  {
+    "id": "p_drink_anomaly_1",
+    "name": "カオスソーダ",
+    "plan": "anomaly",
+    "effect": "使用時、ランダムなバフを付与",
+    "image": "default.png"
+  }
+]

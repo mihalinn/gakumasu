@@ -1,0 +1,16 @@
+[
+  {
+    "id": "p_item_free_1",
+    "name": "思い出のフォト",
+    "plan": "free",
+    "effect": "レッスン終了時、パラメータ+5",
+    "image": "default.png"
+  },
+  {
+    "id": "p_item_free_2",
+    "name": "特製お守り",
+    "plan": "free",
+    "effect": "体力消費軽減 10%",
+    "image": "default.png"
+  }
+]

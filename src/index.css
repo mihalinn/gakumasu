@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: dark;
+    background-color: #111827;
+    color: rgba(255, 255, 255, 0.87);
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+}
+
+/* Custom Scrollbar Global */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+
+/* Custom Animations */
+@keyframes slide-in-right {
+    0% {
+        transform: translateX(20px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 0.6;
+    }
+}
+
+/* Appear from Mosaic/Blur (No movement) */
+@keyframes appear-mosaic {
+    0% {
+        opacity: 0;
+        filter: blur(10px);
+        transform: scale(0.98);
+    }
+
+    40% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: scale(1);
+    }
+}
+
+.animate-slide-in-right {
+    animation: slide-in-right 0.7s ease-out forwards;
+}
+
+/* Faster animation: 0.4s */
+.animate-appear-mosaic {
+    animation: appear-mosaic 0.4s ease-out forwards;
+}

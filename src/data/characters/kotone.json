@@ -1,0 +1,101 @@
+[
+  {
+    "id": "kotone_sekaiichi_kawaii_watashi",
+    "characterName": "藤田 ことね",
+    "name": "世界一可愛い私",
+    "plan": "logic",
+    "image": "世界一可愛い私.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "kotone_kankiku",
+    "characterName": "藤田 ことね",
+    "name": "冠菊",
+    "plan": "logic",
+    "image": "冠菊.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "kotone_shukishuki_song",
+    "characterName": "藤田 ことね",
+    "name": "自己肯定感爆上げ↑↑しゅきしゅきソング",
+    "plan": "sense",
+    "image": "自己肯定感爆上げ↑↑しゅきしゅきソング.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "kotone_hatsukoe",
+    "characterName": "藤田 ことね",
+    "name": "初声",
+    "plan": "sense",
+    "image": "初声.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "kotone_ameagari_no_iris",
+    "characterName": "藤田 ことね",
+    "name": "雨上がりのアイリス",
+    "plan": "anomaly",
+    "image": "雨上がりのアイリス.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "kotone_gakuen_seikatsu",
+    "characterName": "藤田 ことね",
+    "name": "学園生活",
+    "plan": "logic",
+    "image": "学園生活.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "kotone_gamushara",
+    "characterName": "藤田 ことね",
+    "name": "がむしゃらに行こう！",
+    "plan": "sense",
+    "image": "がむしゃらに行こう！.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "kotone_kawaii_hajimemashita",
+    "characterName": "藤田 ことね",
+    "name": "カワイイ♡はじめました",
+    "plan": "sense",
+    "image": "カワイイ♡はじめました.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "kotone_yellow_big_bang",
+    "characterName": "藤田 ことね",
+    "name": "Yellow Big Bang！",
+    "plan": "sense",
+    "image": "Yellow Big Bang！.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "kotone_white_night_white_wish",
+    "characterName": "藤田 ことね",
+    "name": "White Night! White Wish!",
+    "plan": "logic",
+    "image": "White Night! White Wish!.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "kotone_campus_mode",
+    "characterName": "藤田 ことね",
+    "name": "Campus mode!!",
+    "plan": "logic",
+    "image": "Campus mode!!.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  }
+]

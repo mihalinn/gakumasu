@@ -1,0 +1,16 @@
+[
+  {
+    "id": "p_item_logic_1",
+    "name": "ロジカルペン",
+    "plan": "logic",
+    "effect": "使用したカードがロジックプランの場合、元気+2",
+    "image": "default.png"
+  },
+  {
+    "id": "p_item_logic_2",
+    "name": "精密メトロノーム",
+    "plan": "logic",
+    "effect": "ターン開始時、好印象+2",
+    "image": "default.png"
+  }
+]

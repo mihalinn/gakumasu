@@ -1,0 +1,16 @@
+[
+  {
+    "id": "p_item_sense_1",
+    "name": "センスリボン",
+    "plan": "sense",
+    "effect": "集中が5以上の時、スコア+10%",
+    "image": "default.png"
+  },
+  {
+    "id": "p_item_sense_2",
+    "name": "情熱のブローチ",
+    "plan": "sense",
+    "effect": "好調の持続ターン+1",
+    "image": "default.png"
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "p_drink_free_1",
+    "name": "初星水",
+    "plan": "free",
+    "effect": "使用時、元気+3",
+    "image": "default.png"
+  },
+  {
+    "id": "p_drink_free_2",
+    "name": "烏龍茶",
+    "plan": "free",
+    "effect": "使用時、次に出すカードの消費体力-3",
+    "image": "default.png"
+  },
+  {
+    "id": "p_drink_free_3",
+    "name": "ルイボスティー",
+    "plan": "free",
+    "effect": "使用時、HPを5回復",
+    "image": "default.png"
+  }
+]

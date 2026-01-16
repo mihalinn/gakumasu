@@ -1,0 +1,101 @@
+[
+  {
+    "id": "saki_boom_boom_pow",
+    "characterName": "花海 咲季",
+    "name": "Boom Boom Pow",
+    "plan": "logic",
+    "image": "Boom Boom Pow.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "saki_campus_mode",
+    "characterName": "花海 咲季",
+    "name": "Campus mode!!",
+    "plan": "sense",
+    "image": "Campus mode!!.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "saki_fighting_my_way",
+    "characterName": "花海 咲季",
+    "name": "Fighting My Way",
+    "plan": "sense",
+    "image": "Fighting My Way.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "saki_gamushara",
+    "characterName": "花海 咲季",
+    "name": "がむしゃらに行こう！",
+    "plan": "anomaly",
+    "image": "がむしゃらに行こう！.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "saki_watashi_ga_ichiban",
+    "characterName": "花海 咲季",
+    "name": "わたしが一番！",
+    "plan": "sense",
+    "image": "わたしが一番！.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "saki_ameagari_no_iris",
+    "characterName": "花海 咲季",
+    "name": "雨上がりのアイリス",
+    "plan": "logic",
+    "image": "雨上がりのアイリス.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "saki_gakuen_seikatsu",
+    "characterName": "花海 咲季",
+    "name": "学園生活",
+    "plan": "sense",
+    "image": "学園生活.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "saki_kankiku",
+    "characterName": "花海 咲季",
+    "name": "冠菊",
+    "plan": "logic",
+    "image": "冠菊.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "saki_kokontozai",
+    "characterName": "花海 咲季",
+    "name": "古今東西ちょちょいのちょい",
+    "plan": "sense",
+    "image": "古今東西ちょちょいのちょい.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "saki_sakura_photograph",
+    "characterName": "花海 咲季",
+    "name": "桜フォトグラフ",
+    "plan": "anomaly",
+    "image": "桜フォトグラフ.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  },
+  {
+    "id": "saki_hatsukoe",
+    "characterName": "花海 咲季",
+    "name": "初声",
+    "plan": "logic",
+    "image": "初声.png",
+    "uniquePItem": null,
+    "uniqueCard": null
+  }
+]

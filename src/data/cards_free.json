@@ -1,0 +1,102 @@
+[
+    {
+        "id": "basic_move",
+        "name": "基本動作",
+        "type": "active",
+        "plan": "free",
+        "rarity": "R",
+        "cost": 1,
+        "effect": "スコア+100",
+        "image": "default.png"
+    },
+    {
+        "id": "hydration",
+        "name": "水分補給",
+        "type": "mental",
+        "plan": "free",
+        "rarity": "R",
+        "cost": 0,
+        "effect": "元気+1",
+        "image": "default.png"
+    },
+    {
+        "id": "towel",
+        "name": "タオル拭き",
+        "type": "mental",
+        "plan": "free",
+        "rarity": "R",
+        "cost": 0,
+        "effect": "状態異常回復",
+        "image": "default.png"
+    },
+    {
+        "id": "vocalization",
+        "name": "声出し",
+        "type": "active",
+        "plan": "free",
+        "rarity": "R",
+        "cost": 1,
+        "effect": "スコア+150",
+        "image": "default.png"
+    },
+    {
+        "id": "reflection",
+        "name": "振り返り",
+        "type": "mental",
+        "plan": "free",
+        "rarity": "R",
+        "cost": 1,
+        "effect": "カードを1枚引く",
+        "image": "default.png"
+    },
+    {
+        "id": "forward",
+        "name": "前進",
+        "type": "active",
+        "plan": "free",
+        "rarity": "R",
+        "cost": 2,
+        "effect": "スコア+200",
+        "image": "default.png"
+    },
+    {
+        "id": "challenge",
+        "name": "挑戦",
+        "type": "active",
+        "plan": "free",
+        "rarity": "SR",
+        "cost": 3,
+        "effect": "スコア+500",
+        "image": "default.png"
+    },
+    {
+        "id": "rest",
+        "name": "休憩",
+        "type": "mental",
+        "plan": "free",
+        "rarity": "R",
+        "cost": 0,
+        "effect": "体力+2",
+        "image": "default.png"
+    },
+    {
+        "id": "warmup",
+        "name": "準備運動",
+        "type": "mental",
+        "plan": "free",
+        "rarity": "R",
+        "cost": 0,
+        "effect": "元気+2",
+        "image": "default.png"
+    },
+    {
+        "id": "determination",
+        "name": "決意",
+        "type": "mental",
+        "plan": "free",
+        "rarity": "SR",
+        "cost": 2,
+        "effect": "集中力+2",
+        "image": "default.png"
+    }
+]
