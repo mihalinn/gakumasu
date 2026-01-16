@@ -187,7 +187,7 @@ export function PDrinkView({ selectedPDrinks, setSelectedPDrinks, selectedProfil
                                         <>
                                             <div className="w-8 h-8 rounded bg-slate-900 flex-shrink-0 flex items-center justify-center border border-white/10 overflow-hidden">
                                                 {drink.image && drink.image !== "default.png" ? (
-                                                    <img src={`${import.meta.env.BASE_URL}images/drinks/${encodeURIComponent(drink.image)}`} className="w-full h-full object-cover" />
+                                                    <img src={`${import.meta.env.BASE_URL}images/drinks/${drink.image.split('/').map(part => encodeURIComponent(part)).join('/')}`} className="w-full h-full object-cover" />
                                                 ) : <span className="text-[10px] font-bold text-slate-600">D</span>}
                                             </div>
                                             <div className="flex-1 min-w-0">
