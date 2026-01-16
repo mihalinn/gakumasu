@@ -1,9 +1,5 @@
-import type { PDrink, CharacterProfile } from '../types/index'
-import pDrinksLogic from '../data/p_drinks_logic.json';
-import pDrinksSense from '../data/p_drinks_sense.json';
-import pDrinksAnomaly from '../data/p_drinks_anomaly.json';
-import pDrinksFree from '../data/p_drinks_free.json';
 import { useState, useMemo } from 'react';
+import type { PDrink, CharacterProfile } from '../types/index';
 
 type ViewMode = 'detail' | 'compact';
 
@@ -15,16 +11,23 @@ interface PDrinkViewProps {
     setViewMode: (mode: ViewMode) => void;
 }
 
+const DRINK_DATA = import.meta.glob('../data/drinks/*.json', { eager: true });
+
 export function PDrinkView({ selectedPDrinks, setSelectedPDrinks, selectedProfile, viewMode, setViewMode }: PDrinkViewProps) {
     const [searchTerm, setSearchTerm] = useState("");
 
-    // Use Memo for performance + consistent list
-    const allDrinks = useMemo(() => [
-        ...(pDrinksLogic as PDrink[]),
-        ...(pDrinksSense as PDrink[]),
-        ...(pDrinksAnomaly as PDrink[]),
-        ...(pDrinksFree as PDrink[]),
-    ], []);
+    // Use Memo to aggregate all drinks from dynamic JSONs
+    const allDrinks = useMemo(() => {
+        let drinks: PDrink[] = [];
+        for (const path in DRINK_DATA) {
+            const mod = DRINK_DATA[path] as any;
+            const data = mod.default || mod;
+            if (Array.isArray(data)) {
+                drinks = [...drinks, ...data];
+            }
+        }
+        return drinks;
+    }, []);
 
     const addDrink = (drink: PDrink) => {
         if (selectedPDrinks.length >= 3) {
@@ -43,7 +46,7 @@ export function PDrinkView({ selectedPDrinks, setSelectedPDrinks, selectedProfil
     const filteredDrinks = useMemo(() => {
         const plan = selectedProfile?.plan || 'free';
         return allDrinks.filter(d => {
-            // Plan filter
+            // Plan filter: show free drinks and drinks for the current plan
             const planMatch = d.plan === 'free' || d.plan === plan;
             // Search filter
             const searchMatch = !searchTerm.trim() ||

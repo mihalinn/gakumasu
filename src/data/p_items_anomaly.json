@@ -1,9 +1,0 @@
-[
-  {
-    "id": "p_item_anomaly_1",
-    "name": "異変のクリスタル",
-    "plan": "anomaly",
-    "effect": "デバフカード使用時、自身のHPを3回復",
-    "image": "default.png"
-  }
-]

@@ -1,0 +1,723 @@
+﻿[
+  {
+    "plan": "free",
+    "image": "free/873シューター.png",
+    "id": "item_free_873シューター",
+    "effect": "",
+    "name": "873シューター"
+  },
+  {
+    "plan": "free",
+    "image": "free/アイドルパワー測定機.png",
+    "id": "item_free_アイドルパワー測定機",
+    "effect": "",
+    "name": "アイドルパワー測定機"
+  },
+  {
+    "plan": "free",
+    "image": "free/いじっぱりバルーン.png",
+    "id": "item_free_いじっぱりバルーン",
+    "effect": "",
+    "name": "いじっぱりバルーン"
+  },
+  {
+    "plan": "free",
+    "image": "free/イケてるセーター.png",
+    "id": "item_free_イケてるセーター",
+    "effect": "",
+    "name": "イケてるセーター"
+  },
+  {
+    "plan": "free",
+    "image": "free/うるおいのどケア.png",
+    "id": "item_free_うるおいのどケア",
+    "effect": "",
+    "name": "うるおいのどケア"
+  },
+  {
+    "plan": "free",
+    "image": "free/ウチュウジンデアル.png",
+    "id": "item_free_ウチュウジンデアル",
+    "effect": "",
+    "name": "ウチュウジンデアル"
+  },
+  {
+    "plan": "free",
+    "image": "free/おさぼりタオル.png",
+    "id": "item_free_おさぼりタオル",
+    "effect": "",
+    "name": "おさぼりタオル"
+  },
+  {
+    "plan": "free",
+    "image": "free/おとものミミズク.png",
+    "id": "item_free_おとものミミズク",
+    "effect": "",
+    "name": "おとものミミズク"
+  },
+  {
+    "plan": "free",
+    "image": "free/おひるねブランケット.png",
+    "id": "item_free_おひるねブランケット",
+    "effect": "",
+    "name": "おひるねブランケット"
+  },
+  {
+    "plan": "free",
+    "image": "free/おもてなしの気持ち.png",
+    "id": "item_free_おもてなしの気持ち",
+    "effect": "",
+    "name": "おもてなしの気持ち"
+  },
+  {
+    "plan": "free",
+    "image": "free/お残しにんじん.png",
+    "id": "item_free_お残しにんじん",
+    "effect": "",
+    "name": "お残しにんじん"
+  },
+  {
+    "plan": "free",
+    "image": "free/お姉さまビッグラブ.png",
+    "id": "item_free_お姉さまビッグラブ",
+    "effect": "",
+    "name": "お姉さまビッグラブ"
+  },
+  {
+    "plan": "free",
+    "image": "free/お姉さま大百科.png",
+    "id": "item_free_お姉さま大百科",
+    "effect": "",
+    "name": "お姉さま大百科"
+  },
+  {
+    "plan": "free",
+    "image": "free/お似合いネクタイ.png",
+    "id": "item_free_お似合いネクタイ",
+    "effect": "",
+    "name": "お似合いネクタイ"
+  },
+  {
+    "plan": "free",
+    "image": "free/お嬢様の恩返し.png",
+    "id": "item_free_お嬢様の恩返し",
+    "effect": "",
+    "name": "お嬢様の恩返し"
+  },
+  {
+    "plan": "free",
+    "image": "free/お直し刺繍セット.png",
+    "id": "item_free_お直し刺繍セット",
+    "effect": "",
+    "name": "お直し刺繍セット"
+  },
+  {
+    "plan": "free",
+    "image": "free/お礼のティーセット.png",
+    "id": "item_free_お礼のティーセット",
+    "effect": "",
+    "name": "お礼のティーセット"
+  },
+  {
+    "plan": "free",
+    "image": "free/オーバーパワーボール.png",
+    "id": "item_free_オーバーパワーボール",
+    "effect": "",
+    "name": "オーバーパワーボール"
+  },
+  {
+    "plan": "free",
+    "image": "free/かごいっぱいの成果.png",
+    "id": "item_free_かごいっぱいの成果",
+    "effect": "",
+    "name": "かごいっぱいの成果"
+  },
+  {
+    "plan": "free",
+    "image": "free/カワイイのつくり方.png",
+    "id": "item_free_カワイイのつくり方",
+    "effect": "",
+    "name": "カワイイのつくり方"
+  },
+  {
+    "plan": "free",
+    "image": "free/きっかけの帯.png",
+    "id": "item_free_きっかけの帯",
+    "effect": "",
+    "name": "きっかけの帯"
+  },
+  {
+    "plan": "free",
+    "image": "free/ギャルめいきんぐ！.png",
+    "id": "item_free_ギャルめいきんぐ_",
+    "effect": "",
+    "name": "ギャルめいきんぐ！"
+  },
+  {
+    "plan": "free",
+    "image": "free/ゲレンデを駆ける赤.png",
+    "id": "item_free_ゲレンデを駆ける赤",
+    "effect": "",
+    "name": "ゲレンデを駆ける赤"
+  },
+  {
+    "plan": "free",
+    "image": "free/ごきげんようレッスン.png",
+    "id": "item_free_ごきげんようレッスン",
+    "effect": "",
+    "name": "ごきげんようレッスン"
+  },
+  {
+    "plan": "free",
+    "image": "free/ごちそうさまでした.png",
+    "id": "item_free_ごちそうさまでした",
+    "effect": "",
+    "name": "ごちそうさまでした"
+  },
+  {
+    "plan": "free",
+    "image": "free/すごすぎるバトン.png",
+    "id": "item_free_すごすぎるバトン",
+    "effect": "",
+    "name": "すごすぎるバトン"
+  },
+  {
+    "plan": "free",
+    "image": "free/スカウト遮り帽.png",
+    "id": "item_free_スカウト遮り帽",
+    "effect": "",
+    "name": "スカウト遮り帽"
+  },
+  {
+    "plan": "free",
+    "image": "free/ぜったいいっぱい！.png",
+    "id": "item_free_ぜったいいっぱい_",
+    "effect": "",
+    "name": "ぜったいいっぱい！"
+  },
+  {
+    "plan": "free",
+    "image": "free/ぜったいマル秘レシピ.png",
+    "id": "item_free_ぜったいマル秘レシピ",
+    "effect": "",
+    "name": "ぜったいマル秘レシピ"
+  },
+  {
+    "plan": "free",
+    "image": "free/たたいてかぶって.png",
+    "id": "item_free_たたいてかぶって",
+    "effect": "",
+    "name": "たたいてかぶって"
+  },
+  {
+    "plan": "free",
+    "image": "free/ダブルボトル.png",
+    "id": "item_free_ダブルボトル",
+    "effect": "",
+    "name": "ダブルボトル"
+  },
+  {
+    "plan": "free",
+    "image": "free/つやつやでふさふさ.png",
+    "id": "item_free_つやつやでふさふさ",
+    "effect": "",
+    "name": "つやつやでふさふさ"
+  },
+  {
+    "plan": "free",
+    "image": "free/とうちょーのきろく.png",
+    "id": "item_free_とうちょーのきろく",
+    "effect": "",
+    "name": "とうちょーのきろく"
+  },
+  {
+    "plan": "free",
+    "image": "free/とろけた時間.png",
+    "id": "item_free_とろけた時間",
+    "effect": "",
+    "name": "とろけた時間"
+  },
+  {
+    "plan": "free",
+    "image": "free/トレーナーの優しさ.png",
+    "id": "item_free_トレーナーの優しさ",
+    "effect": "",
+    "name": "トレーナーの優しさ"
+  },
+  {
+    "plan": "free",
+    "image": "free/ぬくもりふたりぶん.png",
+    "id": "item_free_ぬくもりふたりぶん",
+    "effect": "",
+    "name": "ぬくもりふたりぶん"
+  },
+  {
+    "plan": "free",
+    "image": "free/のびのびバンド.png",
+    "id": "item_free_のびのびバンド",
+    "effect": "",
+    "name": "のびのびバンド"
+  },
+  {
+    "plan": "free",
+    "image": "free/はいぼくせんげん.png",
+    "id": "item_free_はいぼくせんげん",
+    "effect": "",
+    "name": "はいぼくせんげん"
+  },
+  {
+    "plan": "free",
+    "image": "free/パワーをくれるモノ.png",
+    "id": "item_free_パワーをくれるモノ",
+    "effect": "",
+    "name": "パワーをくれるモノ"
+  },
+  {
+    "plan": "free",
+    "image": "free/ハンターの戦利品.png",
+    "id": "item_free_ハンターの戦利品",
+    "effect": "",
+    "name": "ハンターの戦利品"
+  },
+  {
+    "plan": "free",
+    "image": "free/びっくり仮装グッズ.png",
+    "id": "item_free_びっくり仮装グッズ",
+    "effect": "",
+    "name": "びっくり仮装グッズ"
+  },
+  {
+    "plan": "free",
+    "image": "free/ぴったしコレクション.png",
+    "id": "item_free_ぴったしコレクション",
+    "effect": "",
+    "name": "ぴったしコレクション"
+  },
+  {
+    "plan": "free",
+    "image": "free/ひとりだちシューズ.png",
+    "id": "item_free_ひとりだちシューズ",
+    "effect": "",
+    "name": "ひとりだちシューズ"
+  },
+  {
+    "plan": "free",
+    "image": "free/ピークタイムフラッグ.png",
+    "id": "item_free_ピークタイムフラッグ",
+    "effect": "",
+    "name": "ピークタイムフラッグ"
+  },
+  {
+    "plan": "free",
+    "image": "free/ビシッバシッ竹刀.png",
+    "id": "item_free_ビシッバシッ竹刀",
+    "effect": "",
+    "name": "ビシッバシッ竹刀"
+  },
+  {
+    "plan": "free",
+    "image": "free/ふっかつのアイス.png",
+    "id": "item_free_ふっかつのアイス",
+    "effect": "",
+    "name": "ふっかつのアイス"
+  },
+  {
+    "plan": "free",
+    "image": "free/ふわふわでもこもこ.png",
+    "id": "item_free_ふわふわでもこもこ",
+    "effect": "",
+    "name": "ふわふわでもこもこ"
+  },
+  {
+    "plan": "free",
+    "image": "free/へとへとできゅー.png",
+    "id": "item_free_へとへとできゅー",
+    "effect": "",
+    "name": "へとへとできゅー"
+  },
+  {
+    "plan": "free",
+    "image": "free/ほっこりはんぶんこ.png",
+    "id": "item_free_ほっこりはんぶんこ",
+    "effect": "",
+    "name": "ほっこりはんぶんこ"
+  },
+  {
+    "plan": "free",
+    "image": "free/ほっこりまんぷく.png",
+    "id": "item_free_ほっこりまんぷく",
+    "effect": "",
+    "name": "ほっこりまんぷく"
+  },
+  {
+    "plan": "free",
+    "image": "free/みんなの教科書.png",
+    "id": "item_free_みんなの教科書",
+    "effect": "",
+    "name": "みんなの教科書"
+  },
+  {
+    "plan": "free",
+    "image": "free/めちゃかわプリ.png",
+    "id": "item_free_めちゃかわプリ",
+    "effect": "",
+    "name": "めちゃかわプリ"
+  },
+  {
+    "plan": "free",
+    "image": "free/メリハリストレッチ.png",
+    "id": "item_free_メリハリストレッチ",
+    "effect": "",
+    "name": "メリハリストレッチ"
+  },
+  {
+    "plan": "free",
+    "image": "free/ゆうじょーのきろく.png",
+    "id": "item_free_ゆうじょーのきろく",
+    "effect": "",
+    "name": "ゆうじょーのきろく"
+  },
+  {
+    "plan": "free",
+    "image": "free/わいわいタンバリン.png",
+    "id": "item_free_わいわいタンバリン",
+    "effect": "",
+    "name": "わいわいタンバリン"
+  },
+  {
+    "plan": "free",
+    "image": "free/一緒にお昼寝ポプリ.png",
+    "id": "item_free_一緒にお昼寝ポプリ",
+    "effect": "",
+    "name": "一緒にお昼寝ポプリ"
+  },
+  {
+    "plan": "free",
+    "image": "free/可愛い隠しバスタオル.png",
+    "id": "item_free_可愛い隠しバスタオル",
+    "effect": "",
+    "name": "可愛い隠しバスタオル"
+  },
+  {
+    "plan": "free",
+    "image": "free/会長の完璧な計画.png",
+    "id": "item_free_会長の完璧な計画",
+    "effect": "",
+    "name": "会長の完璧な計画"
+  },
+  {
+    "plan": "free",
+    "image": "free/悔しさの象徴.png",
+    "id": "item_free_悔しさの象徴",
+    "effect": "",
+    "name": "悔しさの象徴"
+  },
+  {
+    "plan": "free",
+    "image": "free/噛み締めたタオル.png",
+    "id": "item_free_噛み締めたタオル",
+    "effect": "",
+    "name": "噛み締めたタオル"
+  },
+  {
+    "plan": "free",
+    "image": "free/完全制覇でポン.png",
+    "id": "item_free_完全制覇でポン",
+    "effect": "",
+    "name": "完全制覇でポン"
+  },
+  {
+    "plan": "free",
+    "image": "free/居残りの生徒会.png",
+    "id": "item_free_居残りの生徒会",
+    "effect": "",
+    "name": "居残りの生徒会"
+  },
+  {
+    "plan": "free",
+    "image": "free/激痛のちぽかぽか.png",
+    "id": "item_free_激痛のちぽかぽか",
+    "effect": "",
+    "name": "激痛のちぽかぽか"
+  },
+  {
+    "plan": "free",
+    "image": "free/月間アニメトーク♪.png",
+    "id": "item_free_月間アニメトーク_",
+    "effect": "",
+    "name": "月間アニメトーク♪"
+  },
+  {
+    "plan": "free",
+    "image": "free/好き嫌い禁止！.png",
+    "id": "item_free_好き嫌い禁止_",
+    "effect": "",
+    "name": "好き嫌い禁止！"
+  },
+  {
+    "plan": "free",
+    "image": "free/咲季オススメマット.png",
+    "id": "item_free_咲季オススメマット",
+    "effect": "",
+    "name": "咲季オススメマット"
+  },
+  {
+    "plan": "free",
+    "image": "free/思い出カタメコイメ.png",
+    "id": "item_free_思い出カタメコイメ",
+    "effect": "",
+    "name": "思い出カタメコイメ"
+  },
+  {
+    "plan": "free",
+    "image": "free/私が見つけた逸材メモ.png",
+    "id": "item_free_私が見つけた逸材メモ",
+    "effect": "",
+    "name": "私が見つけた逸材メモ"
+  },
+  {
+    "plan": "free",
+    "image": "free/手作りサブスク弁当.png",
+    "id": "item_free_手作りサブスク弁当",
+    "effect": "",
+    "name": "手作りサブスク弁当"
+  },
+  {
+    "plan": "free",
+    "image": "free/手作りのご褒美.png",
+    "id": "item_free_手作りのご褒美",
+    "effect": "",
+    "name": "手作りのご褒美"
+  },
+  {
+    "plan": "free",
+    "image": "free/勝利より大切なもの.png",
+    "id": "item_free_勝利より大切なもの",
+    "effect": "",
+    "name": "勝利より大切なもの"
+  },
+  {
+    "plan": "free",
+    "image": "free/勝利をその手に.png",
+    "id": "item_free_勝利をその手に",
+    "effect": "",
+    "name": "勝利をその手に"
+  },
+  {
+    "plan": "free",
+    "image": "free/小さい秋見つけた.png",
+    "id": "item_free_小さい秋見つけた",
+    "effect": "",
+    "name": "小さい秋見つけた"
+  },
+  {
+    "plan": "free",
+    "image": "free/信頼の証.png",
+    "id": "item_free_信頼の証",
+    "effect": "",
+    "name": "信頼の証"
+  },
+  {
+    "plan": "free",
+    "image": "free/寝心地は良好.png",
+    "id": "item_free_寝心地は良好",
+    "effect": "",
+    "name": "寝心地は良好"
+  },
+  {
+    "plan": "free",
+    "image": "free/星のリトルプリンス.png",
+    "id": "item_free_星のリトルプリンス",
+    "effect": "",
+    "name": "星のリトルプリンス"
+  },
+  {
+    "plan": "free",
+    "image": "free/誓いの花びら.png",
+    "id": "item_free_誓いの花びら",
+    "effect": "",
+    "name": "誓いの花びら"
+  },
+  {
+    "plan": "free",
+    "image": "free/打倒！墾田永年私財法.png",
+    "id": "item_free_打倒_墾田永年私財法",
+    "effect": "",
+    "name": "打倒！墾田永年私財法"
+  },
+  {
+    "plan": "free",
+    "image": "free/体ほぐしローラー.png",
+    "id": "item_free_体ほぐしローラー",
+    "effect": "",
+    "name": "体ほぐしローラー"
+  },
+  {
+    "plan": "free",
+    "image": "free/体力作りの教材？.png",
+    "id": "item_free_体力作りの教材_",
+    "effect": "",
+    "name": "体力作りの教材？"
+  },
+  {
+    "plan": "free",
+    "image": "free/体力自慢の本気.png",
+    "id": "item_free_体力自慢の本気",
+    "effect": "",
+    "name": "体力自慢の本気"
+  },
+  {
+    "plan": "free",
+    "image": "free/大きくてつやつや.png",
+    "id": "item_free_大きくてつやつや",
+    "effect": "",
+    "name": "大きくてつやつや"
+  },
+  {
+    "plan": "free",
+    "image": "free/仲直りのきっかけ.png",
+    "id": "item_free_仲直りのきっかけ",
+    "effect": "",
+    "name": "仲直りのきっかけ"
+  },
+  {
+    "plan": "free",
+    "image": "free/朝一の助け舟.png",
+    "id": "item_free_朝一の助け舟",
+    "effect": "",
+    "name": "朝一の助け舟"
+  },
+  {
+    "plan": "free",
+    "image": "free/天川ラーメン巡り.png",
+    "id": "item_free_天川ラーメン巡り",
+    "effect": "",
+    "name": "天川ラーメン巡り"
+  },
+  {
+    "plan": "free",
+    "image": "free/得体のしれないモノ.png",
+    "id": "item_free_得体のしれないモノ",
+    "effect": "",
+    "name": "得体のしれないモノ"
+  },
+  {
+    "plan": "free",
+    "image": "free/曇りを拭ったタオル.png",
+    "id": "item_free_曇りを拭ったタオル",
+    "effect": "",
+    "name": "曇りを拭ったタオル"
+  },
+  {
+    "plan": "free",
+    "image": "free/虹かけるクロス.png",
+    "id": "item_free_虹かけるクロス",
+    "effect": "",
+    "name": "虹かけるクロス"
+  },
+  {
+    "plan": "free",
+    "image": "free/美鈴からの贈り物.png",
+    "id": "item_free_美鈴からの贈り物",
+    "effect": "",
+    "name": "美鈴からの贈り物"
+  },
+  {
+    "plan": "free",
+    "image": "free/負けず嫌いの勲章.png",
+    "id": "item_free_負けず嫌いの勲章",
+    "effect": "",
+    "name": "負けず嫌いの勲章"
+  },
+  {
+    "plan": "free",
+    "image": "free/包まれるやさしさ.png",
+    "id": "item_free_包まれるやさしさ",
+    "effect": "",
+    "name": "包まれるやさしさ"
+  },
+  {
+    "plan": "free",
+    "image": "free/麻央にぴったし.png",
+    "id": "item_free_麻央にぴったし",
+    "effect": "",
+    "name": "麻央にぴったし"
+  },
+  {
+    "plan": "free",
+    "image": "free/満開ペアヘアピン.png",
+    "id": "item_free_満開ペアヘアピン",
+    "effect": "",
+    "name": "満開ペアヘアピン"
+  },
+  {
+    "plan": "free",
+    "image": "free/夢にあふれた大荷物.png",
+    "id": "item_free_夢にあふれた大荷物",
+    "effect": "",
+    "name": "夢にあふれた大荷物"
+  },
+  {
+    "plan": "free",
+    "image": "free/夢へのスタートライン.png",
+    "id": "item_free_夢へのスタートライン",
+    "effect": "",
+    "name": "夢へのスタートライン"
+  },
+  {
+    "plan": "free",
+    "image": "free/無我の境地.png",
+    "id": "item_free_無我の境地",
+    "effect": "",
+    "name": "無我の境地"
+  },
+  {
+    "plan": "free",
+    "image": "free/迷子のお呼び出し.png",
+    "id": "item_free_迷子のお呼び出し",
+    "effect": "",
+    "name": "迷子のお呼び出し"
+  },
+  {
+    "plan": "free",
+    "image": "free/面白くて心配な子.png",
+    "id": "item_free_面白くて心配な子",
+    "effect": "",
+    "name": "面白くて心配な子"
+  },
+  {
+    "plan": "free",
+    "image": "free/優しさミルクシュガー.png",
+    "id": "item_free_優しさミルクシュガー",
+    "effect": "",
+    "name": "優しさミルクシュガー"
+  },
+  {
+    "plan": "free",
+    "image": "free/幼馴染の意地.png",
+    "id": "item_free_幼馴染の意地",
+    "effect": "",
+    "name": "幼馴染の意地"
+  },
+  {
+    "plan": "free",
+    "image": "free/落ち葉つかみの型.png",
+    "id": "item_free_落ち葉つかみの型",
+    "effect": "",
+    "name": "落ち葉つかみの型"
+  },
+  {
+    "plan": "free",
+    "image": "free/例のSSDの秘密.png",
+    "id": "item_free_例のssdの秘密",
+    "effect": "",
+    "name": "例のSSDの秘密"
+  },
+  {
+    "plan": "free",
+    "image": "free/絆のなわとび.png",
+    "id": "item_free_絆のなわとび",
+    "effect": "",
+    "name": "絆のなわとび"
+  }
+]

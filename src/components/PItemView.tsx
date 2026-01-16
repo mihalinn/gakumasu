@@ -1,9 +1,5 @@
+import { useState, useMemo } from 'react';
 import type { PItem, CharacterProfile } from '../types/index';
-import pItemsLogic from '../data/p_items_logic.json';
-import pItemsSense from '../data/p_items_sense.json';
-import pItemsAnomaly from '../data/p_items_anomaly.json';
-import pItemsFree from '../data/p_items_free.json';
-import { useState } from 'react';
 
 type ViewMode = 'detail' | 'compact';
 
@@ -15,15 +11,23 @@ interface PItemViewProps {
     setViewMode: (mode: ViewMode) => void;
 }
 
-const pItemsList = [
-    ...(pItemsLogic as PItem[]),
-    ...(pItemsSense as PItem[]),
-    ...(pItemsAnomaly as PItem[]),
-    ...(pItemsFree as PItem[]),
-];
+const ITEM_DATA = import.meta.glob('../data/items/*.json', { eager: true });
 
 export function PItemView({ selectedPItems, setSelectedPItems, selectedProfile, viewMode, setViewMode }: PItemViewProps) {
     const [searchTerm, setSearchTerm] = useState("");
+
+    // Use Memo to aggregate all items from dynamic JSONs
+    const allItems = useMemo(() => {
+        let items: PItem[] = [];
+        for (const path in ITEM_DATA) {
+            const mod = ITEM_DATA[path] as any;
+            const data = mod.default || mod;
+            if (Array.isArray(data)) {
+                items = [...items, ...data];
+            }
+        }
+        return items;
+    }, []);
 
     const toggleItem = (item: PItem) => {
         if (selectedPItems.find(i => i.id === item.id)) {
@@ -37,16 +41,19 @@ export function PItemView({ selectedPItems, setSelectedPItems, selectedProfile, 
         }
     };
 
-    const filteredItems = pItemsList.filter(i => {
-        // Plan filter
-        const planMatch = i.plan === "free" || (selectedProfile && i.plan === selectedProfile.plan);
-        // Search filter
-        const searchMatch = !searchTerm.trim() ||
-            i.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            i.effect.toLowerCase().includes(searchTerm.toLowerCase());
+    const filteredItems = useMemo(() => {
+        const plan = selectedProfile?.plan || 'free';
+        return allItems.filter(i => {
+            // Plan filter: show free items and items for the current plan
+            const planMatch = i.plan === "free" || i.plan === plan;
+            // Search filter
+            const searchMatch = !searchTerm.trim() ||
+                i.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                i.effect.toLowerCase().includes(searchTerm.toLowerCase());
 
-        return planMatch && searchMatch;
-    });
+            return planMatch && searchMatch;
+        });
+    }, [allItems, selectedProfile, searchTerm]);
 
     return (
         <div className="animate-in slide-in-from-right-4 duration-300 h-full flex flex-col gap-6 text-slate-200">

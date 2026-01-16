@@ -1,0 +1,198 @@
+﻿[
+  {
+    "plan": "free",
+    "image": "free/アイスコーヒー.png",
+    "id": "drink_free_アイスコーヒー",
+    "effect": "",
+    "name": "アイスコーヒー"
+  },
+  {
+    "plan": "free",
+    "image": "free/おしゃれハーブティー.png",
+    "id": "drink_free_おしゃれハーブティー",
+    "effect": "",
+    "name": "おしゃれハーブティー"
+  },
+  {
+    "plan": "free",
+    "image": "free/ジンジャーエール.png",
+    "id": "drink_free_ジンジャーエール",
+    "effect": "",
+    "name": "ジンジャーエール"
+  },
+  {
+    "plan": "free",
+    "image": "free/スタミナ爆発ドリンク.png",
+    "id": "drink_free_スタミナ爆発ドリンク",
+    "effect": "",
+    "name": "スタミナ爆発ドリンク"
+  },
+  {
+    "plan": "free",
+    "image": "free/センブリソーダ.png",
+    "id": "drink_free_センブリソーダ",
+    "effect": "",
+    "name": "センブリソーダ"
+  },
+  {
+    "plan": "free",
+    "image": "free/パワフル漢方ドリンク.png",
+    "id": "drink_free_パワフル漢方ドリンク",
+    "effect": "",
+    "name": "パワフル漢方ドリンク"
+  },
+  {
+    "plan": "free",
+    "image": "free/ビタミンドリンク.png",
+    "id": "drink_free_ビタミンドリンク",
+    "effect": "",
+    "name": "ビタミンドリンク"
+  },
+  {
+    "plan": "free",
+    "image": "free/ブーストエキス.png",
+    "id": "drink_free_ブーストエキス",
+    "effect": "",
+    "name": "ブーストエキス"
+  },
+  {
+    "plan": "free",
+    "image": "free/フレッシュビネガー.png",
+    "id": "drink_free_フレッシュビネガー",
+    "effect": "",
+    "name": "フレッシュビネガー"
+  },
+  {
+    "plan": "free",
+    "image": "free/ほうじ茶.png",
+    "id": "drink_free_ほうじ茶",
+    "effect": "",
+    "name": "ほうじ茶"
+  },
+  {
+    "plan": "free",
+    "image": "free/ほっと緑茶.png",
+    "id": "drink_free_ほっと緑茶",
+    "effect": "",
+    "name": "ほっと緑茶"
+  },
+  {
+    "plan": "free",
+    "image": "free/ホットコーヒー.png",
+    "id": "drink_free_ホットコーヒー",
+    "effect": "",
+    "name": "ホットコーヒー"
+  },
+  {
+    "plan": "free",
+    "image": "free/ミックススムージー.png",
+    "id": "drink_free_ミックススムージー",
+    "effect": "",
+    "name": "ミックススムージー"
+  },
+  {
+    "plan": "free",
+    "image": "free/リカバリドリンク.png",
+    "id": "drink_free_リカバリドリンク",
+    "effect": "",
+    "name": "リカバリドリンク"
+  },
+  {
+    "plan": "free",
+    "image": "free/ルイボスティー.png",
+    "id": "drink_free_ルイボスティー",
+    "effect": "",
+    "name": "ルイボスティー"
+  },
+  {
+    "plan": "free",
+    "image": "free/烏龍茶.png",
+    "id": "drink_free_烏龍茶",
+    "effect": "",
+    "name": "烏龍茶"
+  },
+  {
+    "plan": "free",
+    "image": "free/厳選初星チャイ.png",
+    "id": "drink_free_厳選初星チャイ",
+    "effect": "",
+    "name": "厳選初星チャイ"
+  },
+  {
+    "plan": "free",
+    "image": "free/厳選初星ティー.png",
+    "id": "drink_free_厳選初星ティー",
+    "effect": "",
+    "name": "厳選初星ティー"
+  },
+  {
+    "plan": "free",
+    "image": "free/厳選初星ブレンド.png",
+    "id": "drink_free_厳選初星ブレンド",
+    "effect": "",
+    "name": "厳選初星ブレンド"
+  },
+  {
+    "plan": "free",
+    "image": "free/厳選初星マキアート.png",
+    "id": "drink_free_厳選初星マキアート",
+    "effect": "",
+    "name": "厳選初星マキアート"
+  },
+  {
+    "plan": "free",
+    "image": "free/初星スーパーソーダ.png",
+    "id": "drink_free_初星スーパーソーダ",
+    "effect": "",
+    "name": "初星スーパーソーダ"
+  },
+  {
+    "plan": "free",
+    "image": "free/初星スペシャル青汁.png",
+    "id": "drink_free_初星スペシャル青汁",
+    "effect": "",
+    "name": "初星スペシャル青汁"
+  },
+  {
+    "plan": "free",
+    "image": "free/初星ブーストエナジー.png",
+    "id": "drink_free_初星ブーストエナジー",
+    "effect": "",
+    "name": "初星ブーストエナジー"
+  },
+  {
+    "plan": "free",
+    "image": "free/初星ホエイプロテイン.png",
+    "id": "drink_free_初星ホエイプロテイン",
+    "effect": "",
+    "name": "初星ホエイプロテイン"
+  },
+  {
+    "plan": "free",
+    "image": "free/初星黒酢.png",
+    "id": "drink_free_初星黒酢",
+    "effect": "",
+    "name": "初星黒酢"
+  },
+  {
+    "plan": "free",
+    "image": "free/初星水.png",
+    "id": "drink_free_初星水",
+    "effect": "",
+    "name": "初星水"
+  },
+  {
+    "plan": "free",
+    "image": "free/初星湯.png",
+    "id": "drink_free_初星湯",
+    "effect": "",
+    "name": "初星湯"
+  },
+  {
+    "plan": "free",
+    "image": "free/特製ハツボシエキス.png",
+    "id": "drink_free_特製ハツボシエキス",
+    "effect": "",
+    "name": "特製ハツボシエキス"
+  }
+]
