@@ -1,8 +1,10 @@
+学マス　最終オーディション　シュミレーター　
+
 テスト
 
 https://mihalinn.github.io/gakumasu/
 
-
+まだまだできません
 
 
 # React + TypeScript + Vite
