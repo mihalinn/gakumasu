@@ -234,7 +234,7 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
                                                 } pointer-events-none`}></div>
 
                                             {card.image && card.image !== "default.png" ? (
-                                                <img src={`${import.meta.env.BASE_URL}images/cards/${card.image}`} className="w-full h-full object-cover" />
+                                                <img src={`${import.meta.env.BASE_URL}images/cards/${card.image.split('/').map(part => encodeURIComponent(part)).join('/')}`} className="w-full h-full object-cover" />
                                             ) : <span className="text-[10px] font-bold">{card.name[0]}</span>}
                                         </div>
                                         <div className="flex-1 min-w-0">
@@ -269,7 +269,7 @@ function CardButton({ card, onClick, mode, isUnique }: { card: Card, onClick: ()
                     }`}
             >
                 {card.image && card.image !== "default.png" ? (
-                    <img src={`${import.meta.env.BASE_URL}images/cards/${card.image}`} className="w-full h-full object-cover" />
+                    <img src={`${import.meta.env.BASE_URL}images/cards/${card.image.split('/').map(part => encodeURIComponent(part)).join('/')}`} className="w-full h-full object-cover" />
                 ) : (
                     <div className="w-full h-full flex items-center justify-center bg-slate-950 text-slate-500 font-bold text-lg">
                         {card.name[0]}
@@ -298,7 +298,7 @@ function CardButton({ card, onClick, mode, isUnique }: { card: Card, onClick: ()
             <div className="flex items-center gap-3">
                 <div className={`w-10 h-10 rounded bg-slate-950 flex-shrink-0 flex items-center justify-center border overflow-hidden ${isUnique ? 'border-yellow-500/30' : 'border-white/10'}`}>
                     {card.image && card.image !== "default.png" ? (
-                        <img src={`${import.meta.env.BASE_URL}images/cards/${card.image}`} className="w-full h-full object-cover object-top" />
+                        <img src={`${import.meta.env.BASE_URL}images/cards/${card.image.split('/').map(part => encodeURIComponent(part)).join('/')}`} className="w-full h-full object-cover object-top" />
                     ) : (
                         <span className="text-xs text-slate-600 font-bold">{card.name[0]}</span>
                     )}

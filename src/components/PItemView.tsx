@@ -122,7 +122,7 @@ export function PItemView({ selectedPItems, setSelectedPItems, selectedProfile, 
                                                         }`}
                                                 >
                                                     {item.image && item.image !== "default.png" ? (
-                                                        <img src={`${import.meta.env.BASE_URL}images/items/${item.image}`} className="w-full h-full object-cover" />
+                                                        <img src={`${import.meta.env.BASE_URL}images/items/${encodeURIComponent(item.image)}`} className="w-full h-full object-cover" />
                                                     ) : (
                                                         <div className="w-full h-full flex items-center justify-center bg-slate-950 text-slate-500 font-bold text-lg">
                                                             {item.name[0]}
@@ -154,7 +154,7 @@ export function PItemView({ selectedPItems, setSelectedPItems, selectedProfile, 
                                                 <div className="flex items-center gap-3">
                                                     <div className="w-10 h-10 rounded bg-slate-950 flex-shrink-0 flex items-center justify-center border border-white/10 overflow-hidden">
                                                         {item.image && item.image !== "default.png" ? (
-                                                            <img src={`${import.meta.env.BASE_URL}images/items/${item.image}`} className="w-full h-full object-cover" />
+                                                            <img src={`${import.meta.env.BASE_URL}images/items/${encodeURIComponent(item.image)}`} className="w-full h-full object-cover" />
                                                         ) : (
                                                             <span className="text-[10px] text-slate-500 font-bold">{item.name[0]}</span>
                                                         )}
@@ -202,7 +202,7 @@ export function PItemView({ selectedPItems, setSelectedPItems, selectedProfile, 
                                     <div key={`${item.id}-${idx}`} className="flex items-center gap-3 p-2 bg-slate-800/70 rounded-lg border border-white/10 group transition-all animate-in slide-in-from-right-2 duration-200">
                                         <div className="w-8 h-8 rounded bg-slate-900 flex-shrink-0 flex items-center justify-center border border-white/10 overflow-hidden">
                                             {item.image && item.image !== "default.png" ? (
-                                                <img src={`${import.meta.env.BASE_URL}images/items/${item.image}`} className="w-full h-full object-cover" />
+                                                <img src={`${import.meta.env.BASE_URL}images/items/${encodeURIComponent(item.image)}`} className="w-full h-full object-cover" />
                                             ) : <span className="text-[8px] font-bold text-slate-600">{item.name[0]}</span>}
                                         </div>
                                         <div className="flex-1 min-w-0">
