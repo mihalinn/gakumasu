@@ -67,7 +67,7 @@ export function CharacterView({
                                     <div className="w-14 h-14 rounded-lg bg-slate-950 border border-white/10 flex-shrink-0 overflow-hidden shadow-inner">
                                         {profile.image ? (
                                             <img
-                                                src={`/images/characters/${selectedGroup.id}/${profile.image}`}
+                                                src={`${import.meta.env.BASE_URL}images/characters/${selectedGroup.id}/${profile.image}`}
                                                 className="w-full h-full object-cover object-[50%_15%] transition-transform group-hover:scale-110 duration-500"
                                             />
                                         ) : (
@@ -106,7 +106,7 @@ export function CharacterView({
                     <div key={selectedProfile.id} className="w-full h-full relative">
                         {selectedProfile.image ? (
                             <img
-                                src={`/images/characters/${selectedGroup?.id}/${selectedProfile.image}`}
+                                src={`${import.meta.env.BASE_URL}images/characters/${selectedGroup?.id}/${selectedProfile.image}`}
                                 className="w-full h-full object-contain object-bottom filter drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] animate-appear-mosaic opacity-0"
                                 style={{
                                     maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',

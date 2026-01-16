@@ -104,8 +104,8 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
                         <p className="text-slate-400 text-sm">試験に持ち込むカードを選択してください</p>
                         {selectedProfile && (
                             <span className={`text-[10px] px-1.5 py-0.5 rounded border uppercase font-mono ${selectedProfile.plan === 'logic' ? 'text-blue-300 border-blue-500/30 bg-blue-500/10' :
-                                    selectedProfile.plan === 'sense' ? 'text-red-300 border-red-500/30 bg-red-500/10' :
-                                        'text-purple-300 border-purple-500/30 bg-purple-500/10'
+                                selectedProfile.plan === 'sense' ? 'text-red-300 border-red-500/30 bg-red-500/10' :
+                                    'text-purple-300 border-purple-500/30 bg-purple-500/10'
                                 }`}>
                                 {selectedProfile.plan.toUpperCase()} PLAN ONLY
                             </span>
@@ -157,8 +157,8 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id as TabType)}
                                 className={`px-4 py-2 text-sm font-bold border-b-2 transition-all hover:bg-white/5 relative top-[1px] ${activeTab === tab.id
-                                        ? `text-white border-${tab.color.replace('bg-', '')}`
-                                        : 'text-slate-500 border-transparent hover:text-slate-300'
+                                    ? `text-white border-${tab.color.replace('bg-', '')}`
+                                    : 'text-slate-500 border-transparent hover:text-slate-300'
                                     }`}
                                 style={{
                                     borderColor: activeTab === tab.id ? (tab.id === 'all' ? 'white' : undefined) : undefined
@@ -195,8 +195,8 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
                         <div>
                             <h4 className="text-white font-bold mb-3 flex items-center gap-2 text-sm opacity-80">
                                 <span className={`w-1 h-4 rounded-full ${activeTab === 'active' ? 'bg-red-500' :
-                                        activeTab === 'mental' ? 'bg-blue-500' :
-                                            activeTab === 'other' ? 'bg-slate-500' : 'bg-white'
+                                    activeTab === 'mental' ? 'bg-blue-500' :
+                                        activeTab === 'other' ? 'bg-slate-500' : 'bg-white'
                                     }`}></span>
                                 {activeTab === 'all' ? '検索結果' :
                                     activeTab === 'active' ? 'アクティブ' :
@@ -240,11 +240,11 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
                                     <div key={`${card.id}-${idx}`} className="flex items-center gap-3 p-2 rounded bg-slate-800/70 border border-white/10 group transition-all animate-in slide-in-from-right-2 duration-200">
                                         <div className="w-8 h-8 rounded bg-slate-950 flex-shrink-0 flex items-center justify-center border border-white/10 overflow-hidden relative">
                                             <div className={`absolute inset-0 border-2 rounded opacity-30 ${card.rarity === 'SSR' ? 'border-yellow-400' :
-                                                    card.rarity === 'SR' ? 'border-blue-400' : 'border-slate-600'
+                                                card.rarity === 'SR' ? 'border-blue-400' : 'border-slate-600'
                                                 } pointer-events-none`}></div>
 
                                             {card.image && card.image !== "default.png" ? (
-                                                <img src={`/images/cards/${card.image}`} className="w-full h-full object-cover" />
+                                                <img src={`${import.meta.env.BASE_URL}images/cards/${card.image}`} className="w-full h-full object-cover" />
                                             ) : <span className="text-[10px] font-bold">{card.name[0]}</span>}
                                         </div>
                                         <div className="flex-1 min-w-0">
@@ -274,12 +274,12 @@ function CardButton({ card, onClick, mode, isUnique }: { card: Card, onClick: ()
             <button
                 onClick={onClick}
                 className={`relative group aspect-square rounded-lg overflow-hidden border transition-all hover:scale-105 active:scale-95 ${isUnique
-                        ? "bg-yellow-500/10 border-yellow-500/30 hover:border-yellow-400"
-                        : "bg-slate-800/50 border-white/5 hover:border-white/20 hover:bg-slate-700/50"
+                    ? "bg-yellow-500/10 border-yellow-500/30 hover:border-yellow-400"
+                    : "bg-slate-800/50 border-white/5 hover:border-white/20 hover:bg-slate-700/50"
                     }`}
             >
                 {card.image && card.image !== "default.png" ? (
-                    <img src={`/images/cards/${card.image}`} className="w-full h-full object-cover" />
+                    <img src={`${import.meta.env.BASE_URL}images/cards/${card.image}`} className="w-full h-full object-cover" />
                 ) : (
                     <div className="w-full h-full flex items-center justify-center bg-slate-950 text-slate-500 font-bold text-lg">
                         {card.name[0]}
@@ -291,7 +291,7 @@ function CardButton({ card, onClick, mode, isUnique }: { card: Card, onClick: ()
                 </div>
 
                 <div className={`absolute top-1 right-1 w-2 h-2 rounded-full border border-black/50 ${card.type === 'active' ? 'bg-red-500' :
-                        card.type === 'mental' ? 'bg-blue-500' : 'bg-slate-500'
+                    card.type === 'mental' ? 'bg-blue-500' : 'bg-slate-500'
                     }`}></div>
             </button>
         )
@@ -301,14 +301,14 @@ function CardButton({ card, onClick, mode, isUnique }: { card: Card, onClick: ()
         <button
             onClick={onClick}
             className={`text-left rounded-lg p-3 transition-colors group relative overflow-hidden flex flex-col gap-2 ${isUnique
-                    ? "bg-yellow-500/10 hover:bg-yellow-500/20 border border-yellow-500/30"
-                    : "bg-slate-800/50 hover:bg-slate-700/50 border border-white/5"
+                ? "bg-yellow-500/10 hover:bg-yellow-500/20 border border-yellow-500/30"
+                : "bg-slate-800/50 hover:bg-slate-700/50 border border-white/5"
                 }`}
         >
             <div className="flex items-center gap-3">
                 <div className={`w-10 h-10 rounded bg-slate-950 flex-shrink-0 flex items-center justify-center border overflow-hidden ${isUnique ? 'border-yellow-500/30' : 'border-white/10'}`}>
                     {card.image && card.image !== "default.png" ? (
-                        <img src={`/images/cards/${card.image}`} className="w-full h-full object-cover object-top" />
+                        <img src={`${import.meta.env.BASE_URL}images/cards/${card.image}`} className="w-full h-full object-cover object-top" />
                     ) : (
                         <span className="text-xs text-slate-600 font-bold">{card.name[0]}</span>
                     )}
