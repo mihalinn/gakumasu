@@ -86,7 +86,6 @@ function App() {
     const [hand, setHand] = useState<Card[]>([]);
     // View Mode State (Global)
     const [viewMode, setViewMode] = useState<'detail' | 'compact'>('detail');
-    const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(true);
 
     // Reset Logic
     const handleResetAll = () => {
@@ -110,6 +109,10 @@ function App() {
         e.stopPropagation();
         setSelectedCharName(characterGroups[0]?.name || null);
         setSelectedProfileId(null);
+    };
+    const resetStatus = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setStatus({ vocal: 0, dance: 0, visual: 0, hp: 30, maxHp: 60 });
     };
 
     const [savedConfigs, setSavedConfigs] = useState<SavedConfig[]>(() => {
@@ -324,32 +327,24 @@ function App() {
                         )}
                     </div>
                 </div>
-                {/* Show Right Sidebar Button */}
-                {!isRightSidebarOpen && (
-                    <div className="absolute right-0 top-6 z-50 animate-in fade-in slide-in-from-right-2 duration-300">
-                        <button
-                            onClick={() => setIsRightSidebarOpen(true)}
-                            className="bg-slate-800 border-l border-t border-b border-white/10 rounded-l-lg p-3 text-slate-400 hover:text-white shadow-xl hover:bg-slate-700 transition-all"
-                            title="設定を表示"
-                        >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" /></svg>
-                        </button>
-                    </div>
-                )}
             </div>
 
             {/* Right Sidebar */}
-            <div className={`${isRightSidebarOpen ? 'w-80' : 'w-0'} bg-slate-900/30 border-l border-white/5 flex-shrink-0 flex flex-col overflow-hidden transition-all duration-500 ease-in-out relative`}>
+            <div className="w-80 bg-slate-900/30 border-l border-white/5 flex-shrink-0 flex flex-col overflow-hidden transition-all duration-500 ease-in-out relative">
                 <div className="w-80 h-full flex flex-col p-6 overflow-y-auto">
                     <div className="flex items-center justify-between mb-6 sticky top-0 bg-slate-900/95 py-2 -my-2 z-10 backdrop-blur w-full">
                         <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">現在の設定</h3>
-                        <button onClick={() => setIsRightSidebarOpen(false)} className="text-slate-500 hover:text-white transition-colors">
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" /></svg>
-                        </button>
                     </div>
                     <div className="space-y-6">
                         {/* Status Summary */}
-                        <div className="flex flex-col gap-1.5">
+                        <div
+                            className="flex flex-col gap-1.5 cursor-pointer hover:bg-white/5 p-2 -m-2 mb-2 rounded-lg transition-colors group"
+                            onClick={() => setActiveTab(TABS.STATUS)}
+                        >
+                            <div className="flex justify-between items-center mb-2">
+                                <span className="text-xs text-slate-500 uppercase font-bold group-hover:text-slate-300 transition-colors">ステータス</span>
+                                <button onClick={resetStatus} className="text-[10px] text-slate-600 hover:text-red-400 transition-colors px-1">Clear</button>
+                            </div>
                             <div className="grid grid-cols-3 gap-1.5">
                                 <div className="flex flex-col items-center justify-center gap-0.5 bg-slate-800/50 rounded px-1 py-1.5 border border-white/5">
                                     <span className="text-[9px] font-bold text-pink-400">Vo</span>
@@ -371,16 +366,24 @@ function App() {
                             </div>
                         </div>
 
-                        <SummaryCard
-                            title="アイドル" onClick={() => setActiveTab(TABS.CHARACTER)}
-                            value={selectedProfile ? selectedProfile.name : "（未設定）"}
-                            sub={selectedGroup ? selectedGroup.name : "--"}
-                            badge={selectedProfile?.plan}
-                            highlight={!!selectedProfile}
-                            imageUrl={selectedProfile?.image && selectedGroup ? `${import.meta.env.BASE_URL}images/characters/${selectedGroup.id}/${selectedProfile.image}` : undefined}
-                        />
-                        <div className="flex justify-end -mt-5 pr-2 relative z-20">
-                            <button onClick={resetCharacter} className="text-[9px] text-zinc-600 hover:text-red-400 transition-colors px-1 uppercase tracking-tighter cursor-pointer">Clear Selection</button>
+                        {/* Idol Profile */}
+                        <div
+                            className="cursor-pointer hover:bg-white/5 p-2 -m-2 mb-2 rounded-lg transition-colors group"
+                            onClick={() => setActiveTab(TABS.CHARACTER)}
+                        >
+                            <div className="flex justify-between items-center mb-2">
+                                <span className="text-xs text-slate-500 uppercase font-bold group-hover:text-slate-300 transition-colors">アイドル</span>
+                                <button onClick={resetCharacter} className="text-[10px] text-slate-600 hover:text-red-400 transition-colors px-1">Clear</button>
+                            </div>
+                            <SummaryCard
+                                value={selectedProfile ? selectedProfile.name : "（未設定）"}
+                                sub={selectedGroup ? selectedGroup.name : "--"}
+                                badge={selectedProfile?.plan}
+                                highlight={!!selectedProfile}
+                                imageUrl={selectedProfile?.image && selectedGroup ? `${import.meta.env.BASE_URL}images/characters/${selectedGroup.id}/${selectedProfile.image}` : undefined}
+                                imagePosition="object-[50%_15%]"
+                                imageLayout="right"
+                            />
                         </div>
 
                         <div className="cursor-pointer hover:bg-white/5 p-2 -m-2 rounded-lg transition-colors group" onClick={() => setActiveTab(TABS.HAND)}>

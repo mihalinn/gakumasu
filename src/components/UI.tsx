@@ -23,41 +23,65 @@ export function NavButton({ label, icon, active, onClick, primary = false }: Nav
 }
 
 interface SummaryCardProps {
-    title: string;
+    title?: string;
     value: string;
-    sub?: string;
-    badge?: string;
+    sub: string;
+    badge?: 'logic' | 'sense' | 'anomaly';
     highlight?: boolean;
     onClick?: () => void;
     imageUrl?: string;
+    imagePosition?: string;
+    imageLayout?: 'full' | 'right';
 }
 
-export function SummaryCard({ title, value, sub, badge, highlight = false, onClick, imageUrl }: SummaryCardProps) {
+export function SummaryCard({ title, value, sub, badge, highlight = false, onClick, imageUrl, imagePosition = "object-top", imageLayout = 'full' }: SummaryCardProps) {
     return (
         <div
             onClick={onClick}
-            className={`relative overflow-hidden p-4 rounded-xl border transition-all duration-300 group ${onClick ? "cursor-pointer hover:bg-white/10 hover:border-white/20 active:scale-[0.98]" : ""} ${highlight ? "bg-white/5 border-white/10" : "bg-slate-900/30 border-white/5"}`}
+            className={`
+                relative overflow-hidden rounded-lg border transition-all duration-300 group min-h-[5.5rem]
+                ${highlight
+                    ? 'bg-gradient-to-br from-blue-500/10 to-indigo-500/10 border-blue-400/30 shadow-[0_0_15px_-3px_rgba(59,130,246,0.3)]'
+                    : 'bg-slate-800/50 border-white/5 hover:border-white/10 hover:bg-slate-800/80'
+                }
+            `}
         >
-            {/* Ambient Background Image */}
-            {imageUrl && (
-                <div className="absolute right-[-5%] top-[-10%] bottom-[-10%] w-[70%] pointer-events-none select-none grayscale-[0.2] group-hover:grayscale-0 transition-all duration-500">
-                    <div className="w-full h-full relative">
-                        <img
-                            key={imageUrl}
-                            src={imageUrl}
-                            className="w-full h-full object-cover object-[50%_15%] animate-slide-in-right opacity-0" // Default opacity 0, animation handles fade-in to 0.6
+            {/* Background Image/Effect */}
+            {imageUrl ? (
+                imageLayout === 'right' ? (
+                    /* Right-side layout (2:8 ratio with gradient mask) */
+                    <>
+                        <div
+                            className="absolute right-0 top-0 bottom-0 w-[80%] opacity-80 group-hover:scale-105 transition-transform duration-700"
                             style={{
-                                maskImage: 'linear-gradient(to left, black 20%, transparent 100%)',
-                                WebkitMaskImage: 'linear-gradient(to left, black 20%, transparent 100%)'
+                                maskImage: 'linear-gradient(to right, transparent, black 30%)',
+                                WebkitMaskImage: 'linear-gradient(to right, transparent, black 30%)'
                             }}
-                        />
-                    </div>
-                </div>
+                        >
+                            <img src={imageUrl} alt="" className={`w-full h-full object-cover ${imagePosition}`} />
+                        </div>
+                        {/* Subtle text protection gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/20 to-transparent" />
+                    </>
+                ) : (
+                    /* Full background layout (Original) */
+                    <>
+                        <div className="absolute inset-0 opacity-20 transition-transform duration-700 group-hover:scale-105">
+                            <img src={imageUrl} alt="" className={`w-full h-full object-cover ${imagePosition}`} />
+                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
+                    </>
+                )
+            ) : highlight && (
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
             )}
 
-            <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-1">
-                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest shadow-black drop-shadow-sm">{title}</p>
+            {/* Content */}
+            <div className="relative p-3">
+                <div className="flex justify-between items-start mb-1 min-h-[1.25rem]">
+                    {title && (
+                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">{title}</span>
+                    )}
                     {badge && (
                         <span className={`text-[9px] px-1.5 py-0.5 rounded font-bold uppercase shadow-sm ${badge === "logic" ? "bg-blue-500/20 text-blue-400 border border-blue-500/20 backdrop-blur-sm" :
                             badge === "sense" ? "bg-orange-500/20 text-orange-400 border border-orange-500/20 backdrop-blur-sm" :
@@ -68,7 +92,7 @@ export function SummaryCard({ title, value, sub, badge, highlight = false, onCli
                     )}
                 </div>
                 <div className="flex items-center gap-2">
-                    <div className="min-w-0 pr-6">
+                    <div className="min-w-0 w-full">
                         <p className={`text-sm font-bold truncate ${highlight ? "text-white" : "text-slate-400"} drop-shadow-md shadow-black`}>{value}</p>
                         {sub && <p className="text-[10px] text-slate-500 truncate drop-shadow-sm shadow-black">{sub}</p>}
                     </div>
