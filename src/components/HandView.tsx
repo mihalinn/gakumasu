@@ -1,10 +1,5 @@
 import { useState, useMemo } from 'react';
 import type { Card, CharacterProfile } from '../types/index';
-import cardsLogic from '../data/cards_logic.json';
-import cardsSense from '../data/cards_sense.json';
-import cardsAnomaly from '../data/cards_anomaly.json';
-import cardsFree from '../data/cards_free.json';
-import cardsTrouble from '../data/cards_trouble.json';
 
 interface HandViewProps {
     hand: Card[];
@@ -16,6 +11,8 @@ interface HandViewProps {
 
 type TabType = 'all' | 'active' | 'mental' | 'other';
 type ViewMode = 'detail' | 'compact';
+
+const CARD_DATA = import.meta.glob('../data/cards/*.json', { eager: true });
 
 export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode }: HandViewProps) {
     const [searchTerm, setSearchTerm] = useState("");
@@ -36,41 +33,34 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
     };
 
     const availableCards = useMemo(() => {
-        let pool: Card[] = [
-            ...(cardsFree as Card[]),
-            ...(cardsTrouble as Card[]),
-        ];
+        let allCards: Card[] = [];
+        for (const path in CARD_DATA) {
+            const mod = CARD_DATA[path] as any;
+            const data = mod.default || mod;
+            if (Array.isArray(data)) {
+                allCards = [...allCards, ...data];
+            }
+        }
+
+        // Basic pool: free cards are always available
+        const basePool = allCards.filter(c => c.plan === 'free');
 
         if (!selectedProfile) {
-            return [
-                ...pool,
-                ...(cardsLogic as Card[]),
-                ...(cardsSense as Card[]),
-                ...(cardsAnomaly as Card[]),
-            ];
+            return allCards;
         }
 
-        switch (selectedProfile.plan) {
-            case 'logic':
-                pool = [...pool, ...(cardsLogic as Card[])];
-                break;
-            case 'sense':
-                pool = [...pool, ...(cardsSense as Card[])];
-                break;
-            case 'anomaly':
-                pool = [...pool, ...(cardsAnomaly as Card[])];
-                break;
-            default:
-                pool = [
-                    ...pool,
-                    ...(cardsLogic as Card[]),
-                    ...(cardsSense as Card[]),
-                    ...(cardsAnomaly as Card[]),
-                ];
-                break;
-        }
+        const plan = selectedProfile.plan;
 
-        return pool;
+        // Filter cards based on plan
+        // Inclues: plan-specific basic cards, unique cards for that plan, and support cards for that plan
+        const planSpecificPool = allCards.filter(c =>
+            c.plan === plan ||
+            c.plan === `basic_${plan}` ||
+            c.plan === `unique_${plan}` ||
+            c.plan === `support_${plan}`
+        );
+
+        return [...basePool, ...planSpecificPool];
     }, [selectedProfile]);
 
     const filteredCards = useMemo(() => {

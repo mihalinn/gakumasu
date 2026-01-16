@@ -1,0 +1,642 @@
+﻿[
+  {
+    "image": "logic/200%スマイル.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "200%スマイル",
+    "type": "active",
+    "effect": "",
+    "id": "logic_200_スマイル",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/あのときの約束.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "あのときの約束",
+    "type": "active",
+    "effect": "",
+    "id": "logic_あのときの約束",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/あふれる思い出.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "あふれる思い出",
+    "type": "active",
+    "effect": "",
+    "id": "logic_あふれる思い出",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/ありがとうの言葉.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ありがとうの言葉",
+    "type": "active",
+    "effect": "",
+    "id": "logic_ありがとうの言葉",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/アイコンタクトの基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "アイコンタクトの基本",
+    "type": "active",
+    "effect": "",
+    "id": "logic_アイコンタクトの基本",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/イメトレ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "イメトレ",
+    "type": "active",
+    "effect": "",
+    "id": "logic_イメトレ",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/えいえいおー.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "えいえいおー",
+    "type": "active",
+    "effect": "",
+    "id": "logic_えいえいおー",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/エクセレント♪.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "エクセレント♪",
+    "type": "active",
+    "effect": "",
+    "id": "logic_エクセレント_",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/おまもりミラクル.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "おまもりミラクル",
+    "type": "active",
+    "effect": "",
+    "id": "logic_おまもりミラクル",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/オトメゴコロ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "オトメゴコロ",
+    "type": "active",
+    "effect": "",
+    "id": "logic_オトメゴコロ",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/がむしゃら.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "がむしゃら",
+    "type": "active",
+    "effect": "",
+    "id": "logic_がむしゃら",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/きらきら紙吹雪.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "きらきら紙吹雪",
+    "type": "active",
+    "effect": "",
+    "id": "logic_きらきら紙吹雪",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/キセキの魔法.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "キセキの魔法",
+    "type": "active",
+    "effect": "",
+    "id": "logic_キセキの魔法",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/キラメキ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "キラメキ",
+    "type": "active",
+    "effect": "",
+    "id": "logic_キラメキ",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/セリフの基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "セリフの基本",
+    "type": "active",
+    "effect": "",
+    "id": "logic_セリフの基本",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/セルフケアの基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "セルフケアの基本",
+    "type": "active",
+    "effect": "",
+    "id": "logic_セルフケアの基本",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/デイドリーミング.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "デイドリーミング",
+    "type": "active",
+    "effect": "",
+    "id": "logic_デイドリーミング",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/トキメキ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "トキメキ",
+    "type": "active",
+    "effect": "",
+    "id": "logic_トキメキ",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/ノートの端の決意.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ノートの端の決意",
+    "type": "active",
+    "effect": "",
+    "id": "logic_ノートの端の決意",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/ハートの合図.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ハートの合図",
+    "type": "active",
+    "effect": "",
+    "id": "logic_ハートの合図",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/パステル気分.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "パステル気分",
+    "type": "active",
+    "effect": "",
+    "id": "logic_パステル気分",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/ひなたぼっこ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ひなたぼっこ",
+    "type": "active",
+    "effect": "",
+    "id": "logic_ひなたぼっこ",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/ふれあい.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ふれあい",
+    "type": "active",
+    "effect": "",
+    "id": "logic_ふれあい",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/ファンサの基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ファンサの基本",
+    "type": "active",
+    "effect": "",
+    "id": "logic_ファンサの基本",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/ファンシーチャーム.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ファンシーチャーム",
+    "type": "active",
+    "effect": "",
+    "id": "logic_ファンシーチャーム",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/みんな大好き.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "みんな大好き",
+    "type": "active",
+    "effect": "",
+    "id": "logic_みんな大好き",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/もう少しだけ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "もう少しだけ",
+    "type": "active",
+    "effect": "",
+    "id": "logic_もう少しだけ",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/やる気は満点.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "やる気は満点",
+    "type": "active",
+    "effect": "",
+    "id": "logic_やる気は満点",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/ゆめみごこち.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ゆめみごこち",
+    "type": "active",
+    "effect": "",
+    "id": "logic_ゆめみごこち",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/ゆるふわおしゃべり.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ゆるふわおしゃべり",
+    "type": "active",
+    "effect": "",
+    "id": "logic_ゆるふわおしゃべり",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/ラブリーウインク.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ラブリーウインク",
+    "type": "active",
+    "effect": "",
+    "id": "logic_ラブリーウインク",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/リスタート.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "リスタート",
+    "type": "active",
+    "effect": "",
+    "id": "logic_リスタート",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/リズミカル.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "リズミカル",
+    "type": "active",
+    "effect": "",
+    "id": "logic_リズミカル",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/ワクワクが止まらない.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ワクワクが止まらない",
+    "type": "active",
+    "effect": "",
+    "id": "logic_ワクワクが止まらない",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/意識の基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "意識の基本",
+    "type": "active",
+    "effect": "",
+    "id": "logic_意識の基本",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/可愛い仕草.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "可愛い仕草",
+    "type": "active",
+    "effect": "",
+    "id": "logic_可愛い仕草",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/開花.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "開花",
+    "type": "active",
+    "effect": "",
+    "id": "logic_開花",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/気まぐれハート.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "気まぐれハート",
+    "type": "active",
+    "effect": "",
+    "id": "logic_気まぐれハート",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/気分転換.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "気分転換",
+    "type": "active",
+    "effect": "",
+    "id": "logic_気分転換",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/輝くキミへ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "輝くキミへ",
+    "type": "active",
+    "effect": "",
+    "id": "logic_輝くキミへ",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/究極スマイル.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "究極スマイル",
+    "type": "active",
+    "effect": "",
+    "id": "logic_究極スマイル",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/距離感の基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "距離感の基本",
+    "type": "active",
+    "effect": "",
+    "id": "logic_距離感の基本",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/元気な挨拶.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "元気な挨拶",
+    "type": "active",
+    "effect": "",
+    "id": "logic_元気な挨拶",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/幸せな時間.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "幸せな時間",
+    "type": "active",
+    "effect": "",
+    "id": "logic_幸せな時間",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/幸せのおまじない.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "幸せのおまじない",
+    "type": "active",
+    "effect": "",
+    "id": "logic_幸せのおまじない",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/今日もおはよう.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "今日もおはよう",
+    "type": "active",
+    "effect": "",
+    "id": "logic_今日もおはよう",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/最強パフォーマー.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "最強パフォーマー",
+    "type": "active",
+    "effect": "",
+    "id": "logic_最強パフォーマー",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/仕草の基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "仕草の基本",
+    "type": "active",
+    "effect": "",
+    "id": "logic_仕草の基本",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/思い出し笑い.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "思い出し笑い",
+    "type": "active",
+    "effect": "",
+    "id": "logic_思い出し笑い",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/止められない想い.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "止められない想い",
+    "type": "active",
+    "effect": "",
+    "id": "logic_止められない想い",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/私がスター.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "私がスター",
+    "type": "active",
+    "effect": "",
+    "id": "logic_私がスター",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/手書きのメッセージ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "手書きのメッセージ",
+    "type": "active",
+    "effect": "",
+    "id": "logic_手書きのメッセージ",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/手拍子.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "手拍子",
+    "type": "active",
+    "effect": "",
+    "id": "logic_手拍子",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/笑顔の基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "笑顔の基本",
+    "type": "active",
+    "effect": "",
+    "id": "logic_笑顔の基本",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/成長痛.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "成長痛",
+    "type": "active",
+    "effect": "",
+    "id": "logic_成長痛",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/星屑センセーション.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "星屑センセーション",
+    "type": "active",
+    "effect": "",
+    "id": "logic_星屑センセーション",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/盛り上げの基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "盛り上げの基本",
+    "type": "active",
+    "effect": "",
+    "id": "logic_盛り上げの基本",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/届いて！.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "届いて！",
+    "type": "active",
+    "effect": "",
+    "id": "logic_届いて_",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/虹色ドリーマー.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "虹色ドリーマー",
+    "type": "active",
+    "effect": "",
+    "id": "logic_虹色ドリーマー",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/冒険心.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "冒険心",
+    "type": "active",
+    "effect": "",
+    "id": "logic_冒険心",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/本番前夜.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "本番前夜",
+    "type": "active",
+    "effect": "",
+    "id": "logic_本番前夜",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/夢色リップ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "夢色リップ",
+    "type": "active",
+    "effect": "",
+    "id": "logic_夢色リップ",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/目線の基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "目線の基本",
+    "type": "active",
+    "effect": "",
+    "id": "logic_目線の基本",
+    "plan": "logic"
+  },
+  {
+    "image": "logic/励まし.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "励まし",
+    "type": "active",
+    "effect": "",
+    "id": "logic_励まし",
+    "plan": "logic"
+  }
+]

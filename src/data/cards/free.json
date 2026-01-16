@@ -1,0 +1,122 @@
+﻿[
+  {
+    "image": "free/アイドル魂.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "アイドル魂",
+    "type": "active",
+    "effect": "",
+    "id": "free_アイドル魂",
+    "plan": "free"
+  },
+  {
+    "image": "free/アイドル宣言.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "アイドル宣言",
+    "type": "active",
+    "effect": "",
+    "id": "free_アイドル宣言",
+    "plan": "free"
+  },
+  {
+    "image": "free/アピールの基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "アピールの基本",
+    "type": "active",
+    "effect": "",
+    "id": "free_アピールの基本",
+    "plan": "free"
+  },
+  {
+    "image": "free/テレビ出演.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "テレビ出演",
+    "type": "active",
+    "effect": "",
+    "id": "free_テレビ出演",
+    "plan": "free"
+  },
+  {
+    "image": "free/ハイテンション.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ハイテンション",
+    "type": "active",
+    "effect": "",
+    "id": "free_ハイテンション",
+    "plan": "free"
+  },
+  {
+    "image": "free/ファーストステップ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ファーストステップ",
+    "type": "active",
+    "effect": "",
+    "id": "free_ファーストステップ",
+    "plan": "free"
+  },
+  {
+    "image": "free/ポーズの基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ポーズの基本",
+    "type": "active",
+    "effect": "",
+    "id": "free_ポーズの基本",
+    "plan": "free"
+  },
+  {
+    "image": "free/叶えたい夢.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "叶えたい夢",
+    "type": "active",
+    "effect": "",
+    "id": "free_叶えたい夢",
+    "plan": "free"
+  },
+  {
+    "image": "free/気合十分！.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "気合十分！",
+    "type": "active",
+    "effect": "",
+    "id": "free_気合十分_",
+    "plan": "free"
+  },
+  {
+    "image": "free/仕切り直し.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "仕切り直し",
+    "type": "active",
+    "effect": "",
+    "id": "free_仕切り直し",
+    "plan": "free"
+  },
+  {
+    "image": "free/前途洋々.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "前途洋々",
+    "type": "active",
+    "effect": "",
+    "id": "free_前途洋_",
+    "plan": "free"
+  },
+  {
+    "image": "free/表現の基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "表現の基本",
+    "type": "active",
+    "effect": "",
+    "id": "free_表現の基本",
+    "plan": "free"
+  }
+]

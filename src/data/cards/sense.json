@@ -1,0 +1,642 @@
+﻿[
+  {
+    "image": "sense/アドリブ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "アドリブ",
+    "type": "active",
+    "effect": "",
+    "id": "sense_アドリブ",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/エキサイト.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "エキサイト",
+    "type": "active",
+    "effect": "",
+    "id": "sense_エキサイト",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/コール&レスポンス.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "コール&レスポンス",
+    "type": "active",
+    "effect": "",
+    "id": "sense_コール_レスポンス",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/シュプレヒコール.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "シュプレヒコール",
+    "type": "active",
+    "effect": "",
+    "id": "sense_シュプレヒコール",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/スタートダッシュ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "スタートダッシュ",
+    "type": "active",
+    "effect": "",
+    "id": "sense_スタートダッシュ",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/スタンドプレー.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "スタンドプレー",
+    "type": "active",
+    "effect": "",
+    "id": "sense_スタンドプレー",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/ステージングの基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ステージングの基本",
+    "type": "active",
+    "effect": "",
+    "id": "sense_ステージングの基本",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/ステップの基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ステップの基本",
+    "type": "active",
+    "effect": "",
+    "id": "sense_ステップの基本",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/スポットライト.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "スポットライト",
+    "type": "active",
+    "effect": "",
+    "id": "sense_スポットライト",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/スリリング.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "スリリング",
+    "type": "active",
+    "effect": "",
+    "id": "sense_スリリング",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/タイミングの基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "タイミングの基本",
+    "type": "active",
+    "effect": "",
+    "id": "sense_タイミングの基本",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/トークタイム.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "トークタイム",
+    "type": "active",
+    "effect": "",
+    "id": "sense_トークタイム",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/ハイタッチ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ハイタッチ",
+    "type": "active",
+    "effect": "",
+    "id": "sense_ハイタッチ",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/バズワード.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "バズワード",
+    "type": "active",
+    "effect": "",
+    "id": "sense_バズワード",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/パフォーマンスの基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "パフォーマンスの基本",
+    "type": "active",
+    "effect": "",
+    "id": "sense_パフォーマンスの基本",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/バランス感覚.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "バランス感覚",
+    "type": "active",
+    "effect": "",
+    "id": "sense_バランス感覚",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/パンプアップ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "パンプアップ",
+    "type": "active",
+    "effect": "",
+    "id": "sense_パンプアップ",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/ひと呼吸.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ひと呼吸",
+    "type": "active",
+    "effect": "",
+    "id": "sense_ひと呼吸",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/ファンサ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ファンサ",
+    "type": "active",
+    "effect": "",
+    "id": "sense_ファンサ",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/ペース配分.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "ペース配分",
+    "type": "active",
+    "effect": "",
+    "id": "sense_ペース配分",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/リアクションの基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "リアクションの基本",
+    "type": "active",
+    "effect": "",
+    "id": "sense_リアクションの基本",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/愛嬌.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "愛嬌",
+    "type": "active",
+    "effect": "",
+    "id": "sense_愛嬌",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/意地.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "意地",
+    "type": "active",
+    "effect": "",
+    "id": "sense_意地",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/一発勝負.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "一発勝負",
+    "type": "active",
+    "effect": "",
+    "id": "sense_一発勝負",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/演出計画.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "演出計画",
+    "type": "active",
+    "effect": "",
+    "id": "sense_演出計画",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/王者の風格.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "王者の風格",
+    "type": "active",
+    "effect": "",
+    "id": "sense_王者の風格",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/覚醒.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "覚醒",
+    "type": "active",
+    "effect": "",
+    "id": "sense_覚醒",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/楽観的.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "楽観的",
+    "type": "active",
+    "effect": "",
+    "id": "sense_楽観的",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/完全無欠.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "完全無欠",
+    "type": "active",
+    "effect": "",
+    "id": "sense_完全無欠",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/眼力.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "眼力",
+    "type": "active",
+    "effect": "",
+    "id": "sense_眼力",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/願いの力.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "願いの力",
+    "type": "active",
+    "effect": "",
+    "id": "sense_願いの力",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/軌道修正.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "軌道修正",
+    "type": "active",
+    "effect": "",
+    "id": "sense_軌道修正",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/軽い足取り.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "軽い足取り",
+    "type": "active",
+    "effect": "",
+    "id": "sense_軽い足取り",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/決めポーズ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "決めポーズ",
+    "type": "active",
+    "effect": "",
+    "id": "sense_決めポーズ",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/国民的アイドル.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "国民的アイドル",
+    "type": "active",
+    "effect": "",
+    "id": "sense_国民的アイドル",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/最高傑作.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "最高傑作",
+    "type": "active",
+    "effect": "",
+    "id": "sense_最高傑作",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/始まりの合図.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "始まりの合図",
+    "type": "active",
+    "effect": "",
+    "id": "sense_始まりの合図",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/思考の基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "思考の基本",
+    "type": "active",
+    "effect": "",
+    "id": "sense_思考の基本",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/至高のエンタメ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "至高のエンタメ",
+    "type": "active",
+    "effect": "",
+    "id": "sense_至高のエンタメ",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/視線の基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "視線の基本",
+    "type": "active",
+    "effect": "",
+    "id": "sense_視線の基本",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/試行錯誤.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "試行錯誤",
+    "type": "active",
+    "effect": "",
+    "id": "sense_試行錯誤",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/祝福.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "祝福",
+    "type": "active",
+    "effect": "",
+    "id": "sense_祝福",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/準備運動.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "準備運動",
+    "type": "active",
+    "effect": "",
+    "id": "sense_準備運動",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/情熱ターン.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "情熱ターン",
+    "type": "active",
+    "effect": "",
+    "id": "sense_情熱ターン",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/振る舞いの基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "振る舞いの基本",
+    "type": "active",
+    "effect": "",
+    "id": "sense_振る舞いの基本",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/深呼吸.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "深呼吸",
+    "type": "active",
+    "effect": "",
+    "id": "sense_深呼吸",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/勢い任せ.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "勢い任せ",
+    "type": "active",
+    "effect": "",
+    "id": "sense_勢い任せ",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/成功への道筋.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "成功への道筋",
+    "type": "active",
+    "effect": "",
+    "id": "sense_成功への道筋",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/成就.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "成就",
+    "type": "active",
+    "effect": "",
+    "id": "sense_成就",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/静かな意志.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "静かな意志",
+    "type": "active",
+    "effect": "",
+    "id": "sense_静かな意志",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/存在感.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "存在感",
+    "type": "active",
+    "effect": "",
+    "id": "sense_存在感",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/大声援.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "大声援",
+    "type": "active",
+    "effect": "",
+    "id": "sense_大声援",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/大胆不敵.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "大胆不敵",
+    "type": "active",
+    "effect": "",
+    "id": "sense_大胆不敵",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/挑戦.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "挑戦",
+    "type": "active",
+    "effect": "",
+    "id": "sense_挑戦",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/天真爛漫.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "天真爛漫",
+    "type": "active",
+    "effect": "",
+    "id": "sense_天真爛漫",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/天賦の才.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "天賦の才",
+    "type": "active",
+    "effect": "",
+    "id": "sense_天賦の才",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/破竹の勢い.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "破竹の勢い",
+    "type": "active",
+    "effect": "",
+    "id": "sense_破竹の勢い",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/飛躍.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "飛躍",
+    "type": "active",
+    "effect": "",
+    "id": "sense_飛躍",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/表情の基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "表情の基本",
+    "type": "active",
+    "effect": "",
+    "id": "sense_表情の基本",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/魅惑のパフォーマンス.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "魅惑のパフォーマンス",
+    "type": "active",
+    "effect": "",
+    "id": "sense_魅惑のパフォーマンス",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/魅惑の視線.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "魅惑の視線",
+    "type": "active",
+    "effect": "",
+    "id": "sense_魅惑の視線",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/鳴り止まない拍手.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "鳴り止まない拍手",
+    "type": "active",
+    "effect": "",
+    "id": "sense_鳴り止まない拍手",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/落ち着きの基本.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "落ち着きの基本",
+    "type": "active",
+    "effect": "",
+    "id": "sense_落ち着きの基本",
+    "plan": "sense"
+  },
+  {
+    "image": "sense/立ち位置チェック.png",
+    "rarity": "R",
+    "cost": 0,
+    "name": "立ち位置チェック",
+    "type": "active",
+    "effect": "",
+    "id": "sense_立ち位置チェック",
+    "plan": "sense"
+  }
+]

@@ -22,7 +22,11 @@ export interface CharacterGroup {
 }
 
 export type CardType = 'active' | 'mental' | 'trouble';
-export type CardPlan = 'logic' | 'sense' | 'anomaly' | 'free';
+export type CardPlan =
+    | 'logic' | 'sense' | 'anomaly' | 'free' | 'trouble'
+    | 'unique_logic' | 'unique_sense' | 'unique_anomaly' | 'unique_free'
+    | 'support_logic' | 'support_sense' | 'support_anomaly' | 'support_free'
+    | 'basic_logic' | 'basic_sense' | 'basic_anomaly' | 'basic_free';
 
 export interface Card {
     id: string;
