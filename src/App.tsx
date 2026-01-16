@@ -263,6 +263,7 @@ function App() {
                                 initialHand={hand}
                                 initialPItems={selectedPItems}
                                 initialPDrinks={selectedPDrinks}
+                                status={status}
                             />
                         )}
                         {activeTab === TABS.CHARACTER && (
@@ -489,10 +490,11 @@ interface ProduceViewProps {
     initialHand: Card[];
     initialPItems: PItem[];
     initialPDrinks: PDrink[];
+    status: { vocal: number; dance: number; visual: number; hp: number; maxHp: number };
 }
 
-function ProduceView({ initialHand, initialPItems, initialPDrinks }: ProduceViewProps) {
-    const { state, startTurn, endTurn } = useSimulation();
+function ProduceView({ initialHand: _initialHand, initialPItems: _initialPItems, initialPDrinks: _initialPDrinks, status }: ProduceViewProps) {
+    const { state, endTurn } = useSimulation(status);
 
     return (
         <div className="h-full flex flex-col gap-4 animate-in fade-in duration-500">

@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import type { GameState, Card, PItem, PDrink } from '../types';
+import type { GameState } from '../types';
 
 const INITIAL_STATE: GameState = {
     turn: 1,
@@ -20,8 +20,14 @@ const INITIAL_STATE: GameState = {
     pDrinks: [],
 };
 
-export function useSimulation() {
-    const [state, setState] = useState<GameState>(INITIAL_STATE);
+export function useSimulation(initialStatus?: { vocal: number; dance: number; visual: number; hp: number; maxHp: number }) {
+    const [state, setState] = useState<GameState>(() => ({
+        ...INITIAL_STATE,
+        ...initialStatus,
+        hp: initialStatus?.hp ?? INITIAL_STATE.hp,
+        maxHp: initialStatus?.maxHp ?? INITIAL_STATE.maxHp,
+        // Ensure unknown props don't break strict type if any
+    }));
 
     const startTurn = useCallback(() => {
         setState(prev => ({
