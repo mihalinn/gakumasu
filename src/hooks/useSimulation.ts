@@ -42,17 +42,34 @@ export function useSimulation(
     }, [turnAttributes]);
 
     const endTurn = useCallback(() => {
-        setState(prev => ({
-            ...prev,
-            turn: prev.turn + 1,
-            phase: 'start',
-            // ここにターン終了時の処理（手札破棄、元気減少など）を追加予定
-        }));
-    }, []);
+        setState(prev => {
+            if (prev.turn >= prev.maxTurns) return prev; // Do nothing if already at max turn
+
+            const nextTurn = prev.turn + 1;
+            return {
+                ...prev,
+                turn: nextTurn,
+                phase: 'start',
+                currentTurnAttribute: turnAttributes ? (turnAttributes[nextTurn - 1] ?? 'vocal') : 'vocal',
+                // ここにターン終了時の処理（手札破棄、元気減少など）を追加予定
+            };
+        });
+    }, [turnAttributes]);
+
+    const resetSimulation = useCallback(() => {
+        setState({
+            ...INITIAL_STATE,
+            ...initialStatus,
+            hp: initialStatus?.hp ?? INITIAL_STATE.hp,
+            maxHp: initialStatus?.maxHp ?? INITIAL_STATE.maxHp,
+            currentTurnAttribute: turnAttributes ? turnAttributes[0] : 'vocal',
+        });
+    }, [initialStatus, turnAttributes]);
 
     return {
         state,
         startTurn,
         endTurn,
+        resetSimulation,
     };
 }

@@ -52,13 +52,14 @@ export function SummaryCard({ title, value, sub, badge, highlight = false, onCli
                     /* Right-side layout (2:8 ratio with gradient mask) */
                     <>
                         <div
-                            className="absolute right-0 top-0 bottom-0 w-[80%] opacity-80 group-hover:scale-105 transition-transform duration-700"
+                            key={imageUrl}
+                            className="absolute right-0 top-0 bottom-0 w-[80%] animate-slide-in-right-speedy"
                             style={{
                                 maskImage: 'linear-gradient(to right, transparent, black 30%)',
                                 WebkitMaskImage: 'linear-gradient(to right, transparent, black 30%)'
                             }}
                         >
-                            <img src={imageUrl} alt="" className={`w-full h-full object-cover ${imagePosition}`} />
+                            <img src={imageUrl} alt="" className={`w-full h-full object-cover ${imagePosition} transition-transform duration-700 group-hover:scale-105`} />
                         </div>
                         {/* Subtle text protection gradient */}
                         <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/20 to-transparent" />
