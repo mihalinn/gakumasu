@@ -1,6 +1,6 @@
 学マス　最終オーディション　シュミレーター　
 
-今のところPCタブレッド専用
+今のところPCかタブレッドしか使えないと思う
 
 https://mihalinn.github.io/gakumasu/
 
