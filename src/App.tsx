@@ -290,7 +290,7 @@ function App() {
                         sub={selectedGroup ? selectedGroup.name : "--"}
                         badge={selectedProfile?.plan}
                         highlight={!!selectedProfile}
-                        imageUrl={selectedProfile?.image && selectedGroup ? `/images/characters/${selectedGroup.id}/${selectedProfile.image}` : undefined}
+                        imageUrl={selectedProfile?.image && selectedGroup ? `${import.meta.env.BASE_URL}images/characters/${selectedGroup.id}/${selectedProfile.image}` : undefined}
                     />
                     <div className="flex justify-end -mt-5 pr-2 relative z-20">
                         <button onClick={resetCharacter} className="text-[9px] text-zinc-600 hover:text-red-400 transition-colors px-1 uppercase tracking-tighter cursor-pointer">Clear Selection</button>
@@ -311,7 +311,7 @@ function App() {
                                 <div key={`${card.id}-${i}`} className="aspect-square bg-slate-800 rounded border border-white/10 overflow-hidden relative group">
                                     {card.image && card.image !== 'default.png' && (
                                         <>
-                                            <img src={`/images/cards/${card.image}`} className="w-full h-full object-contain opacity-100 group-hover:opacity-100 transition-opacity" />
+                                            <img src={`${import.meta.env.BASE_URL}images/cards/${card.image}`} className="w-full h-full object-contain opacity-100 group-hover:opacity-100 transition-opacity" />
                                             <div className="w-full h-full flex items-center justify-center text-[8px] text-slate-500 font-bold">
                                                 {card.name[0]}
                                             </div>
@@ -345,7 +345,7 @@ function App() {
                                 <div key={`${item.id}-${i}`} className="aspect-square bg-slate-800 rounded border border-white/10 overflow-hidden relative group" title={item.name}>
                                     {item.image && item.image !== 'default.png' ? (
                                         <div className="relative w-full h-full">
-                                            <img src={`/images/items/${item.image}`} className="w-full h-full object-cover" />
+                                            <img src={`${import.meta.env.BASE_URL}images/items/${item.image}`} className="w-full h-full object-cover" />
                                             <div className={`absolute top-0 right-0 w-1.5 h-1.5 rounded-bl-sm ${item.plan === 'logic' ? 'bg-blue-500' :
                                                 item.plan === 'sense' ? 'bg-orange-500' :
                                                     item.plan === 'anomaly' ? 'bg-purple-500' :
@@ -383,7 +383,7 @@ function App() {
                                         {drink ? (
                                             drink.image && drink.image !== 'default.png' ? (
                                                 <div className="relative w-full h-full">
-                                                    <img src={`/images/drinks/${drink.image}`} className="w-full h-full object-cover" />
+                                                    <img src={`${import.meta.env.BASE_URL}images/drinks/${drink.image}`} className="w-full h-full object-cover" />
                                                     <div className={`absolute top-0 right-0 w-1.5 h-1.5 rounded-bl-sm ${drink.plan === 'logic' ? 'bg-blue-500' :
                                                         drink.plan === 'sense' ? 'bg-orange-500' :
                                                             drink.plan === 'anomaly' ? 'bg-purple-500' :
@@ -450,7 +450,7 @@ function PresetCard({ cfg, characterGroups = [], onLoad, onSaveOver, onDelete, o
             <div className="flex items-center gap-2 mb-2">
                 <div className="w-8 h-8 rounded-lg bg-slate-900 border border-white/10 overflow-hidden flex-shrink-0">
                     {charIcon ? (
-                        <img src={`/images/characters/${charGroup?.id}/${charIcon}`} className="w-full h-full object-cover object-[50%_15%]" />
+                        <img src={`${import.meta.env.BASE_URL}images/characters/${charGroup?.id}/${charIcon}`} className="w-full h-full object-cover object-[50%_15%]" />
                     ) : (
                         <div className="w-full h-full flex items-center justify-center text-[10px] text-slate-600 font-bold">?</div>
                     )}
