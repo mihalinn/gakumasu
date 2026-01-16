@@ -62,6 +62,8 @@ export interface PresetFolder {
     isOpen: boolean;
 }
 
+export type LessonAttribute = 'vocal' | 'dance' | 'visual';
+
 export interface SavedConfig {
     id: string;
     name: string;
@@ -73,6 +75,7 @@ export interface SavedConfig {
         selectedPItems: PItem[];
         selectedPDrinks: PDrink[];
         producePlan?: '初' | '初LEGEND' | 'NIA';
+        turnAttributes?: LessonAttribute[];
         status?: {
             vocal: number;
             dance: number;
@@ -90,6 +93,7 @@ export interface GameState {
     turn: number;
     maxTurns: number;
     phase: TurnPhase;
+    currentTurnAttribute?: LessonAttribute;
 
     // パラメータ
     hp: number;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import type { CharacterGroup, Card, PItem, PDrink, SavedConfig } from './types/index'
+import type { CharacterGroup, Card, PItem, PDrink, SavedConfig, LessonAttribute } from './types/index'
 import { CharacterView } from './components/CharacterView'
 import { HandView } from './components/HandView'
 import { PItemView } from './components/PItemView'
@@ -79,6 +79,7 @@ function App() {
     // Status State
     const [status, setStatus] = useState({ vocal: 0, dance: 0, visual: 0, hp: 30, maxHp: 60 });
     const [producePlan, setProducePlan] = useState<'初' | '初LEGEND' | 'NIA'>('初');
+    const [turnAttributes, setTurnAttributes] = useState<LessonAttribute[]>(Array(12).fill('vocal'));
     // Hand State
     const [hand, setHand] = useState<Card[]>([]);
     // View Mode State (Global)
@@ -95,6 +96,7 @@ function App() {
         setSelectedPDrinks([]);
         setStatus({ vocal: 0, dance: 0, visual: 0, hp: 30, maxHp: 60 });
         setProducePlan('初');
+        setTurnAttributes(Array(12).fill('vocal'));
         setActiveTab(TABS.CHARACTER);
         setViewMode('detail');
     };
@@ -173,6 +175,7 @@ function App() {
         setSelectedPDrinks(data.selectedPDrinks || []);
         setStatus(data.status || { vocal: 0, dance: 0, visual: 0, hp: 30, maxHp: 60 });
         setProducePlan(data.producePlan || '初');
+        setTurnAttributes(data.turnAttributes || Array(12).fill('vocal'));
         setActiveTab(TABS.CHARACTER);
     };
     const handleDeletePreset = (id: string) => {
@@ -264,6 +267,7 @@ function App() {
                                 initialPItems={selectedPItems}
                                 initialPDrinks={selectedPDrinks}
                                 status={status}
+                                turnAttributes={turnAttributes}
                             />
                         )}
                         {activeTab === TABS.CHARACTER && (
@@ -308,6 +312,8 @@ function App() {
                                 setStatus={setStatus}
                                 producePlan={producePlan}
                                 setProducePlan={setProducePlan}
+                                turnAttributes={turnAttributes}
+                                setTurnAttributes={setTurnAttributes}
                             />
                         )}
                     </div>
@@ -317,6 +323,30 @@ function App() {
             <div className="w-80 bg-slate-900/30 border-l border-white/5 p-6 flex-shrink-0 flex flex-col overflow-y-auto animate-in slide-in-from-right-10 duration-300">
                 <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-6">現在の設定 (構成)</h3>
                 <div className="space-y-6">
+                    {/* Status Summary (Vo/Da/Vi row + HP row) */}
+                    {selectedProfile && (
+                        <div className="flex flex-col gap-1.5">
+                            <div className="grid grid-cols-3 gap-1.5">
+                                <div className="flex flex-col items-center justify-center gap-0.5 bg-slate-800/50 rounded px-1 py-1.5 border border-white/5">
+                                    <span className="text-[9px] font-bold text-pink-400">Vo</span>
+                                    <span className="text-sm font-mono font-bold text-white">{status.vocal}</span>
+                                </div>
+                                <div className="flex flex-col items-center justify-center gap-0.5 bg-slate-800/50 rounded px-1 py-1.5 border border-white/5">
+                                    <span className="text-[9px] font-bold text-blue-400">Da</span>
+                                    <span className="text-sm font-mono font-bold text-white">{status.dance}</span>
+                                </div>
+                                <div className="flex flex-col items-center justify-center gap-0.5 bg-slate-800/50 rounded px-1 py-1.5 border border-white/5">
+                                    <span className="text-[9px] font-bold text-yellow-400">Vi</span>
+                                    <span className="text-sm font-mono font-bold text-white">{status.visual}</span>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-3 bg-slate-800/50 rounded px-3 py-1.5 border border-white/5">
+                                <span className="text-[10px] font-bold text-green-400">HP</span>
+                                <span className="text-sm font-mono font-bold text-white ml-auto">{status.hp}</span>
+                                <span className="text-[9px] text-slate-500 font-mono">/ {status.maxHp}</span>
+                            </div>
+                        </div>
+                    )}
                     <SummaryCard
                         title="アイドル" onClick={() => setActiveTab(TABS.CHARACTER)}
                         value={selectedProfile ? selectedProfile.name : "（未設定）"}
@@ -325,27 +355,6 @@ function App() {
                         highlight={!!selectedProfile}
                         imageUrl={selectedProfile?.image && selectedGroup ? `${import.meta.env.BASE_URL}images/characters/${selectedGroup.id}/${selectedProfile.image}` : undefined}
                     />
-                    {/* Status Overlay */}
-                    {selectedProfile && (
-                        <div className="absolute top-2 right-2 flex flex-col gap-1 z-10 pointer-events-none">
-                            <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur rounded px-2 py-1 border border-white/5">
-                                <span className="text-[9px] font-bold text-pink-400 w-4">Vo</span>
-                                <span className="text-xs font-mono font-bold text-white ml-auto">{status.vocal}</span>
-                            </div>
-                            <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur rounded px-2 py-1 border border-white/5">
-                                <span className="text-[9px] font-bold text-blue-400 w-4">Da</span>
-                                <span className="text-xs font-mono font-bold text-white ml-auto">{status.dance}</span>
-                            </div>
-                            <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur rounded px-2 py-1 border border-white/5">
-                                <span className="text-[9px] font-bold text-yellow-400 w-4">Vi</span>
-                                <span className="text-xs font-mono font-bold text-white ml-auto">{status.visual}</span>
-                            </div>
-                            <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur rounded px-2 py-1 border border-white/5 mt-1">
-                                <span className="text-[9px] font-bold text-green-400 w-4">HP</span>
-                                <span className="text-xs font-mono font-bold text-white ml-auto">{status.hp}</span>
-                            </div>
-                        </div>
-                    )}
                     <div className="flex justify-end -mt-5 pr-2 relative z-20">
                         <button onClick={resetCharacter} className="text-[9px] text-zinc-600 hover:text-red-400 transition-colors px-1 uppercase tracking-tighter cursor-pointer">Clear Selection</button>
                     </div>
@@ -491,10 +500,11 @@ interface ProduceViewProps {
     initialPItems: PItem[];
     initialPDrinks: PDrink[];
     status: { vocal: number; dance: number; visual: number; hp: number; maxHp: number };
+    turnAttributes: LessonAttribute[];
 }
 
-function ProduceView({ initialHand: _initialHand, initialPItems: _initialPItems, initialPDrinks: _initialPDrinks, status }: ProduceViewProps) {
-    const { state, endTurn } = useSimulation(status);
+function ProduceView({ initialHand: _initialHand, initialPItems: _initialPItems, initialPDrinks: _initialPDrinks, status, turnAttributes }: ProduceViewProps) {
+    const { state, endTurn } = useSimulation(status, turnAttributes);
 
     return (
         <div className="h-full flex flex-col gap-4 animate-in fade-in duration-500">
@@ -507,6 +517,17 @@ function ProduceView({ initialHand: _initialHand, initialPItems: _initialPItems,
                             {state.turn} <span className="text-sm text-slate-600">/ {state.maxTurns}</span>
                         </div>
                     </div>
+                    {/* Current Turn Attribute Display */}
+                    {state.currentTurnAttribute && (
+                        <div className={`
+                            flex flex-col items-center justify-center w-12 h-12 rounded-full border-2 
+                            ${state.currentTurnAttribute === 'vocal' ? 'border-pink-500 bg-pink-500/10 text-pink-400' : ''}
+                            ${state.currentTurnAttribute === 'dance' ? 'border-blue-500 bg-blue-500/10 text-blue-400' : ''}
+                            ${state.currentTurnAttribute === 'visual' ? 'border-yellow-500 bg-yellow-500/10 text-yellow-400' : ''}
+                        `}>
+                            <span className="text-[10px] font-bold uppercase">{state.currentTurnAttribute.slice(0, 2)}</span>
+                        </div>
+                    )}
                     <div className="h-8 w-px bg-white/10"></div>
                     <div className="flex flex-col">
                         <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">SCORE</span>

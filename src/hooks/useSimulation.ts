@@ -20,22 +20,26 @@ const INITIAL_STATE: GameState = {
     pDrinks: [],
 };
 
-export function useSimulation(initialStatus?: { vocal: number; dance: number; visual: number; hp: number; maxHp: number }) {
+export function useSimulation(
+    initialStatus?: { vocal: number; dance: number; visual: number; hp: number; maxHp: number },
+    turnAttributes?: import('../types').LessonAttribute[]
+) {
     const [state, setState] = useState<GameState>(() => ({
         ...INITIAL_STATE,
         ...initialStatus,
         hp: initialStatus?.hp ?? INITIAL_STATE.hp,
         maxHp: initialStatus?.maxHp ?? INITIAL_STATE.maxHp,
-        // Ensure unknown props don't break strict type if any
+        currentTurnAttribute: turnAttributes ? turnAttributes[0] : 'vocal',
     }));
 
     const startTurn = useCallback(() => {
         setState(prev => ({
             ...prev,
             phase: 'main',
+            currentTurnAttribute: turnAttributes ? turnAttributes[prev.turn - 1] : 'vocal', // turn is 1-based, array 0-based
             // ここにターン開始時の処理（ドローなど）を追加予定
         }));
-    }, []);
+    }, [turnAttributes]);
 
     const endTurn = useCallback(() => {
         setState(prev => ({
