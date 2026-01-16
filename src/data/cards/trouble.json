@@ -1,0 +1,11 @@
+[
+    {
+        "id": "trouble-nemuke",
+        "name": "眠気",
+        "type": "trouble",
+        "plan": "free",
+        "cost": 0,
+        "effect": "使用不可",
+        "image": "trouble/眠気.png"
+    }
+]

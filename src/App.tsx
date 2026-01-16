@@ -4,7 +4,9 @@ import { CharacterView } from './components/CharacterView'
 import { HandView } from './components/HandView'
 import { PItemView } from './components/PItemView'
 import { PDrinkView } from './components/PDrinkView'
+import { StatusView } from './components/StatusView'
 import { NavButton, SummaryCard } from './components/UI'
+import { useSimulation } from './hooks/useSimulation'
 
 const TABS = {
     PRODUCE: 'produce',
@@ -12,6 +14,7 @@ const TABS = {
     HAND: 'hand',
     P_ITEM: 'p_item',
     P_DRINK: 'p_drink',
+    STATUS: 'status',
 } as const;
 type Tab = typeof TABS[keyof typeof TABS];
 
@@ -73,6 +76,9 @@ function App() {
     // P-Item & P-Drink State
     const [selectedPItems, setSelectedPItems] = useState<PItem[]>([]);
     const [selectedPDrinks, setSelectedPDrinks] = useState<PDrink[]>([]);
+    // Status State
+    const [status, setStatus] = useState({ vocal: 0, dance: 0, visual: 0, hp: 30, maxHp: 60 });
+    const [producePlan, setProducePlan] = useState<'初' | '初LEGEND' | 'NIA'>('初');
     // Hand State
     const [hand, setHand] = useState<Card[]>([]);
     // View Mode State (Global)
@@ -87,6 +93,8 @@ function App() {
         setHand([]);
         setSelectedPItems([]);
         setSelectedPDrinks([]);
+        setStatus({ vocal: 0, dance: 0, visual: 0, hp: 30, maxHp: 60 });
+        setProducePlan('初');
         setActiveTab(TABS.CHARACTER);
         setViewMode('detail');
     };
@@ -98,6 +106,9 @@ function App() {
         setSelectedCharName(characterGroups[0]?.name || null);
         setSelectedProfileId(null);
     };
+
+
+
 
     const [savedConfigs, setSavedConfigs] = useState<SavedConfig[]>(() => {
         const saved = localStorage.getItem("gakumas_sim_presets_v2");
@@ -126,7 +137,9 @@ function App() {
                 selectedProfileId,
                 hand,
                 selectedPItems,
-                selectedPDrinks
+                selectedPDrinks,
+                status,
+                producePlan
             }
         };
         const newConfigs = [newPreset, ...savedConfigs];
@@ -141,7 +154,9 @@ function App() {
                 selectedProfileId,
                 hand,
                 selectedPItems,
-                selectedPDrinks
+                selectedPDrinks,
+                status,
+                producePlan
             }
         } : cfg);
         setSavedConfigs(newConfigs);
@@ -156,6 +171,8 @@ function App() {
         setHand(data.hand || []);
         setSelectedPItems(data.selectedPItems || []);
         setSelectedPDrinks(data.selectedPDrinks || []);
+        setStatus(data.status || { vocal: 0, dance: 0, visual: 0, hp: 30, maxHp: 60 });
+        setProducePlan(data.producePlan || '初');
         setActiveTab(TABS.CHARACTER);
     };
     const handleDeletePreset = (id: string) => {
@@ -197,6 +214,7 @@ function App() {
                 </div>
                 <div className="flex flex-col space-y-1">
                     <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 px-3 mt-2">設定</p>
+                    <NavButton label="ステータス" active={activeTab === TABS.STATUS} onClick={() => setActiveTab(TABS.STATUS)} />
                     <NavButton label="キャラ" active={activeTab === TABS.CHARACTER} onClick={() => setActiveTab(TABS.CHARACTER)} />
                     <NavButton label="手札" active={activeTab === TABS.HAND} onClick={() => setActiveTab(TABS.HAND)} />
                     <NavButton label="Pアイテム" active={activeTab === TABS.P_ITEM} onClick={() => setActiveTab(TABS.P_ITEM)} />
@@ -240,7 +258,13 @@ function App() {
             <div className="flex-1 overflow-hidden relative bg-slate-950 flex flex-col">
                 <div className="flex-1 overflow-auto p-8">
                     <div className="max-w-6xl mx-auto h-full">
-                        {activeTab === TABS.PRODUCE && <ProduceView />}
+                        {activeTab === TABS.PRODUCE && (
+                            <ProduceView
+                                initialHand={hand}
+                                initialPItems={selectedPItems}
+                                initialPDrinks={selectedPDrinks}
+                            />
+                        )}
                         {activeTab === TABS.CHARACTER && (
                             <CharacterView
                                 characterGroups={characterGroups}
@@ -277,6 +301,14 @@ function App() {
                                 setViewMode={setViewMode}
                             />
                         )}
+                        {activeTab === TABS.STATUS && (
+                            <StatusView
+                                status={status}
+                                setStatus={setStatus}
+                                producePlan={producePlan}
+                                setProducePlan={setProducePlan}
+                            />
+                        )}
                     </div>
                 </div>
             </div>
@@ -292,6 +324,27 @@ function App() {
                         highlight={!!selectedProfile}
                         imageUrl={selectedProfile?.image && selectedGroup ? `${import.meta.env.BASE_URL}images/characters/${selectedGroup.id}/${selectedProfile.image}` : undefined}
                     />
+                    {/* Status Overlay */}
+                    {selectedProfile && (
+                        <div className="absolute top-2 right-2 flex flex-col gap-1 z-10 pointer-events-none">
+                            <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur rounded px-2 py-1 border border-white/5">
+                                <span className="text-[9px] font-bold text-pink-400 w-4">Vo</span>
+                                <span className="text-xs font-mono font-bold text-white ml-auto">{status.vocal}</span>
+                            </div>
+                            <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur rounded px-2 py-1 border border-white/5">
+                                <span className="text-[9px] font-bold text-blue-400 w-4">Da</span>
+                                <span className="text-xs font-mono font-bold text-white ml-auto">{status.dance}</span>
+                            </div>
+                            <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur rounded px-2 py-1 border border-white/5">
+                                <span className="text-[9px] font-bold text-yellow-400 w-4">Vi</span>
+                                <span className="text-xs font-mono font-bold text-white ml-auto">{status.visual}</span>
+                            </div>
+                            <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur rounded px-2 py-1 border border-white/5 mt-1">
+                                <span className="text-[9px] font-bold text-green-400 w-4">HP</span>
+                                <span className="text-xs font-mono font-bold text-white ml-auto">{status.hp}</span>
+                            </div>
+                        </div>
+                    )}
                     <div className="flex justify-end -mt-5 pr-2 relative z-20">
                         <button onClick={resetCharacter} className="text-[9px] text-zinc-600 hover:text-red-400 transition-colors px-1 uppercase tracking-tighter cursor-pointer">Clear Selection</button>
                     </div>
@@ -303,7 +356,7 @@ function App() {
                             <span className="text-xs text-slate-500 uppercase font-bold group-hover:text-slate-300 transition-colors">手札</span>
                             <div className="flex items-center gap-2 underline-offset-4">
                                 <button onClick={resetHand} className="text-[10px] text-slate-600 hover:text-red-400 transition-colors px-1 cursor-default">Clear</button>
-                                <span className="text-xs text-slate-400">{hand.length}枚</span>
+                                <span className="text-xs text-slate-400">{hand.length}/25</span>
                             </div>
                         </div>
                         <div className="grid grid-cols-5 gap-1 mb-2">
@@ -424,10 +477,81 @@ function App() {
 }
 
 // --- Views ---
-function ProduceView() {
+
+// --- Views ---
+
+
+
+
+
+// --- Views ---
+interface ProduceViewProps {
+    initialHand: Card[];
+    initialPItems: PItem[];
+    initialPDrinks: PDrink[];
+}
+
+function ProduceView({ initialHand, initialPItems, initialPDrinks }: ProduceViewProps) {
+    const { state, startTurn, endTurn } = useSimulation();
+
     return (
-        <div className="h-full flex flex-col items-center justify-center animate-in fade-in duration-500">
-            <h2 className="text-3xl font-bold bg-gradient-to-b from-white to-slate-400 bg-clip-text text-transparent mb-4">プロデュース開始</h2>
+        <div className="h-full flex flex-col gap-4 animate-in fade-in duration-500">
+            {/* Header: Turn & Score */}
+            <div className="flex items-center justify-between bg-slate-900/50 p-4 rounded-xl border border-white/5">
+                <div className="flex items-center gap-6">
+                    <div className="flex flex-col items-center">
+                        <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">TURN</span>
+                        <div className="text-3xl font-bold font-mono text-white">
+                            {state.turn} <span className="text-sm text-slate-600">/ {state.maxTurns}</span>
+                        </div>
+                    </div>
+                    <div className="h-8 w-px bg-white/10"></div>
+                    <div className="flex flex-col">
+                        <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">SCORE</span>
+                        <div className="text-3xl font-bold font-mono text-cyan-400 tabular-nums">
+                            {state.score.toLocaleString()}
+                        </div>
+                    </div>
+                </div>
+                <button
+                    onClick={endTurn}
+                    className="px-6 py-2 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-lg border border-white/10 transition-colors"
+                >
+                    ターン終了
+                </button>
+            </div>
+
+            {/* Main Stage Area */}
+            <div className="flex-1 bg-slate-900/30 rounded-xl border border-white/5 relative overflow-hidden flex items-center justify-center">
+                {/* Character Status Overlay */}
+                <div className="absolute top-4 left-4 flex flex-col gap-2">
+                    <div className="p-3 bg-black/60 backdrop-blur rounded-lg border border-white/10 min-w-[120px]">
+                        <div className="flex justify-between items-end mb-1">
+                            <span className="text-xs font-bold text-slate-400">HP</span>
+                            <span className="text-xl font-bold text-white font-mono">{state.hp}</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                            <div className="h-full bg-green-500" style={{ width: `${(state.hp / state.maxHp) * 100}%` }}></div>
+                        </div>
+                    </div>
+                    <div className="p-3 bg-black/60 backdrop-blur rounded-lg border border-white/10 min-w-[120px]">
+                        <div className="flex justify-between items-end">
+                            <span className="text-xs font-bold text-slate-400">元気</span>
+                            <span className="text-xl font-bold text-blue-400 font-mono">{state.genki}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="text-center opacity-30">
+                    <p className="font-bold text-2xl text-slate-500">STAGE VIEW</p>
+                    <p className="text-sm text-slate-600 mt-2">（スキルエフェクト・アイドル表示予定地）</p>
+                </div>
+            </div>
+
+            {/* Hand Area (Placeholder for now) */}
+            <div className="h-40 bg-slate-900/50 rounded-xl border border-white/5 p-4 flex items-center justify-center text-slate-600">
+                <p>手札エリア (Coming Soon)</p>
+            </div>
         </div>
     );
 }

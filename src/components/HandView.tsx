@@ -141,7 +141,7 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
                             { id: 'all', label: 'すべて', color: 'bg-white' },
                             { id: 'active', label: 'アクティブ', color: 'bg-red-500' },
                             { id: 'mental', label: 'メンタル', color: 'bg-blue-500' },
-                            { id: 'other', label: 'その他', color: 'bg-slate-500' },
+                            { id: 'other', label: 'トラブル', color: 'bg-slate-500' },
                         ].map(tab => (
                             <button
                                 key={tab.id}
@@ -190,7 +190,7 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
                                     }`}></span>
                                 {activeTab === 'all' ? '検索結果' :
                                     activeTab === 'active' ? 'アクティブ' :
-                                        activeTab === 'mental' ? 'メンタル' : 'その他'}
+                                        activeTab === 'mental' ? 'メンタル' : 'トラブル'}
                             </h4>
 
                             {filteredCards.length === 0 ? (
