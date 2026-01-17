@@ -8,7 +8,40 @@ import { StatusView } from './components/StatusView'
 import { PresetListView } from './components/PresetListView'
 import { NavButton, SummaryCard } from './components/UI'
 import { ProduceView } from './components/ProduceView'
+import { CardCatalog } from './components/CardCatalog'
 import { useSimulation } from './hooks/useSimulation'
+
+import logicCardsData from './data/cards/logic.json';
+import freeCardsData from './data/cards/free.json';
+// Helper to find cards
+const findCard = (id: string, list: Card[]) => list.find(c => c.id === id) || list[0];
+const INITIAL_DECK_IDS = [
+    { id: 'appeal_basic', src: freeCardsData },
+    { id: 'pose_basic', src: freeCardsData },
+    { id: 'first_step', src: freeCardsData },
+    { id: 'kawaiishigusa', src: logicCardsData },
+    { id: 'kibuntenkan', src: logicCardsData },
+    { id: 'mesennokihon', src: logicCardsData },
+    { id: 'logic_ファンサの基本', src: logicCardsData },
+];
+
+const INITIAL_PRESET: SavedConfig = {
+    id: 'default-preset-logic',
+    name: '初期デッキ (ロジック)',
+    data: {
+        selectedCharName: '藤田 ことね',
+        selectedProfileId: 'kotone_sekaiichi_kawaii_watashi',
+        hand: INITIAL_DECK_IDS.map(item => {
+            const c = findCard(item.id, item.src as Card[]);
+            return c ? { ...c } : null;
+        }).filter(Boolean) as Card[],
+        selectedPItems: [],
+        selectedPDrinks: [],
+        status: { vocal: 500, dance: 500, visual: 500, hp: 40, maxHp: 80 },
+        producePlan: '初',
+        turnAttributes: Array(12).fill('vocal'),
+    }
+};
 
 const TABS = {
     PRODUCE: 'produce',
@@ -18,6 +51,7 @@ const TABS = {
     P_DRINK: 'p_drink',
     STATUS: 'status',
     PRESETS: 'presets',
+    CARD_LIST: 'card_list',
 } as const;
 type Tab = typeof TABS[keyof typeof TABS];
 
@@ -132,7 +166,7 @@ function App() {
                 return [];
             }
         }
-        return [];
+        return [INITIAL_PRESET];
     });
 
     const persistPresets = (presets: SavedConfig[]) => {
@@ -234,6 +268,7 @@ function App() {
                     <NavButton label="手札" active={activeTab === TABS.HAND} onClick={() => setActiveTab(TABS.HAND)} />
                     <NavButton label="Pアイテム" active={activeTab === TABS.P_ITEM} onClick={() => setActiveTab(TABS.P_ITEM)} />
                     <NavButton label="Pドリンク" active={activeTab === TABS.P_DRINK} onClick={() => setActiveTab(TABS.P_DRINK)} />
+                    <NavButton label="カード一覧" active={activeTab === TABS.CARD_LIST} onClick={() => setActiveTab(TABS.CARD_LIST)} />
                 </div>
                 <div className="flex flex-col space-y-1">
                     <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 px-3 mt-2">保存データ</p>
@@ -273,6 +308,7 @@ function App() {
                                 playCard={playCard}
                                 usePDrink={usePDrink}
                                 turnAttributes={turnAttributes}
+                                plan={selectedProfile?.plan}
                             />
                         )}
                         {activeTab === TABS.CHARACTER && (
@@ -331,6 +367,9 @@ function App() {
                                 onUpdateName={handleUpdatePresetName}
                                 onCreateNew={handleAddNewPreset}
                             />
+                        )}
+                        {activeTab === TABS.CARD_LIST && (
+                            <CardCatalog renderMode="embedded" />
                         )}
                     </div>
                 </div>
@@ -504,6 +543,26 @@ function App() {
                                     </div>
                                 </section>
 
+                                {/* Sidebar Hold */}
+                                <section>
+                                    <div className="flex justify-between items-center mb-2 px-1">
+                                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">HOLD</span>
+                                        <span className="text-[10px] font-mono text-slate-500">{simState.onHold ? simState.onHold.length : 0}</span>
+                                    </div>
+                                    <div className="grid grid-cols-4 gap-1.5">
+                                        {simState.onHold && simState.onHold.map((card: Card, i: number) => (
+                                            <div key={`side-hold-${i}`} className="aspect-square bg-slate-800 rounded border border-white/10 overflow-hidden relative group" title={card.name}>
+                                                {card.image && card.image !== 'default.png' ? (
+                                                    <img src={`${import.meta.env.BASE_URL}images/cards/${card.image.split('/').map((s: string) => encodeURIComponent(s)).join('/')}`} className="w-full h-full object-contain" alt="" />
+                                                ) : (
+                                                    <div className="absolute inset-0 flex items-center justify-center text-[8px] text-center bg-black/50 text-white truncate px-0.5">{card.name[0]}</div>
+                                                )}
+                                            </div>
+                                        ))}
+                                        {(!simState.onHold || simState.onHold.length === 0) && <p className="col-span-4 text-[10px] text-slate-600 text-center py-2 italic">Empty</p>}
+                                    </div>
+                                </section>
+
                                 {/* Sidebar Deck */}
                                 <section>
                                     <div className="flex justify-between items-center mb-2 px-1">
@@ -541,6 +600,26 @@ function App() {
                                             </div>
                                         ))}
                                         {simState.discard.length === 0 && <p className="col-span-4 text-[10px] text-slate-600 text-center py-4 italic">Empty</p>}
+                                    </div>
+                                </section>
+
+                                {/* Sidebar Excluded */}
+                                <section>
+                                    <div className="flex justify-between items-center mb-2 px-1">
+                                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">EXCLUDED</span>
+                                        <span className="text-[10px] font-mono text-slate-500">{simState.excluded ? simState.excluded.length : 0}</span>
+                                    </div>
+                                    <div className="grid grid-cols-4 gap-1.5">
+                                        {simState.excluded && simState.excluded.map((card: Card, i: number) => (
+                                            <div key={`side-excluded-${i}`} className="aspect-square bg-slate-900/50 rounded border border-white/5 overflow-hidden relative group" title={card.name}>
+                                                {card.image && card.image !== 'default.png' ? (
+                                                    <img src={`${import.meta.env.BASE_URL}images/cards/${card.image.split('/').map((s: string) => encodeURIComponent(s)).join('/')}`} className="w-full h-full object-contain" alt="" />
+                                                ) : (
+                                                    <div className="absolute inset-0 flex items-center justify-center text-[8px] text-center text-slate-700 truncate px-0.5">{card.name[0]}</div>
+                                                )}
+                                            </div>
+                                        ))}
+                                        {(!simState.excluded || simState.excluded.length === 0) && <p className="col-span-4 text-[10px] text-slate-600 text-center py-2 italic">Empty</p>}
                                     </div>
                                 </section>
                             </div>

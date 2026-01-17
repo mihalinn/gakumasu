@@ -17,11 +17,25 @@ const CARD_DATA = import.meta.glob('../data/cards/*.json', { eager: true });
 export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode }: HandViewProps) {
     const [searchTerm, setSearchTerm] = useState("");
     const [activeTab, setActiveTab] = useState<TabType>('all');
+    const [filterPlan, setFilterPlan] = useState<'all' | 'dedicated' | 'free'>('all');
+    const [filterRarity, setFilterRarity] = useState<'all' | 'SSR' | 'SR' | 'R' | 'N'>('all');
+    const [filterUpgrade, setFilterUpgrade] = useState<'all' | 'enhanced' | 'basic'>('all');
 
     const addToHand = (card: Card) => {
         if (hand.length >= 25) {
             alert("手札は最大25枚までです");
             return;
+        }
+        // 重複不可チェック
+        if (card.unique) {
+            const getBaseId = (id: string) => id.replace(/_plus$/, '');
+            const targetBaseId = getBaseId(card.id);
+            const hasDuplicate = hand.some(c => getBaseId(c.id) === targetBaseId);
+
+            if (hasDuplicate) {
+                alert(`「${card.name}」は重複不可カードのため、強化前後を含めて1枚しかデッキに入れられません`);
+                return;
+            }
         }
         setHand([...hand, card]);
     };
@@ -70,8 +84,24 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
             const lowerTerm = searchTerm.toLowerCase();
             result = result.filter(c =>
                 c.name.toLowerCase().includes(lowerTerm) ||
-                c.effect.toLowerCase().includes(lowerTerm)
+                (c.effect && c.effect.toLowerCase().includes(lowerTerm))
             );
+        }
+
+        if (filterPlan === 'dedicated' && selectedProfile) {
+            result = result.filter(c => c.plan !== 'free');
+        } else if (filterPlan === 'free') {
+            result = result.filter(c => c.plan === 'free');
+        }
+
+        if (filterRarity !== 'all') {
+            result = result.filter(c => c.rarity === filterRarity);
+        }
+
+        if (filterUpgrade === 'enhanced') {
+            result = result.filter(c => c.name.endsWith('+'));
+        } else if (filterUpgrade === 'basic') {
+            result = result.filter(c => !c.name.endsWith('+'));
         }
 
         if (activeTab === 'active') {
@@ -83,7 +113,7 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
         }
 
         return result;
-    }, [availableCards, searchTerm, activeTab]);
+    }, [availableCards, searchTerm, activeTab, filterPlan, filterRarity, filterUpgrade, selectedProfile]);
 
     return (
         <div className="animate-in slide-in-from-right-4 duration-300 h-full flex flex-col gap-6 text-slate-200">
@@ -136,30 +166,69 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
                         </div>
                     </div>
 
-                    <div className="flex gap-1 border-b border-white/5">
-                        {[
-                            { id: 'all', label: 'すべて', color: 'bg-white' },
-                            { id: 'active', label: 'アクティブ', color: 'bg-red-500' },
-                            { id: 'mental', label: 'メンタル', color: 'bg-blue-500' },
-                            { id: 'other', label: 'トラブル', color: 'bg-slate-500' },
-                        ].map(tab => (
-                            <button
-                                key={tab.id}
-                                onClick={() => setActiveTab(tab.id as TabType)}
-                                className={`px-4 py-2 text-sm font-bold border-b-2 transition-all hover:bg-white/5 relative top-[1px] ${activeTab === tab.id
-                                    ? `text-white border-${tab.color.replace('bg-', '')}`
-                                    : 'text-slate-500 border-transparent hover:text-slate-300'
-                                    }`}
-                                style={{
-                                    borderColor: activeTab === tab.id ? (tab.id === 'all' ? 'white' : undefined) : undefined
-                                }}
-                            >
-                                {tab.label}
-                            </button>
-                        ))}
+                    <div className="flex flex-col gap-4">
+                        {/* Main Tabs (Pill Style) */}
+                        <div className="flex p-1 bg-slate-950/40 rounded-lg border border-white/5 self-start">
+                            {[
+                                { id: 'all', label: 'すべて', activeColor: 'bg-slate-700' },
+                                { id: 'active', label: 'アクティブ', activeColor: 'bg-red-500/80' },
+                                { id: 'mental', label: 'メンタル', activeColor: 'bg-blue-500/80' },
+                                { id: 'other', label: 'トラブル', activeColor: 'bg-slate-600/80' },
+                            ].map(tab => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id as TabType)}
+                                    className={`px-6 py-2 rounded-md text-sm font-bold transition-all ${activeTab === tab.id
+                                        ? `${tab.activeColor} text-white shadow-sm ring-1 ring-white/10`
+                                        : 'text-slate-500 hover:text-slate-300 hover:bg-white/5'
+                                        }`}
+                                >
+                                    {tab.label}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Advanced Filters (Clean Layout) */}
+                        <div className="flex flex-wrap gap-x-8 gap-y-2 items-center px-1">
+                            <div className="flex items-center gap-3">
+                                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">プラン</span>
+                                <div className="flex gap-1 bg-slate-950/40 rounded-md p-1 border border-white/5">
+                                    <FilterFilterButton label="すべて" active={filterPlan === 'all'} onClick={() => setFilterPlan('all')} />
+                                    <FilterFilterButton
+                                        label={selectedProfile ? (selectedProfile.plan === 'logic' ? 'ロジック' : selectedProfile.plan === 'sense' ? 'センス' : '専用') : '専用'}
+                                        active={filterPlan === 'dedicated'}
+                                        onClick={() => setFilterPlan('dedicated')}
+                                        color={selectedProfile?.plan === 'logic' ? 'bg-blue-500/20 text-blue-300 hover:bg-blue-500/30' : selectedProfile?.plan === 'sense' ? 'bg-red-500/20 text-red-300 hover:bg-red-500/30' : ''}
+                                    />
+                                    <FilterFilterButton label="共通" active={filterPlan === 'free'} onClick={() => setFilterPlan('free')} />
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-3">
+                                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">レアリティ</span>
+                                <div className="flex gap-1 bg-slate-950/40 rounded-md p-1 border border-white/5">
+                                    <FilterFilterButton label="すべて" active={filterRarity === 'all'} onClick={() => setFilterRarity('all')} />
+                                    <FilterFilterButton label="SSR" active={filterRarity === 'SSR'} color="text-yellow-400 bg-yellow-400/10 hover:bg-yellow-400/20" onClick={() => setFilterRarity('SSR')} />
+                                    <FilterFilterButton label="SR" active={filterRarity === 'SR'} color="text-blue-400 bg-blue-400/10 hover:bg-blue-400/20" onClick={() => setFilterRarity('SR')} />
+                                    <FilterFilterButton label="R" active={filterRarity === 'R'} color="text-slate-300 bg-white/5 hover:bg-white/10" onClick={() => setFilterRarity('R')} />
+                                    <FilterFilterButton label="N" active={filterRarity === 'N'} color="text-slate-500 bg-white/5 hover:bg-white/10" onClick={() => setFilterRarity('N')} />
+                                </div>
+                            </div>
+
+                            <div className="w-px h-3 bg-white/10 hidden sm:block"></div>
+
+                            <div className="flex items-center gap-3">
+                                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">強化</span>
+                                <div className="flex gap-1 bg-slate-950/40 rounded-md p-1 border border-white/5">
+                                    <FilterFilterButton label="すべて" active={filterUpgrade === 'all'} onClick={() => setFilterUpgrade('all')} />
+                                    <FilterFilterButton label="強化済み" active={filterUpgrade === 'enhanced'} onClick={() => setFilterUpgrade('enhanced')} color="text-yellow-200 bg-yellow-400/10 hover:bg-yellow-400/20" />
+                                    <FilterFilterButton label="強化前" active={filterUpgrade === 'basic'} onClick={() => setFilterUpgrade('basic')} />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </header>
+            </header >
 
             <div className="flex-1 flex flex-col lg:flex-row gap-6 overflow-hidden">
                 <div className="flex-1 bg-slate-900/30 rounded-xl border border-white/5 flex flex-col overflow-hidden">
@@ -173,7 +242,7 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
                                 </h4>
                                 <div className={viewMode === 'compact' ? "grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-2" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"}>
                                     <CardButton
-                                        card={selectedProfile.uniqueCard}
+                                        card={selectedProfile.uniqueCard!}
                                         onClick={() => addToHand(selectedProfile.uniqueCard!)}
                                         mode={viewMode}
                                         isUnique
@@ -197,6 +266,68 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
                                 <div className="py-12 text-center text-slate-500 italic text-sm">
                                     条件に一致するカードが見つかりません
                                 </div>
+                            ) : activeTab === 'all' && !searchTerm ? (
+                                <div className="space-y-8">
+                                    {/* Active Section */}
+                                    <div>
+                                        <h5 className="text-red-300 font-bold mb-3 flex items-center gap-2 text-xs uppercase tracking-wider border-b border-white/5 pb-1">
+                                            <span className="w-2 h-2 bg-red-500 rounded-sm"></span>
+                                            アクティブ (Active)
+                                        </h5>
+                                        <div className={viewMode === 'compact' ? "grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-2" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"}>
+                                            {filteredCards.filter(c => c.type === 'active').map((card, idx) => (
+                                                <CardButton
+                                                    key={`${card.id}-${idx}`}
+                                                    card={card}
+                                                    onClick={() => addToHand(card)}
+                                                    mode={viewMode}
+                                                    isUnique={card.unique}
+                                                />
+                                            ))}
+                                            {filteredCards.filter(c => c.type === 'active').length === 0 && <p className="text-xs text-slate-600 col-span-full italic py-2">No Active cards</p>}
+                                        </div>
+                                    </div>
+
+                                    {/* Mental Section */}
+                                    <div>
+                                        <h5 className="text-blue-300 font-bold mb-3 flex items-center gap-2 text-xs uppercase tracking-wider border-b border-white/5 pb-1">
+                                            <span className="w-2 h-2 bg-blue-500 rounded-sm"></span>
+                                            メンタル (Mental)
+                                        </h5>
+                                        <div className={viewMode === 'compact' ? "grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-2" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"}>
+                                            {filteredCards.filter(c => c.type === 'mental').map((card, idx) => (
+                                                <CardButton
+                                                    key={`${card.id}-${idx}`}
+                                                    card={card}
+                                                    onClick={() => addToHand(card)}
+                                                    mode={viewMode}
+                                                    isUnique={card.unique}
+                                                />
+                                            ))}
+                                            {filteredCards.filter(c => c.type === 'mental').length === 0 && <p className="text-xs text-slate-600 col-span-full italic py-2">No Mental cards</p>}
+                                        </div>
+                                    </div>
+
+                                    {/* Trouble/Other Section */}
+                                    <div>
+                                        <h5 className="text-slate-300 font-bold mb-3 flex items-center gap-2 text-xs uppercase tracking-wider border-b border-white/5 pb-1">
+                                            <span className="w-2 h-2 bg-slate-500 rounded-sm"></span>
+                                            トラブル (Trouble)
+                                        </h5>
+                                        <div className={viewMode === 'compact' ? "grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-2" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"}>
+                                            {filteredCards.filter(c => c.type !== 'active' && c.type !== 'mental').map((card, idx) => (
+                                                <CardButton
+                                                    key={`${card.id}-${idx}`}
+                                                    card={card}
+                                                    onClick={() => addToHand(card)}
+                                                    mode={viewMode}
+                                                    isUnique={card.unique}
+                                                />
+                                            ))}
+                                            {filteredCards.filter(c => c.type !== 'active' && c.type !== 'mental').length === 0 && <p className="text-xs text-slate-600 col-span-full italic py-2">No Trouble cards</p>}
+                                        </div>
+                                    </div>
+                                </div>
                             ) : (
                                 <div className={viewMode === 'compact' ? "grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-2" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"}>
                                     {filteredCards.map((card, idx) => (
@@ -205,6 +336,7 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
                                             card={card}
                                             onClick={() => addToHand(card)}
                                             mode={viewMode}
+                                            isUnique={card.unique}
                                         />
                                     ))}
                                 </div>
@@ -254,7 +386,7 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
@@ -321,6 +453,20 @@ function CardButton({ card, onClick, mode, isUnique }: { card: Card, onClick: ()
                 </div>
             </div>
             <p className="text-[10px] text-slate-400 line-clamp-2 leading-relaxed">{card.effect}</p>
+        </button>
+    )
+}
+
+function FilterFilterButton({ label, active, onClick, color }: { label: string, active: boolean, onClick: () => void, color?: string }) {
+    return (
+        <button
+            onClick={onClick}
+            className={`text-[10px] px-2.5 py-1 rounded transition-all ${active
+                ? `bg-slate-700 text-white font-bold shadow-sm ring-1 ring-white/10 ${color || ''}`
+                : 'text-slate-500 hover:text-slate-300 hover:bg-white/5'
+                }`}
+        >
+            {label}
         </button>
     )
 }

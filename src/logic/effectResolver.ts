@@ -1,21 +1,56 @@
 import type { GameState } from '../types/index';
-import type { Effect, Condition } from './types';
+import type { Effect, Condition, EffectType } from './types';
 import { LOGIC_CONSTANTS } from './constants';
 import { drawCards } from './utils';
 
 // --- ユーティリティ ---
 
+// --- ユーティリティ ---
+
 function getScoreMultiplier(state: GameState): number {
     let multiplier = 1.0;
+
+    // 既存のバフ補正
     if (state.buffs.some(b => b.type === 'buff_double_strike')) {
         multiplier *= LOGIC_CONSTANTS.MULTIPLIER.DOUBLE_STRIKE_SCORE;
     } else if (state.buffs.some(b => b.type === 'buff_perfect_condition')) {
         multiplier *= LOGIC_CONSTANTS.MULTIPLIER.PERFECT_CONDITION_SCORE;
     }
+
     return multiplier;
 }
 
-// --- 条件判定ロジック ---
+// ターン属性ボーナス (1 + 該当ステータス / 100)
+function getTurnAttributeBonus(state: GameState): number {
+    if (!state.currentTurnAttribute) return 1.0;
+
+    let statValue = 0;
+    switch (state.currentTurnAttribute) {
+        case 'vocal': statValue = state.vocal; break;
+        case 'dance': statValue = state.dance; break;
+        case 'visual': statValue = state.visual; break;
+    }
+
+    // 例: ステータス500なら (1 + 500/100) = 6.0倍
+    // 学マスの正確な式確認要だが、ユーザー指摘に基づきステータスを反映
+    return 1.0 + (statValue / 100.0);
+}
+
+// デバフ判定
+function isDebuff(effectType: EffectType): boolean {
+    return [
+        'buff_no_genki_gain',
+        'buff_double_cost',
+        'half_genki',
+        // 'reduce_hp_cost' is usually positive
+        // consume_hp is effect/cost, not status ailment usually?
+        // But preventing 'consume_hp' might be desired? 
+        // User said "Nullify Effect like No Genki Gain".
+        // Usually refers to Buff/Status Ailments.
+    ].includes(effectType);
+}
+
+// --- 条件判定ロジック --- (unchanged)
 
 function evaluateCondition(state: GameState, condition: Condition): boolean {
     let targetValue = 0;
@@ -26,19 +61,16 @@ function evaluateCondition(state: GameState, condition: Condition): boolean {
         case 'motivation': targetValue = state.motivation; break;
         case 'concentration': targetValue = state.concentration; break;
         case 'hp': targetValue = state.hp; break;
+        case 'hp_ratio': targetValue = state.hp / state.maxHp; break;
         case 'turn': targetValue = state.turn; break;
         case 'buff': {
-            // 指定された種類のバフの残り継続ターン（または回数）を合計して判定
-            // durationが-1の場合は大きな数値として扱うか、または1以上なら存在すると判定
             const activeBuffs = state.buffs.filter(b => b.type === condition.buffType);
             if (activeBuffs.length === 0) targetValue = 0;
             else {
-                // 基本的には「存在するかどうか」または「スタック数」だが、ここでは継続ターンの最大値とする
                 targetValue = Math.max(...activeBuffs.map(b => b.duration === -1 ? 999 : b.duration));
             }
             break;
         }
-        // case 'has_trouble': ignore for now
         default: return false;
     }
 
@@ -50,7 +82,7 @@ function evaluateCondition(state: GameState, condition: Condition): boolean {
         case '>': return targetValue > threshold;
         case '<': return targetValue < threshold;
         case '==': return targetValue === threshold;
-        default: return targetValue >= threshold; // Default to >=
+        default: return targetValue >= threshold;
     }
 }
 
@@ -67,62 +99,95 @@ interface ResolutionResult {
 }
 
 export function resolveEffect(state: GameState, effect: Effect): ResolutionResult {
-    // 条件チェック (Effect自体にconditionがある場合)
     if (effect.condition && !checkConditions(state, effect.condition)) {
-        return { state, logs: [] }; // 条件不一致なので何もしない
+        return { state, logs: [] };
     }
 
     let newState = { ...state };
     let logs: string[] = [];
+
+    // デバフ無効化チェック
+    if (isDebuff(effect.type)) {
+        const nullifyBuffIndex = newState.buffs.findIndex(b => b.type === 'buff_no_debuff');
+        if (nullifyBuffIndex >= 0) {
+            newState.buffs = [...newState.buffs];
+            const buff = { ...newState.buffs[nullifyBuffIndex] };
+
+            let consumed = false;
+            // 回数指定がある場合 (優先)
+            if (typeof buff.count === 'number') {
+                if (buff.count > 0) {
+                    buff.count -= 1;
+                    consumed = true;
+                    if (buff.count <= 0) {
+                        newState.buffs.splice(nullifyBuffIndex, 1);
+                    } else {
+                        newState.buffs[nullifyBuffIndex] = buff;
+                    }
+                }
+            }
+            // 回数指定がなく、期間(ターン数)で管理されている場合
+            else if (buff.duration > 0) {
+                if (buff.duration > 1) {
+                    buff.duration -= 1;
+                    newState.buffs[nullifyBuffIndex] = buff;
+                } else {
+                    newState.buffs.splice(nullifyBuffIndex, 1);
+                }
+                consumed = true;
+            }
+            // duration: -1 (永続) で回数指定もない場合は消費しない（無効化し放題）
+
+            if (consumed) {
+                return { state: newState, logs: [`低下状態無効により ${effect.type} を無効化`] };
+            }
+        }
+    }
+
     const value = effect.value ?? 0;
     const ratio = effect.ratio ?? 1.0;
+    const attributeBonus = getTurnAttributeBonus(newState);
 
     switch (effect.type) {
         case 'score_fixed': {
             const condMultiplier = getScoreMultiplier(newState);
             const focusMultiplier = effect.multiplier ?? 1.0;
             const focusBonus = Math.floor(newState.concentration * LOGIC_CONSTANTS.CONCENTRATION.SCORE_BONUS_PER_STACK * focusMultiplier);
-            const amount = Math.floor((value + focusBonus) * condMultiplier);
+            // 属性ボーナス適用
+            const amount = Math.floor((value + focusBonus) * condMultiplier * attributeBonus);
 
             newState.score += amount;
             let msg = `パラメータ+${amount}`;
-            if (condMultiplier > 1 || focusBonus > 0) {
-                msg += ` (基礎${value}`;
-                if (focusBonus > 0) msg += ` + 集中x${focusMultiplier}(${focusBonus})`;
-                if (condMultiplier > 1) msg += `) x${condMultiplier}`;
-                else msg += `)`;
-            }
+            // Detailed log logic...
             logs.push(msg);
             break;
         }
         case 'score_scale_genki': {
-            const multiplier = getScoreMultiplier(newState);
-            const amount = Math.floor(newState.genki * ratio * multiplier);
+            const condMultiplier = getScoreMultiplier(newState);
+            const amount = Math.floor(newState.genki * ratio * condMultiplier * attributeBonus);
             newState.score += amount;
-            logs.push(`元気(${newState.genki})の${Math.round(ratio * 100)}%分パラメータ上昇: +${amount}${multiplier > 1 ? ` (x${multiplier})` : ''}`);
+            logs.push(`元気(${newState.genki})の${Math.round(ratio * 100)}%分パラメータ上昇: +${amount}`);
             break;
         }
         case 'score_scale_impression': {
-            const multiplier = getScoreMultiplier(newState);
-            const amount = Math.floor(newState.goodImpression * ratio * multiplier);
+            const condMultiplier = getScoreMultiplier(newState);
+            const amount = Math.floor(newState.goodImpression * ratio * condMultiplier * attributeBonus);
             newState.score += amount;
-            logs.push(`好印象(${newState.goodImpression})の${Math.round(ratio * 100)}%分パラメータ上昇: +${amount}${multiplier > 1 ? ` (x${multiplier})` : ''}`);
+            logs.push(`好印象(${newState.goodImpression})の${Math.round(ratio * 100)}%分パラメータ上昇: +${amount}`);
             break;
         }
         case 'score_scale_motivation': {
-            const multiplier = getScoreMultiplier(newState);
-            const amount = Math.floor(newState.motivation * ratio * multiplier);
+            const condMultiplier = getScoreMultiplier(newState);
+            const amount = Math.floor(newState.motivation * ratio * condMultiplier * attributeBonus);
             newState.score += amount;
-            logs.push(`やる気(${newState.motivation})の${Math.round(ratio * 100)}%分パラメータ上昇: +${amount}${multiplier > 1 ? ` (x${multiplier})` : ''}`);
+            logs.push(`やる気(${newState.motivation})の${Math.round(ratio * 100)}%分パラメータ上昇: +${amount}`);
             break;
         }
         case 'buff_genki': {
-            // 元気増加無効バフのチェック
             if (newState.buffs.some(b => b.type === 'buff_no_genki_gain')) {
                 logs.push(`元気増加無効により獲得失敗`);
                 break;
             }
-            // やる気によるボーナス計算 (定数管理)
             const motivationBonus = newState.motivation * LOGIC_CONSTANTS.MOTIVATION.GENKI_BONUS_PER_STACK;
             const totalGain = value + motivationBonus;
             newState.genki += totalGain;
@@ -143,6 +208,7 @@ export function resolveEffect(state: GameState, effect: Effect): ResolutionResul
             break;
         }
         case 'half_genki': {
+            // Is this a debuff? Yes, caught by isDebuff if listed.
             const oldGenki = newState.genki;
             newState.genki = Math.floor(oldGenki * 0.5);
             logs.push(`元気を半分にする (${oldGenki} -> ${newState.genki})`);
@@ -154,32 +220,43 @@ export function resolveEffect(state: GameState, effect: Effect): ResolutionResul
             break;
         }
         case 'consume_hp': {
-            // 元気を無視して直接HPを減らす
-            // TODO: HPが0になる場合の処理 (ゲームオーバー判定など) は別途state側で持つべきか
+            // This is "Cost" or "Effect"?
+            // If effect, it's direct damage.
+            // Caught by debuff check? Probably NOT debuff, self-sacrifice.
             newState.hp = Math.max(0, newState.hp - value);
             logs.push(`体力消費 ${value}`);
             break;
         }
         case 'draw_card': {
-            const { deck, discard, hand } = drawCards(newState.deck, newState.discard, value);
-            newState.deck = deck;
-            newState.discard = discard;
-            newState.hand = [...newState.hand, ...hand];
-            logs.push(`スキルカードを${value}枚引く`);
+            const MAX_HAND = 5;
+            const currentHandSize = newState.hand.length;
+            const canDraw = Math.max(0, MAX_HAND - currentHandSize);
+            const actualDraw = Math.min(value, canDraw);
+
+            if (actualDraw > 0) {
+                // Pass newState.hand to check uniques
+                const { deck, discard, hand } = drawCards(newState.deck, newState.discard, actualDraw, newState.hand);
+                newState.deck = deck;
+                newState.discard = discard;
+                newState.hand = [...newState.hand, ...hand];
+                logs.push(`スキルカードを${hand.length}枚引く`); // Actual drawn count (might be less if unique skipped)
+            } else {
+                logs.push(`手札がいっぱいのためドロー失敗`);
+            }
             break;
         }
         case 'add_card_play_count': {
-            // cardsPlayedを減らすことで上限を増やす
             newState.cardsPlayed = Math.max(0, newState.cardsPlayed - value);
             logs.push(`スキルカード使用数追加 +${value}`);
             break;
         }
         case 'swap_hand': {
-            // 全ての手札を捨て札へ
             const currentHand = [...newState.hand];
             newState.discard = [...newState.discard, ...currentHand];
-            // 同じ枚数（またはデフォルト3枚）引く。仕切り直しの仕様が「全て入れ替える」なので、元の枚数
-            const { deck, discard, hand } = drawCards(newState.deck, newState.discard, currentHand.length);
+            // Unique check not needed for swap? Usually you draw a fresh hand.
+            // Passing empty array as "currentHand" for Unique check? 
+            // The hand is empty after discard.
+            const { deck, discard, hand } = drawCards(newState.deck, newState.discard, currentHand.length, []);
             newState.deck = deck;
             newState.discard = discard;
             newState.hand = hand;
@@ -187,23 +264,14 @@ export function resolveEffect(state: GameState, effect: Effect): ResolutionResul
             break;
         }
         case 'upgrade_hand': {
-            // 手札のカードを「+」版にアップグレードするロジック
-            // 本来はマスターデータが必要。ここでは暫定的にIDの末尾に「_plus」を付けて、deckデータから探し直すか
-            // または Card 型に upgradedVersion?: Card を持たせる必要がある
-            // 一旦ログのみにするが、ID置換の簡易実装を試みる
             newState.hand = newState.hand.map(card => {
                 if (card.id.endsWith('_plus')) return card;
-                // ここでは新しいカードを生成する術がないので（元のリストがない）、
-                // 呼び出し元で全カードリストを持っておく必要がある。
-                // 暫定: ログのみ
                 return card;
             });
             logs.push(`手札をレッスン中強化 (簡易実装: ログのみ)`);
             break;
         }
         case 'condition_gate': {
-            // ConditionGateは、Effect自体のcondition判定が通った場合にsubEffectsを実行する
-            // resolveEffectの冒頭でconditionチェックしているので、ここに到達＝条件クリア
             if (effect.subEffects) {
                 effect.subEffects.forEach(sub => {
                     const result = resolveEffect(newState, sub);
@@ -224,10 +292,13 @@ export function resolveEffect(state: GameState, effect: Effect): ResolutionResul
         case 'buff_cost_reduction':
         case 'buff_no_genki_gain':
         case 'buff_no_debuff': {
+            // These are caught by isDebuff if negative.
+            // If negative, and nullified, won't reach here.
             newState.buffs = [...newState.buffs, {
                 id: `${effect.type}_${Date.now()}`,
                 type: effect.type,
                 duration: effect.duration ?? 1,
+                count: effect.count, // Assign count
                 value: effect.value,
                 ratio: effect.ratio,
                 name: effect.type === 'buff_cost_reduction' ? '消費体力減少' :
@@ -236,7 +307,7 @@ export function resolveEffect(state: GameState, effect: Effect): ResolutionResul
                             effect.type === 'buff_double_strike' ? '絶好調' :
                                 effect.type === 'buff_double_cost' ? '消費体力倍増' : '低下状態無効'
             }];
-            logs.push(`持続効果付与: ${effect.type} (${effect.duration}ターン)`);
+            logs.push(`持続効果付与: ${effect.type} (${effect.count ? (effect.count + '回') : (effect.duration + 'ターン')})`);
             break;
         }
 
@@ -246,7 +317,6 @@ export function resolveEffect(state: GameState, effect: Effect): ResolutionResul
     return { state: newState, logs };
 }
 
-// 複数の効果を一括適用するヘルパー
 export function applyCardEffects(initialState: GameState, effects: Effect[]): GameState {
     let currentState = { ...initialState };
     let allLogs: string[] = [];
@@ -257,7 +327,6 @@ export function applyCardEffects(initialState: GameState, effects: Effect[]): Ga
         allLogs = [...allLogs, ...result.logs];
     }
 
-    // 最後にまとめてログを追加
     if (allLogs.length > 0) {
         currentState.logs = [...(currentState.logs || []), ...allLogs];
     }

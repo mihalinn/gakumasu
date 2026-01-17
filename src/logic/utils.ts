@@ -9,19 +9,38 @@ export const shuffle = (cards: Card[]) => {
     return newCards;
 };
 
-export const drawCards = (currentDeck: Card[], currentDiscard: Card[], count: number) => {
+export const drawCards = (currentDeck: Card[], currentDiscard: Card[], count: number, currentHand: Card[] = []) => {
     let deck = [...currentDeck];
     let discard = [...currentDiscard];
     const hand: Card[] = [];
+    const drawnIds = new Set(currentHand.map(c => c.id));
 
-    for (let i = 0; i < count; i++) {
+    let attempts = 0;
+    const MAX_ATTEMPTS = count * 2 + 10; // Prevent infinite loop if deck is small/full of uniques
+
+    while (hand.length < count && (deck.length > 0 || discard.length > 0)) {
+        if (attempts++ > MAX_ATTEMPTS) break;
+
         if (deck.length === 0) {
             if (discard.length === 0) break;
             deck = shuffle(discard);
             discard = [];
         }
+
         const card = deck.pop();
-        if (card) hand.push(card);
+        if (card) {
+            // Unique check
+            if (card.unique && (drawnIds.has(card.id) || hand.some(c => c.id === card.id))) {
+                // Cannot draw this card (already in hand). 
+                // Skip it (effectively discard/return to diff pile? For now, discard)
+                // In a perfect sim, it might stay in deck, but deck is a stack.
+                // If we pop it, we must put it somewhere. discard is safest to avoid blocking.
+                discard.push(card);
+                continue;
+            }
+            hand.push(card);
+            drawnIds.add(card.id);
+        }
     }
 
     return { deck, discard, hand };

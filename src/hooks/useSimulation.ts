@@ -10,6 +10,9 @@ const INITIAL_STATE: GameState = {
     phase: 'start',
     hp: 30, // 仮の初期値
     maxHp: 30,
+    vocal: 0, // Added default vocal stat
+    dance: 0, // Added default dance stat
+    visual: 0, // Added default visual stat
     shield: 0,
     genki: 0,
     goodImpression: 0,
@@ -19,6 +22,8 @@ const INITIAL_STATE: GameState = {
     deck: [],
     hand: [],
     discard: [],
+    onHold: [],
+    excluded: [],
     cardsPlayed: 0,
     pItems: [],
     pDrinks: [],
@@ -39,7 +44,10 @@ export function useSimulation(
         const remainingDeckCards = (targetDeck || []).filter(c => !c.startInHand);
 
         const shuffledDeck = shuffle(remainingDeckCards);
-        const drawCount = Math.max(0, 3 - startHandCards.length);
+        // 初期手札3枚確保 (startInHand優先)
+        // 上限5枚だが、初期は基本3枚
+        const drawTarget = 3;
+        const drawCount = Math.max(0, drawTarget - startHandCards.length);
         const { deck, hand: drawnHand, discard } = drawCards(shuffledDeck, [], drawCount);
 
         return {
@@ -51,6 +59,8 @@ export function useSimulation(
             deck,
             hand: [...startHandCards, ...drawnHand],
             discard,
+            onHold: [],
+            excluded: [],
             cardsPlayed: 0,
             pDrinks: initialPDrinks ? initialPDrinks.map(d => ({ drink: d, used: false })) : [],
             logs: ['ターン1 開始'],
@@ -69,7 +79,7 @@ export function useSimulation(
             return {
                 ...prev,
                 pDrinks: newDrinks,
-                logs: [...prev.logs, `Pドリンク使用: ${newDrinks[index].drink.name}`]
+                logs: [...prev.logs, `Pドリンク使用: ${newDrinks[index].drink.name} `]
             };
         });
     }, []);
@@ -87,27 +97,24 @@ export function useSimulation(
             const [playedCard] = newHand.splice(cardIndex, 1);
 
             // コスト計算
-            // 消費体力削減 (Flat) バフを適用
             let reductionFlat = 0;
             prev.buffs.forEach(b => {
                 if (b.type === 'reduce_hp_cost') reductionFlat += (b.value ?? 0);
             });
-            // 消費体力減少 (Buff) バフがある場合、コストを 0 にする（または半減などの仕様に合わせて調整。一旦0想定）
             let actualCost = Math.max(0, playedCard.cost - reductionFlat);
 
             const hasCostReductionBuff = prev.buffs.some(b => b.type === 'buff_cost_reduction');
             const hasDoubleCostBuff = prev.buffs.some(b => b.type === 'buff_double_cost');
 
-            if (hasCostReductionBuff) actualCost = Math.ceil(actualCost * 0.5);
-            if (hasDoubleCostBuff) actualCost = actualCost * 2;
+            if (hasCostReductionBuff) actualCost = Math.floor(actualCost * 0.5);
+            if (hasDoubleCostBuff) actualCost *= 2;
+            actualCost = Math.max(0, actualCost);
 
-            // リソースチェック
+            // リソースチェック: コストが払えるか？
+            // 体力0でもコスト0なら使用可能
             if (prev.hp + prev.genki < actualCost) {
-                // TODO: 体力不足の警告ログなどを出すべきか。一旦中断で。
                 return prev;
             }
-
-            const newDiscard = [...prev.discard, playedCard];
 
             // リソース消費 (元気 -> 体力の順)
             let remainingCost = actualCost;
@@ -123,25 +130,43 @@ export function useSimulation(
                 newHp -= remainingCost;
             }
 
-            // Apply card using Logic Engine
-            let newState = { ...prev, hp: newHp, genki: newGenki };
+            // カード適用前の状態 (コスト支払い後)
+            let midState: GameState = {
+                ...prev,
+                hand: newHand,
+                genki: newGenki,
+                hp: newHp,
+                cardsPlayed: prev.cardsPlayed + 1,
+            };
 
             // Effect execution
+            let afterEffectState = midState;
             if (playedCard.effects) {
-                const resultState = applyCardEffects(newState, playedCard.effects);
-                newState = { ...resultState };
+                afterEffectState = applyCardEffects(midState, playedCard.effects);
             } else {
-                newState.logs = [...newState.logs, `(No effects data for: ${playedCard.name})`];
+                afterEffectState = {
+                    ...midState,
+                    logs: [...(midState.logs || []), `(No effects data for: ${playedCard.name})`]
+                };
+            }
+
+            // Move card to discard or excluded
+            let newDiscard = [...afterEffectState.discard];
+            let newExcluded = [...(prev.excluded || [])];
+
+            if (playedCard.usageLimit === 'once_per_lesson') {
+                newExcluded.push(playedCard);
+            } else {
+                newDiscard.push(playedCard);
             }
 
             return {
-                ...newState,
-                hand: newHand,
+                ...afterEffectState,
                 discard: newDiscard,
-                cardsPlayed: prev.cardsPlayed + 1,
+                excluded: newExcluded,
                 logs: [
-                    ...newState.logs,
-                    `カード使用: ${playedCard.name}${actualCost > 0 ? ` (消費: ${actualCost})` : ''}`
+                    ...(afterEffectState.logs || []),
+                    `カード使用: ${playedCard.name}${actualCost > 0 ? ` (消費: ${actualCost})` : ''} `
                 ],
             };
         });
@@ -152,11 +177,34 @@ export function useSimulation(
             if (prev.turn >= prev.maxTurns) return prev;
 
             const nextTurn = prev.turn + 1;
-            // 手札を全て捨札へ
+
+            // スキップ回復: カード不使用なら体力+2
+            let nextHp = prev.hp;
+            let skipLog = "";
+            if (prev.cardsPlayed === 0) {
+                nextHp = Math.min(prev.maxHp, prev.hp + 2);
+                skipLog = " (スキップ回復 +2)";
+            }
+
+            // 手札・捨札管理
+            // 保留カード以外を全て捨札へ
+            // TODO: onHoldロジック実装時はここで separation
             const currentDiscard = [...prev.discard, ...prev.hand];
+            const nextHand: import('../types').Card[] = []; // 保留があればここに入れる
 
             // 次のターンのドロー処理
-            const { deck: newDeck, hand: newHand, discard: newDiscard } = drawCards(prev.deck, currentDiscard, 3);
+            // 手札上限5枚だが、基本は「3枚になるまで」引く。
+            // 既に保留で3枚超えている場合は引かない？
+            // 通常: 3枚になるように引く
+            const MAX_HAND = 5;
+            const BASE_DRAW_TARGET = 3;
+
+            const currentHandSize = nextHand.length;
+            const drawCount = Math.max(0, BASE_DRAW_TARGET - currentHandSize);
+            // ドロー後に5枚を超えないようにする（通常ドローでは超えないはずだが、効果ドローとの兼ね合いでガード）
+            const safeDrawCount = Math.min(drawCount, MAX_HAND - currentHandSize);
+
+            const { deck: newDeck, hand: drawnHand, discard: newDiscard } = drawCards(prev.deck, currentDiscard, safeDrawCount);
 
             // 持続効果によるスコア獲得 (好印象など)
             const goodImpressionScore = prev.goodImpression * LOGIC_CONSTANTS.IMPRESSION.TURN_END_SCORE_PER_STACK;
@@ -172,19 +220,20 @@ export function useSimulation(
             return {
                 ...prev,
                 score: prev.score + goodImpressionScore,
+                hp: nextHp,
                 turn: nextTurn,
                 phase: 'start',
                 currentTurnAttribute: turnAttributes ? (turnAttributes[nextTurn - 1] ?? 'vocal') : 'vocal',
                 deck: newDeck,
-                hand: newHand,
+                hand: [...nextHand, ...drawnHand],
                 discard: newDiscard,
                 buffs: updatedBuffs,
                 goodImpression: nextImpression,
                 cardsPlayed: 0,
                 logs: [
                     ...prev.logs,
-                    ...(goodImpressionScore > 0 ? [`好印象スコア: +${goodImpressionScore}`] : []),
-                    `ターン${nextTurn} 開始 (好印象 -1)`
+                    ...(goodImpressionScore > 0 ? [`好印象スコア: +${goodImpressionScore} `] : []),
+                    `ターン${nextTurn} 開始(好印象 - 1)${skipLog} `
                 ],
             };
         });
@@ -195,7 +244,8 @@ export function useSimulation(
         const remainingDeckCards = (targetDeck || []).filter(c => !c.startInHand);
 
         const shuffledDeck = shuffle(remainingDeckCards);
-        const drawCount = Math.max(0, 3 - startHandCards.length);
+        const drawTarget = 3;
+        const drawCount = Math.max(0, drawTarget - startHandCards.length);
         const { deck, hand: drawnHand, discard } = drawCards(shuffledDeck, [], drawCount);
 
         setState({
@@ -207,6 +257,8 @@ export function useSimulation(
             deck,
             hand: [...startHandCards, ...drawnHand],
             discard,
+            excluded: [],
+            onHold: [],
             cardsPlayed: 0,
             pDrinks: initialPDrinks ? initialPDrinks.map(d => ({ drink: d, used: false })) : [],
             logs: ['ターン1 開始'],

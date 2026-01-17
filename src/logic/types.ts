@@ -43,7 +43,8 @@ export type ConditionType =
     | 'impression'      // 好印象
     | 'motivation'      // やる気
     | 'concentration'   // 集中
-    | 'hp'              // 体力
+    | 'hp'              // 体力 (固定値)
+    | 'hp_ratio'        // 体力割合 (0.0 ~ 1.0)
     | 'turn'            // 現在ターン
     | 'phase'           // フェーズ
     | 'buff'            // 特定のバフの状態
@@ -67,6 +68,7 @@ export interface Effect {
     ratio?: number;         // 倍率 (元気の100%分なら 1.0)
     multiplier?: number;     // 特殊倍率 (集中1.5倍など)
     duration?: number;      // 持続ターン (バフなど)
+    count?: number;         // 回数 (例: 低下状態無効1回)
 
     // ターゲット
     target?: 'self' | 'opponent';

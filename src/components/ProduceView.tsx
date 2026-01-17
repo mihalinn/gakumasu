@@ -8,12 +8,18 @@ interface ProduceViewProps {
   playCard: (cardId: string) => void;
   usePDrink: (index: number) => void;
   turnAttributes: LessonAttribute[];
+  plan?: 'logic' | 'sense' | 'anomaly';
 }
 
-export function ProduceView({ state, endTurn, resetSimulation, playCard, usePDrink, turnAttributes }: ProduceViewProps) {
+export function ProduceView({ state, endTurn, resetSimulation, playCard, usePDrink, turnAttributes, plan }: ProduceViewProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+  // Logicプランでない場合のみ集中を表示 -> センスとアノマリーのみ表示に変更 (未選択時は非表示)
+  const showConcentration = plan === 'sense' || plan === 'anomaly';
+
+
   useEffect(() => {
+    // ... (unchanged)
     if (scrollContainerRef.current) {
       const { scrollHeight, clientHeight } = scrollContainerRef.current;
       scrollContainerRef.current.scrollTo({
@@ -25,7 +31,7 @@ export function ProduceView({ state, endTurn, resetSimulation, playCard, usePDri
 
   return (
     <div className="h-full grid grid-cols-[240px_1fr_240px] gap-2 animate-in fade-in duration-500 p-2">
-      {/* Left Column: Logs & P-DRINKS */}
+      {/* ... (Left Column unchanged) */}
       <div className="flex flex-col gap-2 h-full overflow-hidden">
         {/* Logs */}
         <div className="bg-slate-900/50 rounded-xl border border-white/5 p-4 flex flex-col flex-1 min-h-0 overflow-hidden">
@@ -138,33 +144,82 @@ export function ProduceView({ state, endTurn, resetSimulation, playCard, usePDri
         {/* Main Stage Area */}
         <div className="flex-1 bg-slate-900/30 rounded-xl border border-white/5 relative overflow-hidden flex items-center justify-center">
           {/* Character Status Overlay */}
-          <div className="absolute top-4 right-4 z-10">
+          {/* Left Status Overlay: Motivation, Good Impression, Concentration, Buffs */}
+          <div className="absolute top-4 left-4 z-10">
             <div className="bg-slate-900/90 backdrop-blur-xl rounded-lg border border-white/10 p-3 min-w-[150px] shadow-xl ring-1 ring-white/5 flex flex-col gap-2">
-              {/* Genki Section */}
-              <div className="flex justify-between items-center pb-2 border-b border-white/5">
-                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">GENKI</span>
-                <div className="flex items-center gap-1.5 text-blue-400">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]"></div>
-                  <span className="text-sm font-bold font-mono leading-none">{state.genki}</span>
-                </div>
-              </div>
-
               {/* Status Effects Row */}
-              <div className="grid grid-cols-3 gap-2 pb-2 border-b border-white/5">
+              <div className="grid grid-cols-3 gap-2 pb-1">
                 <div className="flex flex-col items-center">
                   <span className="text-[8px] font-bold text-slate-500 uppercase">やる気</span>
                   <span className="text-xs font-bold text-orange-400 font-mono">{state.motivation}</span>
                 </div>
                 <div className="flex flex-col items-center">
-                  <span className="text-[8px] font-bold text-slate-500 uppercase">集中</span>
-                  <span className="text-xs font-bold text-purple-400 font-mono">{state.concentration}</span>
-                </div>
-                <div className="flex flex-col items-center">
                   <span className="text-[8px] font-bold text-slate-500 uppercase">好印象</span>
                   <span className="text-xs font-bold text-pink-400 font-mono">{state.goodImpression}</span>
                 </div>
+                {showConcentration ? (
+                  <div className="flex flex-col items-center">
+                    <span className="text-[8px] font-bold text-slate-500 uppercase">集中</span>
+                    <span className="text-xs font-bold text-purple-400 font-mono">{state.concentration}</span>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center opacity-30">
+                    <span className="text-[8px] font-bold text-slate-500 uppercase">---</span>
+                    <span className="text-xs font-bold text-slate-600 font-mono">-</span>
+                  </div>
+                )}
               </div>
 
+              {/* Active Buffs Section */}
+              {state.buffs && state.buffs.length > 0 && (
+                <div className="flex flex-col gap-1 pt-1 border-t border-white/5 w-full">
+                  {(() => {
+                    const groupedBuffs = state.buffs.reduce((acc: any[], buff: any) => {
+                      const existing = acc.find(b => b.type === buff.type);
+                      if (existing) {
+                        // Sum values
+                        if (buff.value) existing.value = (existing.value || 0) + buff.value;
+                        // Sum counts (stacks)
+                        if (buff.count) existing.count = (existing.count || 0) + buff.count;
+                        // Max duration (or extend? Assuming max for display simplification)
+                        existing.duration = Math.max(existing.duration, buff.duration);
+                      } else {
+                        acc.push({ ...buff });
+                      }
+                      return acc;
+                    }, []);
+
+                    return groupedBuffs.map((buff: any, i: number) => (
+                      <div
+                        key={`${buff.id}-${i}`}
+                        className="bg-blue-500/10 border border-blue-500/20 px-1.5 py-0.5 rounded flex justify-between items-center gap-2 group relative cursor-help w-full"
+                        title={`${buff.name} (残り${buff.duration}ターン)`}
+                      >
+                        <span className="text-[9px] font-bold text-blue-300 uppercase truncate flex-1">
+                          {buff.name}
+                          {buff.value ? ` (${buff.value > 0 ? '+' : ''}${buff.value})` : ''}
+                        </span>
+                        <div className="flex items-center gap-1">
+                          {buff.count !== undefined && (
+                            <span className="text-[8px] font-mono text-white bg-blue-500/30 px-1 rounded flex items-center justify-center min-w-[12px]">
+                              {buff.count}
+                            </span>
+                          )}
+                          <span className="text-[8px] font-mono text-blue-500 bg-blue-500/10 px-0.5 rounded">
+                            {buff.duration === -1 ? '∞' : buff.duration}
+                          </span>
+                        </div>
+                      </div>
+                    ));
+                  })()}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right Status Overlay: HP, Genki */}
+          <div className="absolute top-4 right-4 z-10">
+            <div className="bg-slate-900/90 backdrop-blur-xl rounded-lg border border-white/10 p-3 min-w-[150px] shadow-xl ring-1 ring-white/5 flex flex-col gap-2">
               {/* HP Section */}
               <div className="pb-2 border-b border-white/5">
                 <div className="flex justify-between items-end mb-1">
@@ -184,23 +239,14 @@ export function ProduceView({ state, endTurn, resetSimulation, playCard, usePDri
                 </div>
               </div>
 
-              {/* Active Buffs Section */}
-              {state.buffs && state.buffs.length > 0 && (
-                <div className="flex flex-wrap gap-1 pt-1">
-                  {state.buffs.map((buff: any, i: number) => (
-                    <div
-                      key={`${buff.id}-${i}`}
-                      className="bg-blue-500/10 border border-blue-500/20 px-1.5 py-0.5 rounded flex items-center gap-1 group relative cursor-help"
-                      title={`${buff.name} (残り${buff.duration}ターン)`}
-                    >
-                      <span className="text-[9px] font-bold text-blue-300 uppercase">{buff.name}</span>
-                      <span className="text-[8px] font-mono text-blue-500 bg-blue-500/10 px-0.5 rounded">
-                        {buff.duration === -1 ? '∞' : buff.duration}
-                      </span>
-                    </div>
-                  ))}
+              {/* Genki Section */}
+              <div className="flex justify-between items-center pt-1">
+                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">GENKI</span>
+                <div className="flex items-center gap-1.5 text-blue-400">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]"></div>
+                  <span className="text-sm font-bold font-mono leading-none">{state.genki}</span>
                 </div>
-              )}
+              </div>
             </div>
           </div>
 
@@ -293,10 +339,24 @@ export function ProduceView({ state, endTurn, resetSimulation, playCard, usePDri
         </div>
 
         <div>
-          <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">山札・捨札</h3>
-          <div className="bg-slate-800/50 p-2 rounded text-xs text-slate-400 space-y-1">
-            <div className="flex justify-between"><span>山札</span><span className="text-white font-mono">{state.deck.length}</span></div>
-            <div className="flex justify-between"><span>捨札</span><span className="text-white font-mono">{state.discard.length}</span></div>
+          <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">山札・管理</h3>
+          <div className="bg-slate-800/50 p-2 rounded text-xs text-slate-400 space-y-2">
+            <div className="flex justify-between items-center border-b border-white/5 pb-1">
+              <span>山札</span>
+              <span className="text-white font-mono">{state.deck.length}</span>
+            </div>
+            <div className="flex justify-between items-center border-b border-white/5 pb-1">
+              <span>捨札</span>
+              <span className="text-white font-mono">{state.discard.length}</span>
+            </div>
+            <div className="flex justify-between items-center border-b border-white/5 pb-1">
+              <span className="text-slate-500">除外</span>
+              <span className="text-slate-300 font-mono">{state.excluded ? state.excluded.length : 0}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-slate-500">保留</span>
+              <span className="text-slate-300 font-mono">{state.onHold ? state.onHold.length : 0}</span>
+            </div>
           </div>
         </div>
 

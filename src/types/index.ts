@@ -43,6 +43,9 @@ export interface Card {
     effects?: Effect[]; // New logic engine
     conditions?: Condition[];
     startInHand?: boolean; // レッスン開始時に手札に入る
+    usageLimit?: 'once_per_lesson'; // レッスン中1回
+    unique?: boolean; // 重複不可
+    costType?: 'normal' | 'hp'; // コストタイプ: hpなら元気消費不可で直接HP消費
 }
 
 export interface PItem {
@@ -106,6 +109,9 @@ export interface GameState {
     currentTurnAttribute?: LessonAttribute;
 
     // パラメータ
+    vocal: number;
+    dance: number;
+    visual: number;
     hp: number;
     maxHp: number;
     shield: number; // 元気によるブロック値とは別（もしあれば）。無ければ削除でも可ですが一旦保持
@@ -121,6 +127,8 @@ export interface GameState {
     deck: Card[];
     hand: Card[];
     discard: Card[];
+    onHold: Card[]; // 保留カード (次のターンに持ち越し)
+    excluded: Card[]; // 除外されたカード (レッスン中1回など)
     cardsPlayed: number; // そのターンに使用したカード枚数
 
     // アイテム・ドリンク
