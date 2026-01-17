@@ -29,6 +29,8 @@ export type CardPlan =
     | 'support_logic' | 'support_sense' | 'support_anomaly' | 'support_free'
     | 'basic_logic' | 'basic_sense' | 'basic_anomaly' | 'basic_free';
 
+import type { Effect, Condition } from '../logic/types';
+
 export interface Card {
     id: string;
     name: string;
@@ -36,8 +38,11 @@ export interface Card {
     plan: CardPlan;
     rarity?: string;
     cost: number;
-    effect: string;
+    effect: string; // Legacy description
     image?: string;
+    effects?: Effect[]; // New logic engine
+    conditions?: Condition[];
+    startInHand?: boolean; // レッスン開始時に手札に入る
 }
 
 export interface PItem {
@@ -121,5 +126,6 @@ export interface GameState {
     // アイテム・ドリンク
     pItems: PItem[];
     pDrinks: PDrinkState[];
+    buffs: import('../logic/types').Buff[]; // 追加: 持続効果
     logs: string[];
 }

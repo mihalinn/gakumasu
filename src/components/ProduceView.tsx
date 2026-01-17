@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import type { Card, LessonAttribute, PDrink } from '../types/index'
+import type { Card, LessonAttribute } from '../types/index'
 
 interface ProduceViewProps {
   state: any; // Ideally this would be GameState from types
@@ -55,33 +55,37 @@ export function ProduceView({ state, endTurn, resetSimulation, playCard, usePDri
           <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Pドリンク</h3>
           {state.pDrinks && state.pDrinks.length > 0 ? (
             <div className="grid grid-cols-3 gap-2">
-              {state.pDrinks.map(({ drink, used }: any, idx: number) => (
-                <button
-                  key={`${drink.id}-${idx}`}
-                  onClick={() => !used && usePDrink(idx)}
-                  disabled={used}
-                  className={`
+              {state.pDrinks.map(({ drink, used }: any, idx: number) => {
+                const canAct = state.cardsPlayed < 1;
+                return (
+                  <button
+                    key={`${drink.id}-${idx}`}
+                    onClick={() => canAct && !used && usePDrink(idx)}
+                    disabled={used || !canAct}
+                    className={`
                     aspect-square bg-slate-800 rounded border border-white/10 overflow-hidden relative transition-all
-                    ${used
-                      ? 'opacity-40 grayscale cursor-not-allowed'
-                      : 'hover:border-white/30 hover:scale-105 cursor-pointer'
-                    }
+                    ${(used || !canAct)
+                        ? 'opacity-40 grayscale cursor-not-allowed'
+                        : 'hover:border-white/30 hover:scale-105 cursor-pointer'
+                      }
                   `}
-                  title={drink.name}
-                >
-                  {drink.image ? (
-                    <img
-                      src={`${import.meta.env.BASE_URL}images/drinks/${drink.image.split('/').map((part: string) => encodeURIComponent(part)).join('/')}`}
-                      alt={drink.name}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-[8px] text-slate-500">
-                      {drink.name[0]}
-                    </div>
-                  )}
-                </button>
-              ))}
+                    title={drink.name}
+                  >
+
+                    {drink.image ? (
+                      <img
+                        src={`${import.meta.env.BASE_URL}images/drinks/${drink.image.split('/').map((part: string) => encodeURIComponent(part)).join('/')}`}
+                        alt={drink.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-[8px] text-slate-500">
+                        {drink.name[0]}
+                      </div>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           ) : (
             <div className="text-center text-[10px] text-slate-600 py-2">ドリンクなし</div>
@@ -134,21 +138,69 @@ export function ProduceView({ state, endTurn, resetSimulation, playCard, usePDri
         {/* Main Stage Area */}
         <div className="flex-1 bg-slate-900/30 rounded-xl border border-white/5 relative overflow-hidden flex items-center justify-center">
           {/* Character Status Overlay */}
-          <div className="absolute top-4 left-4 flex flex-col gap-2">
-            <div className="p-3 bg-black/60 backdrop-blur rounded-lg border border-white/10 min-w-[120px]">
-              <div className="flex justify-between items-end mb-1">
-                <span className="text-xs font-bold text-slate-400">HP</span>
-                <span className="text-xl font-bold text-white font-mono">{state.hp}</span>
+          <div className="absolute top-4 right-4 z-10">
+            <div className="bg-slate-900/90 backdrop-blur-xl rounded-lg border border-white/10 p-3 min-w-[150px] shadow-xl ring-1 ring-white/5 flex flex-col gap-2">
+              {/* Genki Section */}
+              <div className="flex justify-between items-center pb-2 border-b border-white/5">
+                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">GENKI</span>
+                <div className="flex items-center gap-1.5 text-blue-400">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]"></div>
+                  <span className="text-sm font-bold font-mono leading-none">{state.genki}</span>
+                </div>
               </div>
-              <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                <div className="h-full bg-green-500" style={{ width: `${(state.hp / state.maxHp) * 100}%` }}></div>
+
+              {/* Status Effects Row */}
+              <div className="grid grid-cols-3 gap-2 pb-2 border-b border-white/5">
+                <div className="flex flex-col items-center">
+                  <span className="text-[8px] font-bold text-slate-500 uppercase">やる気</span>
+                  <span className="text-xs font-bold text-orange-400 font-mono">{state.motivation}</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span className="text-[8px] font-bold text-slate-500 uppercase">集中</span>
+                  <span className="text-xs font-bold text-purple-400 font-mono">{state.concentration}</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span className="text-[8px] font-bold text-slate-500 uppercase">好印象</span>
+                  <span className="text-xs font-bold text-pink-400 font-mono">{state.goodImpression}</span>
+                </div>
               </div>
-            </div>
-            <div className="p-3 bg-black/60 backdrop-blur rounded-lg border border-white/10 min-w-[120px]">
-              <div className="flex justify-between items-end">
-                <span className="text-xs font-bold text-slate-400">元気</span>
-                <span className="text-xl font-bold text-blue-400 font-mono">{state.genki}</span>
+
+              {/* HP Section */}
+              <div className="pb-2 border-b border-white/5">
+                <div className="flex justify-between items-end mb-1">
+                  <span className="text-[10px] font-bold text-slate-400 tracking-wider">HP</span>
+                  <div className="flex items-baseline gap-1">
+                    <span className={`text-lg font-black font-mono tracking-tight ${state.hp < state.maxHp * 0.3 ? 'text-red-400 animate-pulse' : 'text-white'}`}>
+                      {state.hp}
+                    </span>
+                    <span className="text-[9px] text-slate-600 font-mono font-bold">/ {state.maxHp}</span>
+                  </div>
+                </div>
+                <div className="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden ring-1 ring-white/5">
+                  <div
+                    className={`h-full transition-all duration-500 ease-out relative ${state.hp < state.maxHp * 0.3 ? 'bg-gradient-to-r from-red-600 to-red-500' : 'bg-gradient-to-r from-green-500 to-emerald-400'}`}
+                    style={{ width: `${Math.min(100, (state.hp / state.maxHp) * 100)}%` }}
+                  />
+                </div>
               </div>
+
+              {/* Active Buffs Section */}
+              {state.buffs && state.buffs.length > 0 && (
+                <div className="flex flex-wrap gap-1 pt-1">
+                  {state.buffs.map((buff: any, i: number) => (
+                    <div
+                      key={`${buff.id}-${i}`}
+                      className="bg-blue-500/10 border border-blue-500/20 px-1.5 py-0.5 rounded flex items-center gap-1 group relative cursor-help"
+                      title={`${buff.name} (残り${buff.duration}ターン)`}
+                    >
+                      <span className="text-[9px] font-bold text-blue-300 uppercase">{buff.name}</span>
+                      <span className="text-[8px] font-mono text-blue-500 bg-blue-500/10 px-0.5 rounded">
+                        {buff.duration === -1 ? '∞' : buff.duration}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 

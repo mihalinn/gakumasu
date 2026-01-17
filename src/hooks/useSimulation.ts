@@ -1,5 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
-import type { GameState, Card } from '../types';
+import type { GameState } from '../types';
+import { applyCardEffects } from '../logic/effectResolver';
+import { LOGIC_CONSTANTS } from '../logic/constants';
+import { shuffle, drawCards } from '../logic/utils';
 
 const INITIAL_STATE: GameState = {
     turn: 1,
@@ -19,6 +22,7 @@ const INITIAL_STATE: GameState = {
     cardsPlayed: 0,
     pItems: [],
     pDrinks: [],
+    buffs: [],
     logs: [],
 };
 
@@ -28,38 +32,15 @@ export function useSimulation(
     targetDeck?: import('../types').Card[],
     initialPDrinks?: import('../types').PDrink[]
 ) {
-    // デッキをシャッフルするヘルパー関数
-    const shuffle = (cards: GameState['deck']) => {
-        const newCards = [...cards];
-        for (let i = newCards.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [newCards[i], newCards[j]] = [newCards[j], newCards[i]];
-        }
-        return newCards;
-    };
-
-    // カードを引くヘルパー関数
-    const drawCards = (currentDeck: Card[], currentDiscard: Card[], count: number) => {
-        let deck = [...currentDeck];
-        let discard = [...currentDiscard];
-        const hand: Card[] = [];
-
-        for (let i = 0; i < count; i++) {
-            if (deck.length === 0) {
-                if (discard.length === 0) break;
-                deck = shuffle(discard);
-                discard = [];
-            }
-            const card = deck.pop();
-            if (card) hand.push(card);
-        }
-
-        return { deck, discard, hand };
-    };
 
     const [state, setState] = useState<GameState>(() => {
-        const shuffledDeck = shuffle(targetDeck || []);
-        const { deck, hand, discard } = drawCards(shuffledDeck, [], 3);
+        // startInHandのカードを探す
+        const startHandCards = (targetDeck || []).filter(c => c.startInHand);
+        const remainingDeckCards = (targetDeck || []).filter(c => !c.startInHand);
+
+        const shuffledDeck = shuffle(remainingDeckCards);
+        const drawCount = Math.max(0, 3 - startHandCards.length);
+        const { deck, hand: drawnHand, discard } = drawCards(shuffledDeck, [], drawCount);
 
         return {
             ...INITIAL_STATE,
@@ -68,7 +49,7 @@ export function useSimulation(
             maxHp: initialStatus?.maxHp ?? INITIAL_STATE.maxHp,
             currentTurnAttribute: turnAttributes ? turnAttributes[0] : 'vocal',
             deck,
-            hand,
+            hand: [...startHandCards, ...drawnHand],
             discard,
             cardsPlayed: 0,
             pDrinks: initialPDrinks ? initialPDrinks.map(d => ({ drink: d, used: false })) : [],
@@ -93,6 +74,8 @@ export function useSimulation(
         });
     }, []);
 
+
+
     const playCard = useCallback((cardId: string) => {
         setState(prev => {
             if (prev.cardsPlayed >= 1) return prev; // check card limit
@@ -102,16 +85,64 @@ export function useSimulation(
 
             const newHand = [...prev.hand];
             const [playedCard] = newHand.splice(cardIndex, 1);
+
+            // コスト計算
+            // 消費体力削減 (Flat) バフを適用
+            let reductionFlat = 0;
+            prev.buffs.forEach(b => {
+                if (b.type === 'reduce_hp_cost') reductionFlat += (b.value ?? 0);
+            });
+            // 消費体力減少 (Buff) バフがある場合、コストを 0 にする（または半減などの仕様に合わせて調整。一旦0想定）
+            let actualCost = Math.max(0, playedCard.cost - reductionFlat);
+
+            const hasCostReductionBuff = prev.buffs.some(b => b.type === 'buff_cost_reduction');
+            const hasDoubleCostBuff = prev.buffs.some(b => b.type === 'buff_double_cost');
+
+            if (hasCostReductionBuff) actualCost = Math.ceil(actualCost * 0.5);
+            if (hasDoubleCostBuff) actualCost = actualCost * 2;
+
+            // リソースチェック
+            if (prev.hp + prev.genki < actualCost) {
+                // TODO: 体力不足の警告ログなどを出すべきか。一旦中断で。
+                return prev;
+            }
+
             const newDiscard = [...prev.discard, playedCard];
 
-            // TODO: Apply card effects and calculate score here
+            // リソース消費 (元気 -> 体力の順)
+            let remainingCost = actualCost;
+            let newGenki = prev.genki;
+            let newHp = prev.hp;
+
+            if (newGenki >= remainingCost) {
+                newGenki -= remainingCost;
+                remainingCost = 0;
+            } else {
+                remainingCost -= newGenki;
+                newGenki = 0;
+                newHp -= remainingCost;
+            }
+
+            // Apply card using Logic Engine
+            let newState = { ...prev, hp: newHp, genki: newGenki };
+
+            // Effect execution
+            if (playedCard.effects) {
+                const resultState = applyCardEffects(newState, playedCard.effects);
+                newState = { ...resultState };
+            } else {
+                newState.logs = [...newState.logs, `(No effects data for: ${playedCard.name})`];
+            }
 
             return {
-                ...prev,
+                ...newState,
                 hand: newHand,
                 discard: newDiscard,
                 cardsPlayed: prev.cardsPlayed + 1,
-                logs: [...prev.logs, `カード使用: ${playedCard.name}`],
+                logs: [
+                    ...newState.logs,
+                    `カード使用: ${playedCard.name}${actualCost > 0 ? ` (消費: ${actualCost})` : ''}`
+                ],
             };
         });
     }, []);
@@ -127,23 +158,45 @@ export function useSimulation(
             // 次のターンのドロー処理
             const { deck: newDeck, hand: newHand, discard: newDiscard } = drawCards(prev.deck, currentDiscard, 3);
 
+            // 持続効果によるスコア獲得 (好印象など)
+            const goodImpressionScore = prev.goodImpression * LOGIC_CONSTANTS.IMPRESSION.TURN_END_SCORE_PER_STACK;
+
+            // バフの更新 (持続ターンを減らす)
+            const updatedBuffs = prev.buffs
+                .map(b => ({ ...b, duration: b.duration === -1 ? -1 : b.duration - 1 }))
+                .filter(b => b.duration !== 0);
+
+            // 好印象の減衰 (-1)
+            const nextImpression = Math.max(0, prev.goodImpression - 1);
+
             return {
                 ...prev,
+                score: prev.score + goodImpressionScore,
                 turn: nextTurn,
-                phase: 'start', // 'main'にしても良いが、一旦アニメーション等のためにstart経由か、あるいは即mainか要検討。一旦startで維持
+                phase: 'start',
                 currentTurnAttribute: turnAttributes ? (turnAttributes[nextTurn - 1] ?? 'vocal') : 'vocal',
                 deck: newDeck,
                 hand: newHand,
                 discard: newDiscard,
-                cardsPlayed: 0, // Reset for next turn
-                logs: [...prev.logs, `ターン${nextTurn} 開始`],
+                buffs: updatedBuffs,
+                goodImpression: nextImpression,
+                cardsPlayed: 0,
+                logs: [
+                    ...prev.logs,
+                    ...(goodImpressionScore > 0 ? [`好印象スコア: +${goodImpressionScore}`] : []),
+                    `ターン${nextTurn} 開始 (好印象 -1)`
+                ],
             };
         });
     }, [turnAttributes]);
 
     const resetSimulation = useCallback(() => {
-        const shuffledDeck = shuffle(targetDeck || []);
-        const { deck, hand, discard } = drawCards(shuffledDeck, [], 3);
+        const startHandCards = (targetDeck || []).filter(c => c.startInHand);
+        const remainingDeckCards = (targetDeck || []).filter(c => !c.startInHand);
+
+        const shuffledDeck = shuffle(remainingDeckCards);
+        const drawCount = Math.max(0, 3 - startHandCards.length);
+        const { deck, hand: drawnHand, discard } = drawCards(shuffledDeck, [], drawCount);
 
         setState({
             ...INITIAL_STATE,
@@ -152,7 +205,7 @@ export function useSimulation(
             maxHp: initialStatus?.maxHp ?? INITIAL_STATE.maxHp,
             currentTurnAttribute: turnAttributes ? turnAttributes[0] : 'vocal',
             deck,
-            hand,
+            hand: [...startHandCards, ...drawnHand],
             discard,
             cardsPlayed: 0,
             pDrinks: initialPDrinks ? initialPDrinks.map(d => ({ drink: d, used: false })) : [],

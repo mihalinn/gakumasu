@@ -1,122 +1,521 @@
 ﻿[
   {
-    "image": "free/アイドル魂.png",
-    "rarity": "R",
-    "cost": 0,
-    "name": "アイドル魂",
-    "type": "active",
-    "effect": "",
-    "id": "free_アイドル魂",
-    "plan": "free"
-  },
-  {
-    "image": "free/アイドル宣言.png",
-    "rarity": "R",
-    "cost": 0,
-    "name": "アイドル宣言",
-    "type": "active",
-    "effect": "",
-    "id": "free_アイドル宣言",
-    "plan": "free"
-  },
-  {
-    "image": "free/アピールの基本.png",
-    "rarity": "R",
-    "cost": 0,
+    "id": "appeal_basic",
     "name": "アピールの基本",
+    "plan": "free",
     "type": "active",
-    "effect": "",
-    "id": "free_アピールの基本",
-    "plan": "free"
+    "rarity": "N",
+    "cost": 4,
+    "image": "free/アピールの基本.png",
+    "effects": [
+      {
+        "type": "score_fixed",
+        "value": 9
+      }
+    ]
   },
   {
-    "image": "free/テレビ出演.png",
-    "rarity": "R",
-    "cost": 0,
-    "name": "テレビ出演",
+    "id": "appeal_basic_plus",
+    "name": "アピールの基本+",
+    "plan": "free",
     "type": "active",
-    "effect": "",
-    "id": "free_テレビ出演",
-    "plan": "free"
+    "rarity": "N",
+    "cost": 3,
+    "image": "free/アピールの基本_plus.png",
+    "effects": [
+      {
+        "type": "score_fixed",
+        "value": 14
+      }
+    ]
   },
   {
-    "image": "free/ハイテンション.png",
-    "rarity": "R",
-    "cost": 0,
-    "name": "ハイテンション",
-    "type": "active",
-    "effect": "",
-    "id": "free_ハイテンション",
-    "plan": "free"
-  },
-  {
-    "image": "free/ファーストステップ.png",
-    "rarity": "R",
-    "cost": 0,
-    "name": "ファーストステップ",
-    "type": "active",
-    "effect": "",
-    "id": "free_ファーストステップ",
-    "plan": "free"
-  },
-  {
-    "image": "free/ポーズの基本.png",
-    "rarity": "R",
-    "cost": 0,
+    "id": "pose_basic",
     "name": "ポーズの基本",
+    "plan": "free",
     "type": "active",
-    "effect": "",
-    "id": "free_ポーズの基本",
-    "plan": "free"
+    "rarity": "N",
+    "cost": 3,
+    "image": "free/ポーズの基本.png",
+    "effects": [
+      {
+        "type": "score_fixed",
+        "value": 2
+      },
+      {
+        "type": "buff_genki",
+        "value": 2
+      }
+    ]
   },
   {
-    "image": "free/叶えたい夢.png",
-    "rarity": "R",
-    "cost": 0,
-    "name": "叶えたい夢",
+    "id": "pose_basic_plus",
+    "name": "ポーズの基本+",
+    "plan": "free",
     "type": "active",
-    "effect": "",
-    "id": "free_叶えたい夢",
-    "plan": "free"
+    "rarity": "N",
+    "cost": 3,
+    "image": "free/ポーズの基本_plus.png",
+    "effects": [
+      {
+        "type": "score_fixed",
+        "value": 6
+      },
+      {
+        "type": "buff_genki",
+        "value": 4
+      }
+    ]
   },
   {
-    "image": "free/気合十分！.png",
-    "rarity": "R",
-    "cost": 0,
-    "name": "気合十分！",
-    "type": "active",
-    "effect": "",
-    "id": "free_気合十分_",
-    "plan": "free"
-  },
-  {
-    "image": "free/仕切り直し.png",
-    "rarity": "R",
-    "cost": 0,
-    "name": "仕切り直し",
-    "type": "active",
-    "effect": "",
-    "id": "free_仕切り直し",
-    "plan": "free"
-  },
-  {
-    "image": "free/前途洋々.png",
-    "rarity": "R",
-    "cost": 0,
-    "name": "前途洋々",
-    "type": "active",
-    "effect": "",
-    "id": "free_前途洋_",
-    "plan": "free"
-  },
-  {
-    "image": "free/表現の基本.png",
-    "rarity": "R",
-    "cost": 0,
+    "id": "expression_basic",
     "name": "表現の基本",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "N",
+    "cost": 0,
+    "image": "free/表現の基本.png",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "expression_basic_plus",
+    "name": "表現の基本+",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "N",
+    "cost": 0,
+    "image": "free/表現の基本_plus.png",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 7
+      }
+    ]
+  },
+  {
+    "id": "spirit_full",
+    "name": "気合十分！",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "R",
+    "cost": 0,
+    "image": "free/気合十分！.png",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_cost_reduction",
+        "duration": 2
+      }
+    ]
+  },
+  {
+    "id": "spirit_full_plus",
+    "name": "気合十分！+",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "R",
+    "cost": 0,
+    "image": "free/気合十分！_plus.png",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_cost_reduction",
+        "duration": 3
+      }
+    ]
+  },
+  {
+    "id": "first_step",
+    "name": "ファーストステップ",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "R",
+    "cost": 0,
+    "image": "free/ファーストステップ.png",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 3
+      },
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "hp",
+            "compare": ">=",
+            "value": 0.5,
+            "target": "game"
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "reduce_hp_cost",
+            "value": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "first_step_plus",
+    "name": "ファーストステップ+",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "R",
+    "cost": 0,
+    "image": "free/ファーストステップ_plus.png",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 6
+      },
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "hp",
+            "compare": ">=",
+            "value": 0.5,
+            "target": "game"
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "reduce_hp_cost",
+            "value": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "promising_future",
+    "name": "前途洋々",
+    "plan": "free",
     "type": "active",
-    "effect": "",
-    "id": "free_表現の基本",
-    "plan": "free"
+    "rarity": "SR",
+    "cost": 4,
+    "image": "free/前途洋々.png",
+    "effects": [
+      {
+        "type": "score_fixed",
+        "value": 8
+      },
+      {
+        "type": "buff_genki",
+        "value": 7
+      }
+    ]
+  },
+  {
+    "id": "promising_future_plus",
+    "name": "前途洋々+",
+    "plan": "free",
+    "type": "active",
+    "rarity": "SR",
+    "cost": 4,
+    "image": "free/前途洋々_plus.png",
+    "effects": [
+      {
+        "type": "score_fixed",
+        "value": 12
+      },
+      {
+        "type": "buff_genki",
+        "value": 10
+      }
+    ]
+  },
+  {
+    "id": "idol_declaration",
+    "name": "アイドル宣言",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "SR",
+    "cost": 1,
+    "image": "free/アイドル宣言.png",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 1
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      },
+      {
+        "type": "draw_card",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "idol_declaration_plus",
+    "name": "アイドル宣言+",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "SR",
+    "cost": 0,
+    "image": "free/アイドル宣言_plus.png",
+    "effects": [
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      },
+      {
+        "type": "draw_card",
+        "value": 2
+      },
+      {
+        "type": "buff_cost_reduction",
+        "duration": 1
+      }
+    ]
+  },
+  {
+    "id": "high_tension",
+    "name": "ハイテンション",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "SR",
+    "cost": 0,
+    "image": "free/ハイテンション.png",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 11
+      },
+      {
+        "type": "buff_no_genki_gain",
+        "duration": 2
+      },
+      {
+        "type": "buff_cost_reduction",
+        "duration": 3
+      }
+    ]
+  },
+  {
+    "id": "high_tension_plus",
+    "name": "ハイテンション+",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "SR",
+    "cost": 0,
+    "image": "free/ハイテンション_plus.png",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 13
+      },
+      {
+        "type": "buff_no_genki_gain",
+        "duration": 2
+      },
+      {
+        "type": "buff_cost_reduction",
+        "duration": 4
+      }
+    ]
+  },
+  {
+    "id": "tv_appearance",
+    "name": "テレビ出演",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "SSR",
+    "cost": 1,
+    "image": "free/テレビ出演.png",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 3
+      },
+      {
+        "type": "buff_cost_reduction",
+        "duration": 4
+      }
+    ]
+  },
+  {
+    "id": "tv_appearance_plus",
+    "name": "テレビ出演+",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "SSR",
+    "cost": 1,
+    "image": "free/テレビ出演_plus.png",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 5
+      },
+      {
+        "type": "buff_cost_reduction",
+        "duration": 5
+      }
+    ]
+  },
+  {
+    "id": "dream_fulfillment",
+    "name": "叶えたい夢",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "SSR",
+    "cost": 1,
+    "image": "free/叶えたい夢.png",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 1
+      },
+      {
+        "type": "buff_genki",
+        "value": 8
+      },
+      {
+        "type": "reduce_hp_cost",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "dream_fulfillment_plus",
+    "name": "叶えたい夢+",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "SSR",
+    "cost": 1,
+    "image": "free/叶えたい夢_plus.png",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 1
+      },
+      {
+        "type": "buff_genki",
+        "value": 9
+      },
+      {
+        "type": "reduce_hp_cost",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "idol_soul",
+    "name": "アイドル魂",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "SSR",
+    "cost": 2,
+    "image": "free/アイドル魂.png",
+    "startInHand": true,
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 6
+      },
+      {
+        "type": "buff_no_debuff",
+        "duration": -1,
+        "value": 1
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "idol_soul_plus",
+    "name": "アイドル魂+",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "SSR",
+    "cost": 2,
+    "image": "free/アイドル魂_plus.png",
+    "startInHand": true,
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 6
+      },
+      {
+        "type": "buff_no_debuff",
+        "duration": -1,
+        "value": 1
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 2
+      },
+      {
+        "type": "upgrade_hand"
+      }
+    ]
+  },
+  {
+    "id": "reshuffle",
+    "name": "仕切り直し",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "SSR",
+    "cost": 5,
+    "image": "free/仕切り直し.png",
+    "effects": [
+      {
+        "type": "swap_hand"
+      },
+      {
+        "type": "buff_cost_reduction",
+        "duration": 4
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      },
+      {
+        "type": "draw_card",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "reshuffle_plus",
+    "name": "仕切り直し+",
+    "plan": "free",
+    "type": "mental",
+    "rarity": "SSR",
+    "cost": 2,
+    "image": "free/仕切り直し_plus.png",
+    "effects": [
+      {
+        "type": "swap_hand"
+      },
+      {
+        "type": "buff_cost_reduction",
+        "duration": 4
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 2
+      },
+      {
+        "type": "draw_card",
+        "value": 2
+      }
+    ]
   }
 ]

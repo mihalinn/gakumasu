@@ -1,0 +1,139 @@
+[
+    {
+        "id": "appeal_basic",
+        "name": "アピールの基本",
+        "plan": "free",
+        "type": "active",
+        "rarity": "N",
+        "cost": 4,
+        "effects": [
+            {
+                "type": "score_fixed",
+                "value": 9
+            }
+        ]
+    },
+    {
+        "id": "appeal_basic_plus",
+        "name": "アピールの基本+",
+        "plan": "free",
+        "type": "active",
+        "rarity": "N",
+        "cost": 3,
+        "effects": [
+            {
+                "type": "score_fixed",
+                "value": 14
+            }
+        ]
+    },
+    {
+        "id": "pose_basic",
+        "name": "ポーズの基本",
+        "plan": "free",
+        "type": "active",
+        "rarity": "N",
+        "cost": 3,
+        "effects": [
+            {
+                "type": "score_fixed",
+                "value": 2
+            },
+            {
+                "type": "buff_genki",
+                "value": 2
+            }
+        ]
+    },
+    {
+        "id": "expression_basic",
+        "name": "表現の基本",
+        "plan": "free",
+        "type": "mental",
+        "rarity": "N",
+        "cost": 0,
+        "effects": [
+            {
+                "type": "buff_genki",
+                "value": 4
+            }
+        ],
+        "conditions": [
+            {
+                "type": "turn",
+                "compare": "all"
+            }
+        ]
+    },
+    {
+        "id": "spirit_full",
+        "name": "気合十分！",
+        "plan": "free",
+        "type": "mental",
+        "rarity": "R",
+        "cost": 0,
+        "effects": [
+            {
+                "type": "buff_genki",
+                "value": 2
+            },
+            {
+                "type": "buff_cost_reduction",
+                "duration": 2
+            }
+        ]
+    },
+    {
+        "id": "first_step",
+        "name": "ファーストステップ",
+        "plan": "free",
+        "type": "mental",
+        "rarity": "R",
+        "cost": 0,
+        "effects": [
+            {
+                "type": "buff_genki",
+                "value": 3
+            },
+            {
+                "type": "condition_gate",
+                "condition": [
+                    {
+                        "type": "hp",
+                        "compare": ">=",
+                        "value": 0.5,
+                        "target": "game"
+                    }
+                ],
+                "subEffects": [
+                    {
+                        "type": "reduce_hp_cost",
+                        "value": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "idol_declaration",
+        "name": "アイドル宣言",
+        "plan": "free",
+        "type": "mental",
+        "rarity": "SR",
+        "cost": 0,
+        "effects": [
+            {
+                "type": "consume_hp",
+                "value": 1
+            },
+            {
+                "type": "add_card_play_count",
+                "value": 1
+            },
+            {
+                "type": "draw_card",
+                "value": 2
+            }
+        ]
+    }
+]
