@@ -19,12 +19,14 @@ const INITIAL_STATE: GameState = {
     cardsPlayed: 0,
     pItems: [],
     pDrinks: [],
+    logs: [],
 };
 
 export function useSimulation(
     initialStatus?: { vocal: number; dance: number; visual: number; hp: number; maxHp: number },
     turnAttributes?: import('../types').LessonAttribute[],
-    targetDeck?: import('../types').Card[]
+    targetDeck?: import('../types').Card[],
+    initialPDrinks?: import('../types').PDrink[]
 ) {
     // デッキをシャッフルするヘルパー関数
     const shuffle = (cards: GameState['deck']) => {
@@ -69,8 +71,27 @@ export function useSimulation(
             hand,
             discard,
             cardsPlayed: 0,
+            pDrinks: initialPDrinks ? initialPDrinks.map(d => ({ drink: d, used: false })) : [],
+            logs: ['ターン1 開始'],
         };
     });
+
+    const usePDrink = useCallback((index: number) => {
+        setState(prev => {
+            if (index < 0 || index >= prev.pDrinks.length || prev.pDrinks[index].used) return prev;
+
+            const newDrinks = [...prev.pDrinks];
+            newDrinks[index] = { ...newDrinks[index], used: true };
+
+            // TODO: Apply drink effects here
+
+            return {
+                ...prev,
+                pDrinks: newDrinks,
+                logs: [...prev.logs, `Pドリンク使用: ${newDrinks[index].drink.name}`]
+            };
+        });
+    }, []);
 
     const playCard = useCallback((cardId: string) => {
         setState(prev => {
@@ -90,6 +111,7 @@ export function useSimulation(
                 hand: newHand,
                 discard: newDiscard,
                 cardsPlayed: prev.cardsPlayed + 1,
+                logs: [...prev.logs, `カード使用: ${playedCard.name}`],
             };
         });
     }, []);
@@ -114,6 +136,7 @@ export function useSimulation(
                 hand: newHand,
                 discard: newDiscard,
                 cardsPlayed: 0, // Reset for next turn
+                logs: [...prev.logs, `ターン${nextTurn} 開始`],
             };
         });
     }, [turnAttributes]);
@@ -132,8 +155,10 @@ export function useSimulation(
             hand,
             discard,
             cardsPlayed: 0,
+            pDrinks: initialPDrinks ? initialPDrinks.map(d => ({ drink: d, used: false })) : [],
+            logs: ['ターン1 開始'],
         });
-    }, [initialStatus, turnAttributes, targetDeck]);
+    }, [initialStatus, turnAttributes, targetDeck, initialPDrinks]);
 
     // 入力プロップス（デッキ、ステータス、属性）が変更されたら、シミュレーションを初期化/リセットする
     // これにより、キャラ選択や手札追加時に自動的に初期ドローが行われるようになる
@@ -156,5 +181,6 @@ export function useSimulation(
         endTurn,
         resetSimulation,
         playCard,
+        usePDrink,
     };
 }

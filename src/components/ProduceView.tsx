@@ -1,24 +1,91 @@
-import type { Card, LessonAttribute } from '../types/index'
+import { useEffect, useRef } from 'react';
+import type { Card, LessonAttribute, PDrink } from '../types/index'
 
 interface ProduceViewProps {
   state: any; // Ideally this would be GameState from types
   endTurn: () => void;
   resetSimulation: () => void;
   playCard: (cardId: string) => void;
+  usePDrink: (index: number) => void;
   turnAttributes: LessonAttribute[];
 }
 
-export function ProduceView({ state, endTurn, resetSimulation, playCard, turnAttributes }: ProduceViewProps) {
+export function ProduceView({ state, endTurn, resetSimulation, playCard, usePDrink, turnAttributes }: ProduceViewProps) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      const { scrollHeight, clientHeight } = scrollContainerRef.current;
+      scrollContainerRef.current.scrollTo({
+        top: scrollHeight - clientHeight,
+        behavior: 'smooth'
+      });
+    }
+  }, [state.logs]);
 
   return (
     <div className="h-full grid grid-cols-[240px_1fr_240px] gap-2 animate-in fade-in duration-500 p-2">
-      {/* Left Column: Logs */}
-      <div className="bg-slate-900/50 rounded-xl border border-white/5 p-4 flex flex-col">
-        <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">LOGS</h3>
-        <div className="flex-1 overflow-auto text-xs text-slate-500 font-mono space-y-1">
-          <p>Turn 1 Start</p>
-          <p>Skill activated: ...</p>
-          <p className="opacity-50">...</p>
+      {/* Left Column: Logs & P-DRINKS */}
+      <div className="flex flex-col gap-2 h-full overflow-hidden">
+        {/* Logs */}
+        <div className="bg-slate-900/50 rounded-xl border border-white/5 p-4 flex flex-col flex-1 min-h-0 overflow-hidden">
+          <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">ログ</h3>
+          <div ref={scrollContainerRef} className="flex-1 overflow-y-auto text-xs space-y-1 custom-scrollbar p-1 scroll-smooth">
+            {state.logs && state.logs.length > 0 ? (
+              state.logs.map((log: string, idx: number) => {
+                let styleClass = "text-slate-400 border-b border-white/5";
+                if (log.includes('開始')) styleClass = "text-white bg-white/5 border-l-2 border-white/50 font-bold";
+                else if (log.includes('カード使用')) styleClass = "text-cyan-200 bg-cyan-500/10 border-l-2 border-cyan-500/50";
+                else if (log.includes('Pドリンク使用')) styleClass = "text-orange-200 bg-orange-500/10 border-l-2 border-orange-500/50";
+
+                return (
+                  <p key={`${state.turn}-${idx}`} className={`py-1.5 px-2 rounded-r text-[11px] leading-relaxed break-words whitespace-pre-wrap transition-all animate-in fade-in slide-in-from-left-1 ${styleClass}`}>
+                    {log}
+                  </p>
+                );
+              })
+            ) : (
+              <p className="opacity-50 text-slate-500 text-center py-4">ログなし</p>
+            )}
+          </div>
+        </div>
+
+        {/* P-DRINKS */}
+        <div className="bg-slate-900/50 rounded-xl border border-white/5 p-4 shrink-0">
+          <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Pドリンク</h3>
+          {state.pDrinks && state.pDrinks.length > 0 ? (
+            <div className="grid grid-cols-3 gap-2">
+              {state.pDrinks.map(({ drink, used }: any, idx: number) => (
+                <button
+                  key={`${drink.id}-${idx}`}
+                  onClick={() => !used && usePDrink(idx)}
+                  disabled={used}
+                  className={`
+                    aspect-square bg-slate-800 rounded border border-white/10 overflow-hidden relative transition-all
+                    ${used
+                      ? 'opacity-40 grayscale cursor-not-allowed'
+                      : 'hover:border-white/30 hover:scale-105 cursor-pointer'
+                    }
+                  `}
+                  title={drink.name}
+                >
+                  {drink.image ? (
+                    <img
+                      src={`${import.meta.env.BASE_URL}images/drinks/${drink.image.split('/').map((part: string) => encodeURIComponent(part)).join('/')}`}
+                      alt={drink.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-[8px] text-slate-500">
+                      {drink.name[0]}
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-[10px] text-slate-600 py-2">ドリンクなし</div>
+          )}
         </div>
       </div>
 
@@ -28,7 +95,7 @@ export function ProduceView({ state, endTurn, resetSimulation, playCard, turnAtt
         <div className="flex items-center justify-between bg-slate-900/50 p-4 rounded-xl border border-white/5">
           <div className="flex items-center gap-6">
             <div className="flex flex-col items-center">
-              <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">TURN</span>
+              <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">ターン</span>
               <div className="text-3xl font-bold font-mono text-white">
                 {state.turn} <span className="text-sm text-slate-600">/ {state.maxTurns}</span>
               </div>
@@ -46,7 +113,7 @@ export function ProduceView({ state, endTurn, resetSimulation, playCard, turnAtt
             )}
             <div className="h-8 w-px bg-white/10"></div>
             <div className="flex flex-col">
-              <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">SCORE</span>
+              <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">スコア</span>
               <div className="text-3xl font-bold font-mono text-cyan-400 tabular-nums">
                 {state.score.toLocaleString()}
               </div>
@@ -86,7 +153,7 @@ export function ProduceView({ state, endTurn, resetSimulation, playCard, turnAtt
           </div>
 
           <div className="text-center opacity-30">
-            <p className="font-bold text-2xl text-slate-500">STAGE VIEW</p>
+            <p className="font-bold text-2xl text-slate-500">ステージビュー</p>
             <p className="text-sm text-slate-600 mt-2">（スキルエフェクト・アイドル表示予定地）</p>
           </div>
         </div>
@@ -94,7 +161,7 @@ export function ProduceView({ state, endTurn, resetSimulation, playCard, turnAtt
         {/* Hand Area */}
         <div className="h-48 bg-slate-900/50 rounded-xl border border-white/5 p-4 flex items-center justify-center gap-3 overflow-x-auto custom-scrollbar">
           {state.hand.length === 0 ? (
-            <p className="text-slate-600 text-sm font-medium">No Cards in Hand</p>
+            <p className="text-slate-600 text-sm font-medium">手札なし</p>
           ) : (
             state.hand.map((card: Card, idx: number) => {
               const canPlay = state.cardsPlayed < 1;
@@ -140,7 +207,7 @@ export function ProduceView({ state, endTurn, resetSimulation, playCard, turnAtt
       <div className="bg-slate-900/50 rounded-xl border border-white/5 p-4 flex flex-col gap-4 overflow-hidden">
         {/* Turn Attributes Summary */}
         <div>
-          <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">TURN ATTRIBUTES</h3>
+          <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">ターン属性</h3>
           <div className="grid grid-cols-6 gap-1">
             {turnAttributes.map((attr, index) => {
               const turnNumber = index + 1;
@@ -150,7 +217,7 @@ export function ProduceView({ state, endTurn, resetSimulation, playCard, turnAtt
               return (
                 <div
                   key={`turn-attr-${index}`}
-                  title={`Turn ${turnNumber}: ${attr.toUpperCase()}`}
+                  title={`ターン ${turnNumber}: ${attr.toUpperCase()}`}
                   className={`
                                 h-1.5 rounded-full transition-all duration-300
                                 ${attr === 'vocal' ? 'bg-pink-500' : ''}
@@ -174,10 +241,10 @@ export function ProduceView({ state, endTurn, resetSimulation, playCard, turnAtt
         </div>
 
         <div>
-          <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">DECK SUMMARY</h3>
+          <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">山札・捨札</h3>
           <div className="bg-slate-800/50 p-2 rounded text-xs text-slate-400 space-y-1">
-            <div className="flex justify-between"><span>Remaining Deck</span><span className="text-white font-mono">{state.deck.length}</span></div>
-            <div className="flex justify-between"><span>Discard Pile</span><span className="text-white font-mono">{state.discard.length}</span></div>
+            <div className="flex justify-between"><span>山札</span><span className="text-white font-mono">{state.deck.length}</span></div>
+            <div className="flex justify-between"><span>捨札</span><span className="text-white font-mono">{state.discard.length}</span></div>
           </div>
         </div>
 

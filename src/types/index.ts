@@ -88,6 +88,11 @@ export interface SavedConfig {
 
 export type TurnPhase = 'start' | 'main' | 'end';
 
+export interface PDrinkState {
+    drink: PDrink;
+    used: boolean;
+}
+
 export interface GameState {
     // ターン管理
     turn: number;
@@ -115,5 +120,6 @@ export interface GameState {
 
     // アイテム・ドリンク
     pItems: PItem[];
-    pDrinks: PDrink[];
+    pDrinks: PDrinkState[];
+    logs: string[];
 }

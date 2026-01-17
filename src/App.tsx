@@ -89,7 +89,7 @@ function App() {
     const [viewMode, setViewMode] = useState<'detail' | 'compact'>('detail');
 
     // Simulation State (LIFTED)
-    const { state: simState, endTurn, resetSimulation, playCard } = useSimulation(status, turnAttributes, hand);
+    const { state: simState, endTurn, resetSimulation, playCard, usePDrink } = useSimulation(status, turnAttributes, hand, selectedPDrinks);
 
     // Reset Logic
     const handleResetAll = () => {
@@ -263,7 +263,7 @@ function App() {
 
             {/* Main Content */}
             <div className="flex-1 overflow-hidden relative bg-slate-950 flex flex-col transition-all duration-500">
-                <div className="flex-1 overflow-auto p-8">
+                <div className={`flex-1 p-8 ${activeTab === TABS.PRODUCE ? 'overflow-hidden' : 'overflow-auto'}`}>
                     <div className="max-w-6xl mx-auto h-full">
                         {activeTab === TABS.PRODUCE && (
                             <ProduceView
@@ -271,6 +271,7 @@ function App() {
                                 endTurn={endTurn}
                                 resetSimulation={resetSimulation}
                                 playCard={playCard}
+                                usePDrink={usePDrink}
                                 turnAttributes={turnAttributes}
                             />
                         )}
