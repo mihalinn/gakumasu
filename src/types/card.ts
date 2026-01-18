@@ -55,7 +55,8 @@ export type ConditionType =
     | 'buff'
     | 'has_trouble'
     | 'trouble_card_count'
-    | 'card_type_usage';
+    | 'card_type_usage'
+    | 'hand_rarity_count';
 
 export type CompareOp = '>=' | '<=' | '==' | '>' | '<';
 
@@ -66,6 +67,7 @@ export interface Condition {
     target?: 'self' | 'game';
     buffType?: EffectType;
     cardType?: CardType; // type='card_type_usage'
+    targetRarity?: string; // type='hand_rarity_count'
     scope?: 'hand' | 'deck' | 'discard' | 'all'; // type='trouble_card_count'
 }
 
@@ -85,6 +87,7 @@ export interface Effect {
     targetRarity?: string; // trigger_random_hand_card
     ignoreCost?: boolean; // trigger_random_hand_card
     param?: 'genki' | 'impression' | 'motivation'; // buff_card_base_value
+    doubleMotivation?: boolean; // やる気効果を2倍にする
 }
 
 export interface Buff {
@@ -99,6 +102,7 @@ export interface Buff {
     triggeredEffect?: Effect;
     triggerCondition?: Condition;
     param?: 'genki' | 'impression' | 'motivation';
+    doubleMotivation?: boolean;
 }
 
 // Card Types (from types/index.ts)

@@ -146,6 +146,15 @@ export function playCardCore(prevState: GameState, cardId: string): GameState {
 
     // リソースチェック: 払えるか？ (体力0以上であること)
     // ※体力0でもコスト0なら使用可能
+    const consumeMotEffect = playedCard.effects?.find(e => e.type === 'consume_motivation');
+    if (consumeMotEffect && prevState.motivation < consumeMotEffect.value!) {
+        return prevState; // Not enough motivation
+    }
+    const consumeImpEffect = playedCard.effects?.find(e => e.type === 'consume_impression');
+    if (consumeImpEffect && prevState.goodImpression < consumeImpEffect.value!) {
+        return prevState; // Not enough impression
+    }
+
     // リソースチェック: 払えるか？ (体力0以上であること)
     if (prevState.hp + prevState.genki < actualCost) {
         return prevState;

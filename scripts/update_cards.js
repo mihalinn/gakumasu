@@ -10,350 +10,239 @@ const logicJsonPath = path.join(__dirname, '../src/data/cards/logic.json');
 
 try {
     const csvContent = fs.readFileSync(csvPath, 'utf8');
-    console.log('Read bytes:', csvContent.length);
-    const lines = csvContent.split(/\r?\n/);
-    console.log('Line count:', lines.length);
+    const backupPath = path.join(__dirname, '../学マス　シュミレーション - backup.csv');
+    const backupContent = fs.readFileSync(backupPath, 'utf8');
+    const descMap = new Map();
+    backupContent.split('\n').forEach(line => {
+        const cols = line.split(',');
+        // Description was potentially spread across cols 5, 6, 7, 8...
+        // Join them back with commas if they exist
+        if (cols[0]) {
+            const desc = [cols[5], cols[6], cols[7], cols[8]].filter(s => s && s.trim()).join('\n');
+            // Actually original was comma separated in CSV, effectively splitting it.
+            // The UI expects a string. Commas are fine.
+            descMap.set(cols[0], desc);
+        }
+    });
 
+    const lines = csvContent.split('\n');
     const logicCards = [];
 
-    // Helper to determine cost type and value
-    function parseCost(costStr, effectStr) {
-        let cost = 0;
-        let costType = 'normal';
-        let consumeHp = 0;
-        let consumeMot = 0;
-        let consumeImp = 0;
+    // Columns:
+    // 0: Name, 1: Rarity, 2: Plan, 3: Type, 4: CostType, 5: CostValue, 6: Condition
+    // 7: Effect1, 8: Effect2, 9: Effect3, 10: Effect4, 11: Limit, 12: Unique
 
-        if (costStr) {
-            const num = parseInt(costStr, 10);
-            if (!isNaN(num)) cost = num;
+    function parseEffectString(str) {
+        if (!str) return null;
+
+        // Format: type:key=val,key2=val2 OR type:val (if single value)
+        const parts = str.split(':');
+        const type = parts[0];
+        const valStr = parts.slice(1).join(':'); // Re-join rest
+
+        let effect = {};
+
+        // Map simplified keys to internal JSON types
+        switch (type) {
+            case 'score': effect.type = 'score_fixed'; effect.value = parseInt(valStr); break;
+            case 'genki': effect.type = 'buff_genki'; effect.value = parseInt(valStr); break;
+            case 'impression': effect.type = 'buff_impression'; effect.value = parseInt(valStr); break;
+            case 'motivation': effect.type = 'buff_motivation'; effect.value = parseInt(valStr); break;
+            case 'score_genki': effect.type = 'score_scale_genki'; effect.ratio = parseFloat(valStr); break;
+            case 'score_impression': effect.type = 'score_scale_impression'; effect.ratio = parseFloat(valStr); break;
+            case 'score_motivation': effect.type = 'score_scale_motivation'; effect.ratio = parseFloat(valStr); break;
+            case 'buff_base_impression': effect.type = 'buff_card_base_value'; effect.param = 'impression'; effect.value = parseInt(valStr); effect.duration = -1; break;
+            case 'buff_impression_gain':
+                effect.type = 'buff_impression_gain';
+                effect.value = parseInt(valStr);
+                const bigDur = valStr.match(/duration=(\d+)/);
+                effect.duration = bigDur ? parseInt(bigDur[1]) : 1;
+                break;
+            case 'buff_score_bonus':
+                effect.type = 'buff_score_bonus';
+                effect.value = parseInt(valStr);
+                const bsbDur = valStr.match(/duration=(\d+)/);
+                effect.duration = bsbDur ? parseInt(bsbDur[1]) : -1; // Default? Usually permanent or turn based.
+                break;
+            case 'buff_cost_reduction':
+                effect.type = 'buff_cost_reduction';
+                // parse duration=X
+                const dMatch = valStr.match(/duration=(\d+)/);
+                if (dMatch) effect.duration = parseInt(dMatch[1]);
+                break;
+            case 'block_genki':
+                effect.type = 'buff_no_genki_gain';
+                const bMatch = valStr.match(/duration=(\d+)/);
+                if (bMatch) effect.duration = parseInt(bMatch[1]);
+                break;
+            case 'ap': effect.type = 'add_card_play_count'; effect.value = parseInt(valStr); break;
+            case 'draw': effect.type = 'draw_card'; effect.value = parseInt(valStr); break;
+            case 'swap_hand': effect.type = 'swap_hand'; break;
+            case 'flag': return null; // handled elsewhere
+            case 'reaction_genki':
+                effect.type = 'buff_reaction_on_cost';
+                effect.triggeredEffect = { type: 'buff_genki', value: parseInt(valStr) };
+                break;
+            case 'mult_impression':
+                effect.type = 'multiply_impression';
+                effect.value = parseFloat(valStr);
+                const miDur = valStr.match(/duration=(\d+)/);
+                if (miDur) effect.duration = parseInt(miDur[1]);
+                break;
+            case 'trigger_hand':
+                effect.type = 'trigger_random_hand_card';
+                // rar=R,count=2
+                const rMatch = valStr.match(/rarity=([A-Z]+)/);
+                const cMatch = valStr.match(/count=(\d+)/);
+                if (rMatch) effect.targetRarity = rMatch[1];
+                if (cMatch) effect.count = parseInt(cMatch[1]);
+                effect.ignoreCost = true;
+                break;
+            case 'trigger_use':
+                effect.type = 'buff_on_card_use';
+                effect.duration = -1;
+                // type=mental,effect=impression:1
+                const tMatch = valStr.match(/type=([a-z]+)/);
+                const eMatch = valStr.match(/effect=([a-z]+):(\d+)/);
+                if (tMatch) effect.triggerCondition = { type: 'card_type_usage', cardType: tMatch[1] };
+                if (eMatch) {
+                    const eTypeMap = { 'impression': 'buff_impression', 'motivation': 'buff_motivation' };
+                    effect.triggeredEffect = { type: eTypeMap[eMatch[1]], value: parseInt(eMatch[2]) };
+                }
+                break;
+            case 'add_turn': effect.type = 'add_turn'; effect.value = parseInt(valStr); break;
+            case 'debuff_cost_up':
+                effect.type = 'debuff_cost_increase';
+                const durMatch = valStr.match(/duration=(\d+)/);
+                const valMatch = valStr.match(/value=(\d+)/);
+                if (durMatch) effect.duration = parseInt(durMatch[1]);
+                effect.value = valMatch ? parseInt(valMatch[1]) : 1;
+                break;
+            case 'upgrade_hand': effect.type = 'upgrade_hand'; break;
+            case 'turn_start':
+                effect.type = 'buff_turn_start';
+                effect.duration = -1;
+                // gate=[cond],effect=subStr changed to gate=[cond]&effect=subStr
+                // Check if gate=[cond] exists
+                if (valStr.includes('gate=[')) {
+                    const gateContent = valStr.match(/gate=\[(.*?)\]/)[1];
+                    const subEffMatch = valStr.match(/effect=(.*)/);
+                    const subEffStr = subEffMatch ? subEffMatch[1] : '';
+                    const conditions = parseConditionString(gateContent);
+                    const subEff = parseEffectString(subEffStr);
+                    effect.triggeredEffect = { type: 'condition_gate', condition: conditions, subEffects: [subEff] };
+                } else {
+                    const subEffMatch = valStr.match(/effect=(.*)/);
+                    if (subEffMatch) {
+                        effect.triggeredEffect = parseEffectString(subEffMatch[1]);
+                    }
+                }
+                break;
+            case 'gate':
+                effect.type = 'condition_gate';
+                const gContentMatch = valStr.match(/\[(.*?)\]/);
+                const gContent = gContentMatch ? gContentMatch[1] : '';
+                // ]:effect=... or ]:subStr...
+                // The separator is : after ].
+                const sEffStr = valStr.substring(valStr.indexOf(']:') + 2);
+                effect.condition = parseConditionString(gContent);
+                effect.subEffects = [parseEffectString(sEffStr)];
+                break;
+            default:
+                console.warn(`Unknown effect type: ${type}`);
+                return null;
         }
 
-        // Effect string overrides for cost
-        if (effectStr.includes('体力消費')) {
-            const match = effectStr.match(/体力消費(\d+)/);
-            if (match) {
-                costType = 'hp';
-                consumeHp = parseInt(match[1], 10);
-                cost = 0;
-            }
-        }
-        if (effectStr.includes('やる気消費')) {
-            const match = effectStr.match(/やる気消費(\d+)/);
-            if (match) {
-                consumeMot = parseInt(match[1], 10);
-            }
-        }
-        if (effectStr.includes('好印象消費')) {
-            const match = effectStr.match(/好印象消費(\d+)/);
-            if (match) {
-                consumeImp = parseInt(match[1], 10);
-            }
+        if (valStr.includes('double_mot=true')) {
+            if (effect.triggeredEffect) effect.triggeredEffect.doubleMotivation = true;
+            else effect.doubleMotivation = true;
         }
 
-        return { cost, costType, consumeHp, consumeMot, consumeImp };
+        return effect;
     }
 
-    function parseEffects(effectStr) {
-        const effects = [];
-        const conditionGates = [];
+    function parseConditionString(str) {
+        if (!str || str === 'none') return [];
+        const conds = [];
+        const parts = str.split('&');
+        const typeMap = { 'genki': 'genki', 'impression': 'impression', 'motivation': 'motivation', 'hp': 'hp', 'turn': 'turn', 'hp_percent': 'hp_percent', 'trouble_count': 'trouble_card_count', 'hand_rarity': 'hand_rarity_count' };
 
-        // Split by comma vs slash vs newlines? CSV uses commas in quoted string usually.
-        // The detailed desc column might have commas.
-        // My script joins cols 5,6,7.
-        // Split by " / " or just tokenize?
-        // Let's split by punctuation that separates distinct effects.
-        // Looking at CSV, some have "効果A, 効果B".
-        const parts = effectStr.split(/[,、/]/).map(s => s.trim()).filter(s => s);
-
-        parts.forEach(part => {
-            let match;
-
-            // --- CONDITIONS (Gate) ---
-            if (match = part.match(/(元気|好印象|やる気|体力)が(\d+)以上の場合/)) {
-                const typeMap = { '元気': 'genki', '好印象': 'impression', 'やる気': 'motivation', '体力': 'hp' };
-                conditionGates.push({
-                    type: typeMap[match[1]],
-                    value: parseInt(match[2], 10),
-                    compare: '>='
-                });
-                return;
-            }
-            if (match = part.match(/(体力)が(\d+)％以上の場合/)) {
-                conditionGates.push({
-                    type: 'hp_percent',
-                    value: parseInt(match[2], 10),
-                    compare: '>='
-                });
-                return;
-            }
-            if (match = part.match(/除外以外にある(T|Ｔ)トラブルカードが(\d+)枚以上の場合/)) {
-                conditionGates.push({
-                    type: 'trouble_card_count',
-                    value: parseInt(match[2], 10),
-                    compare: '>='
-                });
-                return;
-            }
-
-            // --- EFFECTS ---
-            let currentEffect = null;
-
-            // Basic Stats
-            if (match = part.match(/^パラメータ\+(\d+)$/)) {
-                currentEffect = { type: 'score_fixed', value: parseInt(match[1], 10) };
-            } else if (match = part.match(/^パラメーター\+(\d+)$/)) {
-                currentEffect = { type: 'score_fixed', value: parseInt(match[1], 10) };
-            } else if (match = part.match(/^元気\+(\d+)$/)) {
-                currentEffect = { type: 'buff_genki', value: parseInt(match[1], 10) };
-            } else if (match = part.match(/^好印象\+(\d+)$/)) {
-                currentEffect = { type: 'buff_impression', value: parseInt(match[1], 10) };
-            } else if (match = part.match(/^やる気\+(\d+)$/)) {
-                currentEffect = { type: 'buff_motivation', value: parseInt(match[1], 10) };
-            }
-            // Scaled Stats
-            else if (match = part.match(/^元気の(\d+)％分パラメーター上昇/)) {
-                currentEffect = { type: 'score_scale_genki', ratio: parseInt(match[1], 10) / 100 };
-            } else if (match = part.match(/^好印象の(\d+)％分パラメーター上昇/)) {
-                currentEffect = { type: 'score_scale_impression', ratio: parseInt(match[1], 10) / 100 };
-            } else if (match = part.match(/^やる気の(\d+)％分パラメーター上昇/)) {
-                currentEffect = { type: 'score_scale_motivation', ratio: parseInt(match[1], 10) / 100 };
-            }
-            // Costs & Resources
-            else if (match = part.match(/^消費体力減少(\d+)ターン/)) {
-                currentEffect = { type: 'buff_cost_reduction', duration: parseInt(match[1], 10) };
-            } else if (match = part.match(/^消費体力削減(\d+)/)) {
-                // Usually "Next 1 card" or "Target". Assuming "Next card" buff for now or immediate reduction if cost logic checks it?
-                // Given "Consume HP Reduction 1", likely a buff.
-                currentEffect = { type: 'reduce_hp_cost', value: parseInt(match[1], 10), duration: 1 }; // Default 1 turn? Or 1 use?
-            } else if (match = part.match(/^元気増加無効(\d+)ターン/)) {
-                currentEffect = { type: 'buff_no_genki_gain', duration: parseInt(match[1], 10) };
-            } else if (match = part.match(/^消費体力増加(\d+)ターン/)) {
-                currentEffect = { type: 'debuff_cost_increase', value: 1, duration: parseInt(match[1], 10) }; // Assuming +1 cost? Or doubles? Usually +Cost.
-            }
-            // Card Manip
-            else if (match = part.match(/^スキルカード使用数追加\+(\d+)/)) {
-                currentEffect = { type: 'add_card_play_count', value: parseInt(match[1], 10) };
-            } else if (match = part.match(/^スキルカードを(\d+)枚引く/)) {
-                currentEffect = { type: 'draw_card', value: parseInt(match[1], 10) };
-            } else if (part.includes('スキルカードを引く')) {
-                currentEffect = { type: 'draw_card', value: 1 };
-            } else if (part.includes('眠気を山札のランダムな位置に生成')) {
-                currentEffect = { type: 'generate_trouble', troubleId: 'sleep' };
-            } else if (part.includes('手札をすべて入れ替える')) {
-                currentEffect = { type: 'swap_hand' };
-            } else if (part.includes('手札をすべてレッスン中強化')) {
-                currentEffect = { type: 'upgrade_hand' };
-            }
-            // Consumption
-            else if (match = part.match(/^体力消費(\d+)/)) {
-                currentEffect = { type: 'consume_hp', value: parseInt(match[1], 10) };
-            } else if (match = part.match(/^やる気消費(\d+)/)) {
-                currentEffect = { type: 'consume_motivation', value: parseInt(match[1], 10) };
-            } else if (match = part.match(/^好印象消費(\d+)/)) {
-                currentEffect = { type: 'consume_impression', value: parseInt(match[1], 10) };
-            }
-            // Special
-            else if (match = part.match(/^ターン追加\+(\d+)/)) {
-                currentEffect = { type: 'add_turn', value: parseInt(match[1], 10) };
-            } else if (part.includes('元気を半分にする')) {
-                currentEffect = { type: 'half_genki' };
-            } else if (part.includes('元気を0にする')) {
-                currentEffect = { type: 'set_genki', value: 0 };
-            } else if (part.includes('低下状態無効')) {
-                currentEffect = { type: 'buff_no_debuff', count: 1, duration: -1 };
-            }
-            // Complex Buffs
-            else if (match = part.match(/パラメーター上昇量増加(\d+)％/)) {
-                currentEffect = { type: 'buff_score_bonus', value: parseInt(match[1], 10), duration: -1 };
-            } else if (match = part.match(/好印象増加量増加\+(\d+)％/)) {
-                currentEffect = { type: 'buff_impression_gain', value: parseInt(match[1], 10), duration: 0 }; // Duration set later if needed
-            } else if (match = part.match(/^好印象強化\+(\d+)%/)) {
-                currentEffect = { type: 'buff_impression_gain', value: parseInt(match[1], 10), duration: 1 };
-            } else if (match = part.match(/すべてのスキルカードの好印象(値|值)増加\+(\d+)/)) {
-                currentEffect = { type: 'buff_card_base_value', param: 'impression', value: parseInt(match[2], 10) };
-            }
-            // Triggers
-            else if (part.includes('以降、メンタルスキルカード使用時、好印象+1')) {
-                currentEffect = {
-                    type: 'buff_on_card_use',
-                    duration: -1,
-                    triggerCondition: { type: 'card_type_usage', cardType: 'mental' },
-                    triggeredEffect: { type: 'buff_impression', value: 1 }
-                };
-            } else if (part.includes('以降、メンタルスキルカード使用時、やる気+1')) {
-                currentEffect = {
-                    type: 'buff_on_card_use',
-                    duration: -1,
-                    triggerCondition: { type: 'card_type_usage', cardType: 'mental' },
-                    triggeredEffect: { type: 'buff_motivation', value: 1 }
-                };
-            } else if (match = part.match(/以降、スキルカード使用時、好印象の(\d+)％分パラメーター上昇/)) {
-                currentEffect = {
-                    type: 'buff_on_card_use',
-                    duration: -1,
-                    triggeredEffect: { type: 'score_scale_impression', ratio: parseInt(match[1], 10) / 100 }
-                };
-            } else if (match = part.match(/ターン開始時、元気の(\d+)％分パラメーター上昇/)) {
-                currentEffect = {
-                    type: 'buff_turn_start',
-                    triggeredEffect: { type: 'score_scale_genki', ratio: parseInt(match[1], 10) / 100 }
-                };
-            } else if (match = part.match(/ターン開始時、好印象(\d+(\.\d+)?)倍/)) {
-                currentEffect = {
-                    type: 'buff_turn_start',
-                    triggeredEffect: { type: 'multiply_impression', value: parseFloat(match[1]) }
-                };
-            }
-            // Legend / Complex
-            else if (match = part.match(/ランダムな手札にあるスキルカード（([A-Za-z]+)）(\d+)枚をコストを消費せず使用/)) {
-                currentEffect = {
-                    type: 'trigger_random_hand_card',
-                    targetRarity: match[1],
-                    count: parseInt(match[2], 10),
-                    ignoreCost: true
-                };
-            } else if (part.includes('スキルカードコストで体力減少時、元気+4')) {
-                currentEffect = {
-                    type: 'buff_reaction_on_cost',
-                    triggeredEffect: { type: 'buff_genki', value: 4 } // Motivation scaling handled in engine/resolver?
-                };
-                // Note: "やる気効果を2倍適用" is handled as a property potentially?
-                // For now, assume engine handles standard Motivation for Genki if we set a flag, or we set a special type.
-            } else if (match = part.match(/ターン終了時、好印象が(\d+)以上の場合、好印象\+(\d+)/)) {
-                currentEffect = {
-                    type: 'buff_turn_start', // Actually turn end? Use buff_turn_end if we have it, or start of next. Gakumas: "End of Turn".
-                    // We'll map to buff_turn_start for simplicity unless end-turn strictly required.
-                    // But effectively same for persistent.
-                    triggeredEffect: {
-                        type: 'condition_gate',
-                        condition: [{ type: 'impression', value: parseInt(match[1], 10), compare: '>=' }],
-                        subEffects: [{ type: 'buff_impression', value: parseInt(match[2], 10) }]
-                    }
-                };
-            }
-
-            if (currentEffect) {
-                if (conditionGates.length > 0) {
-                    const gate = {
-                        type: 'condition_gate',
-                        condition: [...conditionGates],
-                        subEffects: [currentEffect]
-                    };
-                    effects.push(gate);
-                    // conditionGates.length = 0; // Should we clear? Usually conditions apply to the immediate next effect.
-                    // But some descriptions are "Condition, Effect A, Effect B".
-                    // Gakumas CSV seems to put Condition first.
-                    // Let's Keep conditions for the whole line? No, CSV structure in "desc" is concatenated.
-                    // "Condition... / Effect" -> Split by / puts Condition in first part.
-                    // My split uses [,、/].
-                    // If "Condition" is its own part, we keep it for subsequent parts?
-                    // Let's clear ONLY if we encounter a new condition?
-                    // Or assume one condition applies to all following effects?
-                    // Safer to Clear after push?
-                    // "好印象が6以上の場合、使用可" is a Global Condition for card use (cols[5]).
-                    // "好印象が6以上の場合、好印象+3" is a Conditional Effect.
-                } else {
-                    effects.push(currentEffect);
-                }
+        parts.forEach(p => {
+            const match = p.match(/([a-z_]+)([><=]+)(\d+)(l?)/); // l for literal suffix? No.
+            // hand_rarity:SSR>=1 is special
+            if (p.startsWith('hand_rarity')) {
+                const m = p.match(/hand_rarity:([A-Z]+)([><=]+)(\d+)/);
+                if (m) conds.push({ type: 'hand_rarity_count', targetRarity: m[1], compare: m[2], value: parseInt(m[3]) });
+            } else if (match) {
+                const key = match[1];
+                const op = match[2];
+                const val = parseInt(match[3]);
+                if (typeMap[key]) conds.push({ type: typeMap[key], compare: op, value: val });
             }
         });
-
-        // Duration parsing (Global override for the line?)
-        if (effectStr.match(/以降の(\d+)ターンの間/)) {
-            const durMatch = effectStr.match(/以降の(\d+)ターンの間/);
-            const dur = parseInt(durMatch[1], 10);
-            const buff = effects.find(e => e.type.startsWith('buff_'));
-            if (buff) buff.duration = dur;
-        }
-        if (effectStr.match(/\(5ターン\)/)) { // Star dust sensation
-            const buff = effects.find(e => e.type === 'buff_impression_gain');
-            if (buff) buff.duration = 5;
-        }
-
-        return effects;
-    }
-
-    function parseConditions(effectStr) {
-        const conditions = [];
-        let match;
-
-        if (match = effectStr.match(/(元気|好印象|やる気|体力)が(\d+)以上の場合、使用可/)) {
-            const typeMap = { '元気': 'genki', '好印象': 'impression', 'やる気': 'motivation', '体力': 'hp' };
-            conditions.push({ type: typeMap[match[1]], value: parseInt(match[2], 10), compare: '>=' });
-        }
-        // Multi-condition support?
-        // CSV usually has "Genki >= X, Impression >= Y useable".
-        // Regex /.../g matchAll?
-        // Let's do simple separate checks for now to catch multiple.
-        if (match = effectStr.match(/元気が(\d+)以上の場合、使用可/)) {
-            if (!conditions.some(c => c.type === 'genki')) conditions.push({ type: 'genki', value: parseInt(match[1], 10), compare: '>=' });
-        }
-        if (match = effectStr.match(/好印象が(\d+)以上の場合、使用可/)) {
-            if (!conditions.some(c => c.type === 'impression')) conditions.push({ type: 'impression', value: parseInt(match[1], 10), compare: '>=' });
-        }
-        if (match = effectStr.match(/やる気が(\d+)以上の場合、使用可/)) {
-            if (!conditions.some(c => c.type === 'motivation')) conditions.push({ type: 'motivation', value: parseInt(match[1], 10), compare: '>=' });
-        }
-
-        return conditions;
+        return conds;
     }
 
     for (let i = 1; i < lines.length; i++) {
         const line = lines[i];
         if (!line.trim()) continue;
+        const cols = line.split(','); // safe since we reformatted
+        if (cols.length < 13) continue;
 
-        const cols = line.split(',');
         const name = cols[0];
-        if (!name) continue;
+        const rarity = cols[1] === 'レジェンド' ? 'Legend' : cols[1];
+        const plan = cols[2];
+        const type = cols[3];
+        const costType = cols[4];
+        const costValue = parseInt(cols[5]) || 0;
+        const condStr = cols[6];
+        const effstrs = [cols[7], cols[8], cols[9], cols[10]];
+        const limitStr = cols[11];
+        const uniqueStr = cols[12];
 
-        let rarity = cols[1];
-        if (rarity === 'レジェンド') rarity = 'Legend';
-        const planRaw = cols[2].toLowerCase();
+        if (plan.toLowerCase() !== 'logic') continue;
 
-        // Strict logic filter as per task
-        if (planRaw !== 'logic') continue;
-
-        const desc = [cols[5], cols[6], cols[7]].filter(Boolean).join(',');
-
-        const typeRaw = cols[3];
-        const type = (typeRaw && typeRaw.toLowerCase().includes('active')) ? 'active' : 'mental';
-
-        const { cost, costType, consumeHp, consumeMot, consumeImp } = parseCost(cols[4], desc);
-        const effects = parseEffects(desc);
-
-        if (consumeMot > 0) effects.unshift({ type: 'consume_motivation', value: consumeMot });
-        if (consumeImp > 0) effects.unshift({ type: 'consume_impression', value: consumeImp });
-        if (consumeHp > 0 && costType === 'hp') effects.unshift({ type: 'consume_hp', value: consumeHp });
-
-        const conditions = parseConditions(desc);
-        const isUnique = line.includes('重複不可');
-        const limit = line.includes('レッスン中1回') ? 'once_per_lesson' : undefined;
-        const startInHand = line.includes('レッスン開始時手札に入る');
-
-        // Use simple ID based on name? Or keep Japanese ID?
-        // logic.json already has `logic_JapaneseName`. It's fine.
-        const id = `logic_${name}`;
+        const effects = effstrs.map(s => parseEffectString(s)).filter(e => e);
+        // Cost metadata handling
+        // If costType is hp/motivation/impression, DO NOT add consumption effect if engine handles it.
+        // BUT engine currently only handles HP/Genki auto-pay if configured?
+        // My engine update ADDED specific checks for Mot/Imp. It does NOT auto-deduct them?
+        // Wait, playCardCore calls calculateActualCost.
+        // And then checks resources.
+        // It does NOT deduct Mot/Imp automatically unless logic says so.
+        // Review engine.ts:
+        // uses generic cost for Genki/HP.
+        // Checks Mot/Imp sufficiency.
+        // Does it DEDUCT?
+        // NO. Engine checks `consume_motivation` EFFECT to deduct.
+        // So we MUST add consumption effects for Mot/Imp.
+        // But for HP/Genki, engine deducts via `actualCost`.
+        // So:
+        if (costType === 'motivation' && costValue > 0) effects.unshift({ type: 'consume_motivation', value: costValue });
+        if (costType === 'impression' && costValue > 0) effects.unshift({ type: 'consume_impression', value: costValue });
+        // HP is deducted by engine as Cost if `card.costType === 'hp'`.
 
         const card = {
-            id: id,
-            name: name,
-            rarity: rarity,
-            type: type,
-            plan: 'logic',
-            cost: cost,
+            id: `logic_${name}`, name, rarity, type: type.toLowerCase(), plan: 'logic',
+            cost: costValue,
             image: `logic/${name.replace(/\+$/, '_plus')}.png`,
-            effect: desc.replace(/,/g, ' / '),
-            effects: effects,
-            conditions: conditions.length > 0 ? conditions : undefined,
-            usageLimit: limit,
-            unique: isUnique || undefined,
-            startInHand: startInHand || undefined,
+            effects,
+            conditions: parseConditionString(condStr).length > 0 ? parseConditionString(condStr) : undefined,
+            usageLimit: limitStr === 'once' ? 'once_per_lesson' : undefined,
         };
+        if (uniqueStr && uniqueStr.includes('unique')) card.unique = true;
+
+        // Restore description from backup
+        if (descMap.has(name)) {
+            card.effect = descMap.get(name);
+        } else {
+            card.effect = ''; // Fallback
+        }
+        card.startInHand = effstrs.some(s => s && s.includes('flag:start_hand')) || undefined;
 
         if (costType === 'hp') {
             card.costType = 'hp';
-            card.consumeHp = consumeHp;
+            card.consumeHp = costValue;
         }
 
         logicCards.push(card);
@@ -362,7 +251,4 @@ try {
     fs.writeFileSync(logicJsonPath, JSON.stringify(logicCards, null, 2), 'utf8');
     console.log(`Generated ${logicCards.length} cards in logic.json`);
 
-} catch (err) {
-    console.error('Fatal error:', err);
-    process.exit(1);
-}
+} catch (err) { console.error(err); process.exit(1); }

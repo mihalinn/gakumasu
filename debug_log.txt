@@ -1,0 +1,13 @@
+Debug: 盛り上げの基本
+Cols: [0]盛り上げの基本, [1]N, [2]logic, [3]Mentaru, [4]genki, [5]0, [6], [7], [8], [9], [10], [11], [12]
+Original Cost: genki
+Desc Text: 0,,,,,
+Parsed Cost: 0, Type: genki
+Parsed Effects: []
+Debug: おまもりミラクル
+Desc Text: 0,,,,,
+Part 0: "0"
+  Gate Match: false
+  Effect Match: false
+Parsed Effects: []
+CSV structure converted successfully.

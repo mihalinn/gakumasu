@@ -1,5 +1,10 @@
 import type { GameState } from '../types';
-import type { Effect, Condition, EffectType } from '../types';
+import type { Effect, Condition, EffectType, Card } from '../types';
+import logicCards from '../data/cards/logic.json';
+import freeCards from '../data/cards/free.json';
+
+const allCardsMap = new Map<string, Card>();
+[...logicCards, ...freeCards].forEach(c => allCardsMap.set(c.id, c as unknown as Card));
 import { LOGIC_CONSTANTS } from './constants';
 import { drawCards } from './utils';
 
@@ -108,12 +113,12 @@ function evaluateCondition(state: GameState, condition: Condition): boolean {
             targetValue = (state.hp / state.maxHp) * 100;
             break;
         case 'card_type_usage': {
-            // このターン、あるいはこれまで使用した指定タイプのカード数
-            // GameStateに履歴が必要だが、簡易的に cardsPlayed (数) しかない。
-            // 詳細な履歴がない場合、正確な判定は困難。
-            // 一旦、現在の仕様では判定不可のため 0 とする (履歴実装が必要)
-            // TODO: GameStateに使用カード履歴を追加する
             targetValue = 0;
+            break;
+        }
+        case 'hand_rarity_count': {
+            const rarity = condition.targetRarity;
+            targetValue = state.hand.filter(c => !rarity || c.rarity === rarity).length;
             break;
         }
         default: return false;
@@ -289,12 +294,14 @@ export function resolveEffect(state: GameState, effect: Effect): ResolutionResul
                 break;
             }
             // やる気による元気加算ボーナス
-            const motivationBonus = newState.motivation * LOGIC_CONSTANTS.MOTIVATION.GENKI_BONUS_PER_STACK;
+            // "やる気効果を2倍適用" の場合は倍率をかける
+            const motivationMult = effect.doubleMotivation ? 2 : 1;
+            const motivationBonus = newState.motivation * LOGIC_CONSTANTS.MOTIVATION.GENKI_BONUS_PER_STACK * motivationMult;
             const totalGain = adjustedValue + motivationBonus;
             newState.genki += totalGain;
 
             let msg = `元気+${value}`;
-            if (motivationBonus > 0) msg += `(やる気補正+${motivationBonus})`;
+            if (motivationBonus > 0) msg += `(やる気補正+${motivationBonus}${motivationMult > 1 ? ' × 2' : ''})`;
             logs.push(msg);
             break;
         }
@@ -571,14 +578,17 @@ export function resolveEffect(state: GameState, effect: Effect): ResolutionResul
 
         case 'upgrade_hand': {
             newState.hand = newState.hand.map(card => {
-                // 簡易実装: IDに+があれば_plusにするなどのロジックが必要だが
-                // 現状はデータ上のリンクがないため、強化済みカードへの変換は困難。
-                // 名前ベースで "_plus" を探す？
-                // あるいは Card オブジェクト自体を変更？
-                // ここではログ出力のみとする。
-                return card;
+                if (card.id.endsWith('+')) return card;
+
+                // logic_Name -> logic_Name+
+                // free_Name -> free_Name+
+                // We assume the ID convention holds.
+                const potentialId = card.id + '+';
+                const upgradedCard = allCardsMap.get(potentialId);
+
+                return upgradedCard ? { ...upgradedCard } : card;
             });
-            logs.push(`手札をレッスン中強化 (未実装: データリンクが必要)`);
+            logs.push(`手札をすべてレッスン中強化`);
             break;
         }
 
@@ -628,7 +638,8 @@ export function resolveEffect(state: GameState, effect: Effect): ResolutionResul
                         isNew: true,
                         triggeredEffect: effect.triggeredEffect,
                         triggerCondition: effect.triggerCondition,
-                        param: effect.param
+                        param: effect.param,
+                        doubleMotivation: effect.doubleMotivation
                     });
                     logs.push(`状態付与: ${effect.type}`);
                 }
