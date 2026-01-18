@@ -1,44 +1,45 @@
-﻿[
+[
   {
-    "id": "appeal_basic",
+    "id": "free_アピールの基本",
     "name": "アピールの基本",
-    "plan": "free",
-    "type": "active",
     "rarity": "N",
+    "type": "active",
+    "plan": "free",
     "cost": 4,
     "image": "free/アピールの基本.png",
+    "effect": "パラメータ+9",
     "effects": [
       {
         "type": "score_fixed",
         "value": 9
       }
-    ],
-    "effect": "パラメータ+9"
+    ]
   },
   {
-    "id": "appeal_basic_plus",
+    "id": "free_アピールの基本+",
     "name": "アピールの基本+",
-    "plan": "free",
-    "type": "active",
     "rarity": "N",
+    "type": "active",
+    "plan": "free",
     "cost": 3,
     "image": "free/アピールの基本_plus.png",
+    "effect": "パラメータ+14",
     "effects": [
       {
         "type": "score_fixed",
         "value": 14
       }
-    ],
-    "effect": "パラメータ+14"
+    ]
   },
   {
-    "id": "pose_basic",
+    "id": "free_ポーズの基本",
     "name": "ポーズの基本",
-    "plan": "free",
-    "type": "active",
     "rarity": "N",
+    "type": "active",
+    "plan": "free",
     "cost": 3,
     "image": "free/ポーズの基本.png",
+    "effect": "パラメータ+2 / 元気+2",
     "effects": [
       {
         "type": "score_fixed",
@@ -48,17 +49,17 @@
         "type": "buff_genki",
         "value": 2
       }
-    ],
-    "effect": "パラメータ+2 / 元気+2"
+    ]
   },
   {
-    "id": "pose_basic_plus",
+    "id": "free_ポーズの基本+",
     "name": "ポーズの基本+",
-    "plan": "free",
-    "type": "active",
     "rarity": "N",
+    "type": "active",
+    "plan": "free",
     "cost": 3,
     "image": "free/ポーズの基本_plus.png",
+    "effect": "パラメータ+6 / 元気+4",
     "effects": [
       {
         "type": "score_fixed",
@@ -68,51 +69,51 @@
         "type": "buff_genki",
         "value": 4
       }
-    ],
-    "effect": "パラメータ+6 / 元気+4"
+    ]
   },
   {
-    "id": "expression_basic",
+    "id": "free_表現の基本",
     "name": "表現の基本",
-    "plan": "free",
-    "type": "mental",
     "rarity": "N",
+    "type": "mental",
+    "plan": "free",
     "cost": 0,
     "image": "free/表現の基本.png",
+    "effect": "元気+4",
     "effects": [
       {
         "type": "buff_genki",
         "value": 4
       }
     ],
-    "usageLimit": "once_per_lesson",
-    "effect": "元気+4"
+    "usageLimit": "once_per_lesson"
   },
   {
-    "id": "expression_basic_plus",
+    "id": "free_表現の基本+",
     "name": "表現の基本+",
-    "plan": "free",
-    "type": "mental",
     "rarity": "N",
+    "type": "mental",
+    "plan": "free",
     "cost": 0,
     "image": "free/表現の基本_plus.png",
+    "effect": "元気+7",
     "effects": [
       {
         "type": "buff_genki",
         "value": 7
       }
     ],
-    "usageLimit": "once_per_lesson",
-    "effect": "元気+7"
+    "usageLimit": "once_per_lesson"
   },
   {
-    "id": "spirit_full",
+    "id": "free_気合十分！",
     "name": "気合十分！",
-    "plan": "free",
-    "type": "mental",
     "rarity": "R",
+    "type": "mental",
+    "plan": "free",
     "cost": 0,
     "image": "free/気合十分！.png",
+    "effect": "元気+2 / 消費体力減少2ターン",
     "effects": [
       {
         "type": "buff_genki",
@@ -122,17 +123,17 @@
         "type": "buff_cost_reduction",
         "duration": 2
       }
-    ],
-    "effect": "元気+2 / 消費体力減少2ターン"
+    ]
   },
   {
-    "id": "spirit_full_plus",
+    "id": "free_気合十分！+",
     "name": "気合十分！+",
-    "plan": "free",
-    "type": "mental",
     "rarity": "R",
+    "type": "mental",
+    "plan": "free",
     "cost": 0,
     "image": "free/気合十分！_plus.png",
+    "effect": "元気+2 / 消費体力減少3ターン",
     "effects": [
       {
         "type": "buff_genki",
@@ -142,18 +143,17 @@
         "type": "buff_cost_reduction",
         "duration": 3
       }
-    ],
-    "effect": "元気+2 / 消費体力減少3ターン"
+    ]
   },
   {
-    "id": "first_step",
+    "id": "free_ファーストステップ",
     "name": "ファーストステップ",
-    "plan": "free",
-    "type": "mental",
     "rarity": "R",
-    "unique": true,
+    "type": "mental",
+    "plan": "free",
     "cost": 0,
     "image": "free/ファーストステップ.png",
+    "effect": "元気+3 / 体力が50%以上の場合、消費体力削減1",
     "effects": [
       {
         "type": "buff_genki",
@@ -162,28 +162,21 @@
       {
         "type": "reduce_hp_cost",
         "value": 1,
-        "duration": -1,
-        "condition": [
-          {
-            "type": "hp_ratio",
-            "compare": ">=",
-            "value": 0.5
-          }
-        ]
+        "duration": -1
       }
     ],
     "usageLimit": "once_per_lesson",
-    "effect": "元気+3 / 体力が50%以上の場合、消費体力削減1"
+    "unique": true
   },
   {
-    "id": "first_step_plus",
+    "id": "free_ファーストステップ+",
     "name": "ファーストステップ+",
-    "plan": "free",
-    "type": "mental",
     "rarity": "R",
-    "unique": true,
+    "type": "mental",
+    "plan": "free",
     "cost": 0,
     "image": "free/ファーストステップ_plus.png",
+    "effect": "元気+6 / 体力が50%以上の場合、消費体力削減1",
     "effects": [
       {
         "type": "buff_genki",
@@ -192,62 +185,66 @@
       {
         "type": "reduce_hp_cost",
         "value": 1,
-        "duration": -1,
-        "condition": [
-          {
-            "type": "hp_ratio",
-            "compare": ">=",
-            "value": 0.5
-          }
-        ]
+        "duration": -1
       }
     ],
     "usageLimit": "once_per_lesson",
-    "effect": "元気+6 / 体力が50%以上の場合、消費体力削減1"
+    "unique": true
   },
   {
-    "id": "promising_future",
+    "id": "free_前途洋々",
     "name": "前途洋々",
-    "plan": "free",
-    "type": "active",
     "rarity": "SR",
+    "type": "active",
+    "plan": "free",
     "cost": 4,
     "image": "free/前途洋々.png",
+    "effect": "パラメーター+8 / 元気+7",
     "effects": [
+      {
+        "type": "score_fixed",
+        "value": 8
+      },
       {
         "type": "buff_genki",
         "value": 7
       }
-    ],
-    "effect": "パラメーター+8 / 元気+7"
+    ]
   },
   {
-    "id": "promising_future_plus",
+    "id": "free_前途洋々+",
     "name": "前途洋々+",
-    "plan": "free",
-    "type": "active",
     "rarity": "SR",
+    "type": "active",
+    "plan": "free",
     "cost": 4,
     "image": "free/前途洋々_plus.png",
+    "effect": "パラメーター+12 / 元気+10",
     "effects": [
+      {
+        "type": "score_fixed",
+        "value": 12
+      },
       {
         "type": "buff_genki",
         "value": 10
       }
-    ],
-    "effect": "パラメーター+12 / 元気+10"
+    ]
   },
   {
-    "id": "idol_declaration",
+    "id": "free_アイドル宣言",
     "name": "アイドル宣言",
-    "plan": "free",
-    "type": "mental",
     "rarity": "SR",
-    "unique": true,
+    "type": "mental",
+    "plan": "free",
     "cost": 0,
-    "costType": "hp",
     "image": "free/アイドル宣言.png",
+    "effect": "体力消費1 / スキルカード使用数追加+1 / スキルカードを2枚引く",
     "effects": [
+      {
+        "type": "consume_hp",
+        "value": 1
+      },
       {
         "type": "consume_hp",
         "value": 1
@@ -262,17 +259,19 @@
       }
     ],
     "usageLimit": "once_per_lesson",
-    "effect": "体力消費1 / スキルカード使用数追加+1 / スキルカードを2枚引く"
+    "unique": true,
+    "costType": "hp",
+    "consumeHp": 1
   },
   {
-    "id": "idol_declaration_plus",
+    "id": "free_アイドル宣言+",
     "name": "アイドル宣言+",
-    "plan": "free",
-    "type": "mental",
     "rarity": "SR",
-    "unique": true,
+    "type": "mental",
+    "plan": "free",
     "cost": 0,
     "image": "free/アイドル宣言_plus.png",
+    "effect": "スキルカード使用数追加+1 / スキルカードを2枚引く / 消費体力減少1ターン",
     "effects": [
       {
         "type": "add_card_play_count",
@@ -288,16 +287,17 @@
       }
     ],
     "usageLimit": "once_per_lesson",
-    "effect": "スキルカード使用数追加+1 / スキルカードを2枚引く / 消費体力減少1ターン"
+    "unique": true
   },
   {
-    "id": "high_tension",
+    "id": "free_ハイテンション",
     "name": "ハイテンション",
-    "plan": "free",
-    "type": "mental",
     "rarity": "SR",
+    "type": "mental",
+    "plan": "free",
     "cost": 0,
     "image": "free/ハイテンション.png",
+    "effect": "元気+11 / 元気増加無効2ターン / 消費体力減少3ターン",
     "effects": [
       {
         "type": "buff_genki",
@@ -312,17 +312,17 @@
         "duration": 3
       }
     ],
-    "usageLimit": "once_per_lesson",
-    "effect": "元気+11 / 元気増加無効2ターン / 消費体力減少3ターン"
+    "usageLimit": "once_per_lesson"
   },
   {
-    "id": "high_tension_plus",
+    "id": "free_ハイテンション+",
     "name": "ハイテンション+",
-    "plan": "free",
-    "type": "mental",
     "rarity": "SR",
+    "type": "mental",
+    "plan": "free",
     "cost": 0,
     "image": "free/ハイテンション_plus.png",
+    "effect": "元気+13 / 元気増加無効2ターン / 消費体力減少4ターン",
     "effects": [
       {
         "type": "buff_genki",
@@ -337,18 +337,17 @@
         "duration": 4
       }
     ],
-    "usageLimit": "once_per_lesson",
-    "effect": "元気+13 / 元気増加無効2ターン / 消費体力減少4ターン"
+    "usageLimit": "once_per_lesson"
   },
   {
-    "id": "tv_appearance",
+    "id": "free_テレビ出演",
     "name": "テレビ出演",
-    "plan": "free",
-    "type": "mental",
     "rarity": "SSR",
-    "unique": true,
+    "type": "mental",
+    "plan": "free",
     "cost": 1,
     "image": "free/テレビ出演.png",
+    "effect": "元気+3 / 消費体力減少4ターン",
     "effects": [
       {
         "type": "buff_genki",
@@ -360,17 +359,17 @@
       }
     ],
     "usageLimit": "once_per_lesson",
-    "effect": "元気+3 / 消費体力減少4ターン"
+    "unique": true
   },
   {
-    "id": "tv_appearance_plus",
+    "id": "free_テレビ出演+",
     "name": "テレビ出演+",
-    "plan": "free",
-    "type": "mental",
     "rarity": "SSR",
-    "unique": true,
+    "type": "mental",
+    "plan": "free",
     "cost": 1,
     "image": "free/テレビ出演_plus.png",
+    "effect": "元気+5 / 消費体力減少5ターン",
     "effects": [
       {
         "type": "buff_genki",
@@ -382,19 +381,22 @@
       }
     ],
     "usageLimit": "once_per_lesson",
-    "effect": "元気+5 / 消費体力減少5ターン"
+    "unique": true
   },
   {
-    "id": "dream_fulfillment",
+    "id": "free_叶えたい夢",
     "name": "叶えたい夢",
-    "plan": "free",
-    "type": "mental",
     "rarity": "SSR",
-    "unique": true,
+    "type": "mental",
+    "plan": "free",
     "cost": 0,
-    "costType": "hp",
     "image": "free/叶えたい夢.png",
+    "effect": "体力消費1 / 元気+8 / 消費体力削減1",
     "effects": [
+      {
+        "type": "consume_hp",
+        "value": 1
+      },
       {
         "type": "consume_hp",
         "value": 1
@@ -410,19 +412,24 @@
       }
     ],
     "usageLimit": "once_per_lesson",
-    "effect": "体力消費1 / 元気+8 / 消費体力削減1"
+    "unique": true,
+    "costType": "hp",
+    "consumeHp": 1
   },
   {
-    "id": "dream_fulfillment_plus",
+    "id": "free_叶えたい夢+",
     "name": "叶えたい夢+",
-    "plan": "free",
-    "type": "mental",
     "rarity": "SSR",
-    "unique": true,
+    "type": "mental",
+    "plan": "free",
     "cost": 0,
-    "costType": "hp",
     "image": "free/叶えたい夢_plus.png",
+    "effect": "体力消費1 / 元気+9 / 消費体力削減2",
     "effects": [
+      {
+        "type": "consume_hp",
+        "value": 1
+      },
       {
         "type": "consume_hp",
         "value": 1
@@ -433,23 +440,24 @@
       },
       {
         "type": "reduce_hp_cost",
-        "value": 3,
+        "value": 2,
         "duration": -1
       }
     ],
     "usageLimit": "once_per_lesson",
-    "effect": "体力消費1 / 元気+9 / 消費体力削減3"
+    "unique": true,
+    "costType": "hp",
+    "consumeHp": 1
   },
   {
-    "id": "idol_soul",
+    "id": "free_アイドル魂",
     "name": "アイドル魂",
-    "plan": "free",
-    "type": "mental",
     "rarity": "SSR",
-    "unique": true,
+    "type": "mental",
+    "plan": "free",
     "cost": 2,
     "image": "free/アイドル魂.png",
-    "startInHand": true,
+    "effect": "レッスン開始時手札に入る / 元気+6 / 低下状態無効1回",
     "effects": [
       {
         "type": "buff_genki",
@@ -459,25 +467,21 @@
         "type": "buff_no_debuff",
         "count": 1,
         "duration": -1
-      },
-      {
-        "type": "add_card_play_count",
-        "value": 1
       }
     ],
     "usageLimit": "once_per_lesson",
-    "effect": "レッスン開始時手札に入る / 元気+6 / 低下状態無効1回 / スキルカード使用数追加+1"
+    "unique": true,
+    "startInHand": true
   },
   {
-    "id": "idol_soul_plus",
+    "id": "free_アイドル魂+",
     "name": "アイドル魂+",
-    "plan": "free",
-    "type": "mental",
     "rarity": "SSR",
-    "unique": true,
+    "type": "mental",
+    "plan": "free",
     "cost": 2,
     "image": "free/アイドル魂_plus.png",
-    "startInHand": true,
+    "effect": "レッスン開始時手札に入る / 元気+6 / 低下状態無効1回",
     "effects": [
       {
         "type": "buff_genki",
@@ -487,24 +491,21 @@
         "type": "buff_no_debuff",
         "count": 1,
         "duration": -1
-      },
-      {
-        "type": "add_card_play_count",
-        "value": 2
       }
     ],
     "usageLimit": "once_per_lesson",
-    "effect": "レッスン開始時手札に入る / 元気+6 / 低下状態無効1回 / スキルカード使用数追加+2 / 次のターン、手札をすべてレッスン中強化"
+    "unique": true,
+    "startInHand": true
   },
   {
-    "id": "reshuffle",
+    "id": "free_仕切り直し",
     "name": "仕切り直し",
-    "plan": "free",
-    "type": "mental",
     "rarity": "SSR",
-    "unique": true,
+    "type": "mental",
+    "plan": "free",
     "cost": 5,
     "image": "free/仕切り直し.png",
+    "effect": "手札をすべて入れ替える / 消費体力減少4ターン / スキルカード使用数追加+1",
     "effects": [
       {
         "type": "swap_hand"
@@ -516,24 +517,20 @@
       {
         "type": "add_card_play_count",
         "value": 1
-      },
-      {
-        "type": "draw_card",
-        "value": 2
       }
     ],
     "usageLimit": "once_per_lesson",
-    "effect": "手札をすべて入れ替える / 消費体力減少4ターン / スキルカード使用数追加+1 / スキルカードを2枚引く"
+    "unique": true
   },
   {
-    "id": "reshuffle_plus",
+    "id": "free_仕切り直し+",
     "name": "仕切り直し+",
-    "plan": "free",
-    "type": "mental",
     "rarity": "SSR",
-    "unique": true,
+    "type": "mental",
+    "plan": "free",
     "cost": 2,
     "image": "free/仕切り直し_plus.png",
+    "effect": "手札をすべて入れ替える / 消費体力減少4ターン / スキルカード使用数追加+2",
     "effects": [
       {
         "type": "swap_hand"
@@ -545,13 +542,9 @@
       {
         "type": "add_card_play_count",
         "value": 2
-      },
-      {
-        "type": "draw_card",
-        "value": 2
       }
     ],
     "usageLimit": "once_per_lesson",
-    "effect": "手札をすべて入れ替える / 消費体力減少4ターン / スキルカード使用数追加+2 / スキルカードを2枚引く"
+    "unique": true
   }
 ]

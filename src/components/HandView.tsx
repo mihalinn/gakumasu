@@ -18,7 +18,7 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
     const [searchTerm, setSearchTerm] = useState("");
     const [activeTab, setActiveTab] = useState<TabType>('all');
     const [filterPlan, setFilterPlan] = useState<'all' | 'dedicated' | 'free'>('all');
-    const [filterRarity, setFilterRarity] = useState<'all' | 'SSR' | 'SR' | 'R' | 'N'>('all');
+    const [filterRarity, setFilterRarity] = useState<'all' | 'Legend' | 'SSR' | 'SR' | 'R' | 'N'>('all');
     const [filterUpgrade, setFilterUpgrade] = useState<'all' | 'enhanced' | 'basic'>('all');
 
     const addToHand = (card: Card) => {
@@ -166,64 +166,63 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-4">
-                        {/* Main Tabs (Pill Style) */}
-                        <div className="flex p-1 bg-slate-950/40 rounded-lg border border-white/5 self-start">
-                            {[
-                                { id: 'all', label: 'すべて', activeColor: 'bg-slate-700' },
-                                { id: 'active', label: 'アクティブ', activeColor: 'bg-red-500/80' },
-                                { id: 'mental', label: 'メンタル', activeColor: 'bg-blue-500/80' },
-                                { id: 'other', label: 'トラブル', activeColor: 'bg-slate-600/80' },
-                            ].map(tab => (
-                                <button
-                                    key={tab.id}
-                                    onClick={() => setActiveTab(tab.id as TabType)}
-                                    className={`px-6 py-2 rounded-md text-sm font-bold transition-all ${activeTab === tab.id
-                                        ? `${tab.activeColor} text-white shadow-sm ring-1 ring-white/10`
-                                        : 'text-slate-500 hover:text-slate-300 hover:bg-white/5'
-                                        }`}
-                                >
-                                    {tab.label}
-                                </button>
-                            ))}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 px-1">
+                        {/* 1. Plan Filter */}
+                        <div className="flex items-center gap-2">
+                            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider w-16 flex-shrink-0">プラン</span>
+                            <div className="flex gap-1 flex-wrap">
+                                <FilterFilterButton label="すべて" active={filterPlan === 'all'} onClick={() => setFilterPlan('all')} />
+                                <FilterFilterButton
+                                    label={selectedProfile ? (selectedProfile.plan === 'logic' ? 'ロジック' : selectedProfile.plan === 'sense' ? 'センス' : '専用') : '専用'}
+                                    active={filterPlan === 'dedicated'}
+                                    onClick={() => setFilterPlan('dedicated')}
+                                    color={selectedProfile?.plan === 'logic' ? 'bg-blue-500/20 text-blue-300 hover:bg-blue-500/30' : selectedProfile?.plan === 'sense' ? 'bg-red-500/20 text-red-300 hover:bg-red-500/30' : ''}
+                                />
+                                <FilterFilterButton label="共通" active={filterPlan === 'free'} onClick={() => setFilterPlan('free')} />
+                            </div>
                         </div>
 
-                        {/* Advanced Filters (Clean Layout) */}
-                        <div className="flex flex-wrap gap-x-8 gap-y-2 items-center px-1">
-                            <div className="flex items-center gap-3">
-                                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">プラン</span>
-                                <div className="flex gap-1 bg-slate-950/40 rounded-md p-1 border border-white/5">
-                                    <FilterFilterButton label="すべて" active={filterPlan === 'all'} onClick={() => setFilterPlan('all')} />
+                        {/* 2. Type Filter (Main Tabs) */}
+                        <div className="flex items-center gap-2">
+                            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider w-16 flex-shrink-0">タイプ</span>
+                            <div className="flex gap-1 flex-wrap">
+                                {[
+                                    { id: 'all', label: 'すべて', activeColor: '' },
+                                    { id: 'active', label: 'アクティブ', activeColor: 'bg-red-500/20 text-red-300 hover:bg-red-500/30' },
+                                    { id: 'mental', label: 'メンタル', activeColor: 'bg-blue-500/20 text-blue-300 hover:bg-blue-500/30' },
+                                    { id: 'other', label: 'トラブル', activeColor: 'bg-slate-500/20 text-slate-300 hover:bg-slate-500/30' },
+                                ].map(tab => (
                                     <FilterFilterButton
-                                        label={selectedProfile ? (selectedProfile.plan === 'logic' ? 'ロジック' : selectedProfile.plan === 'sense' ? 'センス' : '専用') : '専用'}
-                                        active={filterPlan === 'dedicated'}
-                                        onClick={() => setFilterPlan('dedicated')}
-                                        color={selectedProfile?.plan === 'logic' ? 'bg-blue-500/20 text-blue-300 hover:bg-blue-500/30' : selectedProfile?.plan === 'sense' ? 'bg-red-500/20 text-red-300 hover:bg-red-500/30' : ''}
+                                        key={tab.id}
+                                        label={tab.label}
+                                        active={activeTab === tab.id}
+                                        onClick={() => setActiveTab(tab.id as TabType)}
+                                        color={activeTab === tab.id ? tab.activeColor : undefined}
                                     />
-                                    <FilterFilterButton label="共通" active={filterPlan === 'free'} onClick={() => setFilterPlan('free')} />
-                                </div>
+                                ))}
                             </div>
+                        </div>
 
-                            <div className="flex items-center gap-3">
-                                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">レアリティ</span>
-                                <div className="flex gap-1 bg-slate-950/40 rounded-md p-1 border border-white/5">
-                                    <FilterFilterButton label="すべて" active={filterRarity === 'all'} onClick={() => setFilterRarity('all')} />
-                                    <FilterFilterButton label="SSR" active={filterRarity === 'SSR'} color="text-yellow-400 bg-yellow-400/10 hover:bg-yellow-400/20" onClick={() => setFilterRarity('SSR')} />
-                                    <FilterFilterButton label="SR" active={filterRarity === 'SR'} color="text-blue-400 bg-blue-400/10 hover:bg-blue-400/20" onClick={() => setFilterRarity('SR')} />
-                                    <FilterFilterButton label="R" active={filterRarity === 'R'} color="text-slate-300 bg-white/5 hover:bg-white/10" onClick={() => setFilterRarity('R')} />
-                                    <FilterFilterButton label="N" active={filterRarity === 'N'} color="text-slate-500 bg-white/5 hover:bg-white/10" onClick={() => setFilterRarity('N')} />
-                                </div>
+                        {/* 3. Rarity Filter */}
+                        <div className="flex items-center gap-2">
+                            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider w-16 flex-shrink-0">レアリティ</span>
+                            <div className="flex gap-1 flex-wrap">
+                                <FilterFilterButton label="すべて" active={filterRarity === 'all'} onClick={() => setFilterRarity('all')} />
+                                <FilterFilterButton label="Legend" active={filterRarity === 'Legend'} color="text-fuchsia-400 bg-fuchsia-400/10 hover:bg-fuchsia-400/20" onClick={() => setFilterRarity('Legend')} />
+                                <FilterFilterButton label="SSR" active={filterRarity === 'SSR'} color="text-yellow-400 bg-yellow-400/10 hover:bg-yellow-400/20" onClick={() => setFilterRarity('SSR')} />
+                                <FilterFilterButton label="SR" active={filterRarity === 'SR'} color="text-blue-400 bg-blue-400/10 hover:bg-blue-400/20" onClick={() => setFilterRarity('SR')} />
+                                <FilterFilterButton label="R" active={filterRarity === 'R'} color="text-slate-300 bg-white/5 hover:bg-white/10" onClick={() => setFilterRarity('R')} />
+                                <FilterFilterButton label="N" active={filterRarity === 'N'} color="text-slate-500 bg-white/5 hover:bg-white/10" onClick={() => setFilterRarity('N')} />
                             </div>
+                        </div>
 
-                            <div className="w-px h-3 bg-white/10 hidden sm:block"></div>
-
-                            <div className="flex items-center gap-3">
-                                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">強化</span>
-                                <div className="flex gap-1 bg-slate-950/40 rounded-md p-1 border border-white/5">
-                                    <FilterFilterButton label="すべて" active={filterUpgrade === 'all'} onClick={() => setFilterUpgrade('all')} />
-                                    <FilterFilterButton label="強化済み" active={filterUpgrade === 'enhanced'} onClick={() => setFilterUpgrade('enhanced')} color="text-yellow-200 bg-yellow-400/10 hover:bg-yellow-400/20" />
-                                    <FilterFilterButton label="強化前" active={filterUpgrade === 'basic'} onClick={() => setFilterUpgrade('basic')} />
-                                </div>
+                        {/* 4. Upgrade Filter */}
+                        <div className="flex items-center gap-2">
+                            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider w-16 flex-shrink-0">強化</span>
+                            <div className="flex gap-1 flex-wrap">
+                                <FilterFilterButton label="すべて" active={filterUpgrade === 'all'} onClick={() => setFilterUpgrade('all')} />
+                                <FilterFilterButton label="強化済み" active={filterUpgrade === 'enhanced'} onClick={() => setFilterUpgrade('enhanced')} color="text-yellow-200 bg-yellow-400/10 hover:bg-yellow-400/20" />
+                                <FilterFilterButton label="強化前" active={filterUpgrade === 'basic'} onClick={() => setFilterUpgrade('basic')} />
                             </div>
                         </div>
                     </div>
@@ -361,8 +360,9 @@ export function HandView({ hand, setHand, selectedProfile, viewMode, setViewMode
                                 {hand.map((card, idx) => (
                                     <div key={`${card.id}-${idx}`} className="flex items-center gap-3 p-2 rounded bg-slate-800/70 border border-white/10 group transition-all animate-in slide-in-from-right-2 duration-200">
                                         <div className="w-8 h-8 rounded bg-slate-950 flex-shrink-0 flex items-center justify-center border border-white/10 overflow-hidden relative">
-                                            <div className={`absolute inset-0 border-2 rounded opacity-30 ${card.rarity === 'SSR' ? 'border-yellow-400' :
-                                                card.rarity === 'SR' ? 'border-blue-400' : 'border-slate-600'
+                                            <div className={`absolute inset-0 border-2 rounded opacity-30 ${card.rarity === 'Legend' ? 'border-fuchsia-400' :
+                                                card.rarity === 'SSR' ? 'border-yellow-400' :
+                                                    card.rarity === 'SR' ? 'border-blue-400' : 'border-slate-600'
                                                 } pointer-events-none`}></div>
 
                                             {card.image && card.image !== "default.png" ? (
@@ -442,7 +442,8 @@ function CardButton({ card, onClick, mode, isUnique }: { card: Card, onClick: ()
                         {card.rarity && (
                             <span className={`text-[8px] px-1.5 py-0.5 rounded border font-mono uppercase ${card.rarity === "R" ? "bg-slate-400/20 text-slate-400 border-slate-400/20" :
                                 card.rarity === "SR" ? "bg-blue-500/20 text-blue-400 border-blue-500/20" :
-                                    "bg-yellow-500/20 text-yellow-400 border-yellow-500/20"
+                                    card.rarity === "Legend" ? "bg-fuchsia-500/20 text-fuchsia-400 border-fuchsia-500/20" :
+                                        "bg-yellow-500/20 text-yellow-400 border-yellow-500/20"
                                 }`}>{card.rarity}</span>
                         )}
                         <span className={`text-[8px] px-1.5 py-0.5 rounded border font-mono uppercase ${card.type === "active" ? "bg-red-500/10 text-red-400 border-red-500/20" :

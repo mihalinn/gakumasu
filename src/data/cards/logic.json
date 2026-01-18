@@ -1,1011 +1,4 @@
-﻿[
-  {
-    "id": "kawaiishigusa",
-    "name": "可愛い仕草",
-    "plan": "logic",
-    "type": "active",
-    "rarity": "N",
-    "cost": 5,
-    "image": "logic/可愛い仕草.png",
-    "effects": [
-      {
-        "type": "buff_impression",
-        "value": 2
-      },
-      {
-        "type": "score_scale_impression",
-        "ratio": 1
-      }
-    ],
-    "usageLimit": "once_per_lesson",
-    "effect": "好印象+2 / 好印象の100％分パラメーター上昇"
-  },
-  {
-    "id": "kawaiishigusa_plus",
-    "name": "可愛い仕草+",
-    "plan": "logic",
-    "type": "active",
-    "rarity": "N",
-    "cost": 5,
-    "image": "logic/可愛い仕草_plus.png",
-    "effects": [
-      {
-        "type": "buff_impression",
-        "value": 3
-      },
-      {
-        "type": "score_scale_impression",
-        "ratio": 1.2
-      }
-    ],
-    "usageLimit": "once_per_lesson",
-    "effect": "好印象+3 / 好印象の120％分パラメーター上昇"
-  },
-  {
-    "id": "kibuntenkan",
-    "name": "気分転換",
-    "plan": "logic",
-    "type": "active",
-    "rarity": "N",
-    "cost": 0,
-    "costType": "hp",
-    "consumeHp": 5,
-    "image": "logic/気分転換.png",
-    "effects": [
-      {
-        "type": "consume_hp",
-        "value": 5
-      },
-      {
-        "type": "score_scale_genki",
-        "ratio": 1
-      }
-    ],
-    "usageLimit": "once_per_lesson",
-    "effect": "体力消費5 / 元気の100％分パラメーター上昇"
-  },
-  {
-    "id": "kibuntenkan_plus",
-    "name": "気分転換+",
-    "plan": "logic",
-    "type": "active",
-    "rarity": "N",
-    "cost": 0,
-    "costType": "hp",
-    "consumeHp": 3,
-    "image": "logic/気分転換_plus.png",
-    "effects": [
-      {
-        "type": "consume_hp",
-        "value": 3
-      },
-      {
-        "type": "score_scale_genki",
-        "ratio": 1.1
-      }
-    ],
-    "usageLimit": "once_per_lesson",
-    "effect": "体力消費3 / 元気の110％分パラメーター上昇"
-  },
-  {
-    "id": "mesennokihon",
-    "name": "目線の基本",
-    "plan": "logic",
-    "type": "mental",
-    "rarity": "C",
-    "cost": 2,
-    "image": "logic/目線の基本.png",
-    "effects": [
-      {
-        "type": "buff_genki",
-        "value": 1
-      },
-      {
-        "type": "buff_impression",
-        "value": 2
-      }
-    ]
-  },
-  {
-    "id": "mesennokihon_plus",
-    "name": "目線の基本+",
-    "plan": "logic",
-    "type": "mental",
-    "rarity": "C",
-    "cost": 2,
-    "image": "logic/目線の基本_plus.png",
-    "effects": [
-      {
-        "type": "buff_genki",
-        "value": 2
-      },
-      {
-        "type": "buff_impression",
-        "value": 3
-      }
-    ]
-  },
-  {
-    "id": "ishikinokihon",
-    "name": "意識の基本",
-    "plan": "logic",
-    "type": "mental",
-    "rarity": "C",
-    "cost": 2,
-    "image": "logic/意識の基本.png",
-    "effects": [
-      {
-        "type": "buff_genki",
-        "value": 1
-      },
-      {
-        "type": "buff_motivation",
-        "value": 2
-      }
-    ]
-  },
-  {
-    "id": "ishikinokihon_plus",
-    "name": "意識の基本+",
-    "plan": "logic",
-    "type": "mental",
-    "rarity": "C",
-    "cost": 2,
-    "image": "logic/意識の基本_plus.png",
-    "effects": [
-      {
-        "type": "buff_genki",
-        "value": 2
-      },
-      {
-        "type": "buff_motivation",
-        "value": 3
-      }
-    ]
-  },
-  {
-    "id": "kyomoohayo",
-    "name": "今日もおはよう",
-    "plan": "logic",
-    "type": "active",
-    "rarity": "R",
-    "cost": 4,
-    "image": "logic/今日もおはよう.png",
-    "effects": [
-      {
-        "type": "score_fixed",
-        "value": 7
-      },
-      {
-        "type": "buff_impression",
-        "value": 3
-      }
-    ]
-  },
-  {
-    "id": "kyomoohayo_plus",
-    "name": "今日もおはよう+",
-    "plan": "logic",
-    "type": "active",
-    "rarity": "R",
-    "cost": 4,
-    "image": "logic/今日もおはよう_plus.png",
-    "effects": [
-      {
-        "type": "score_fixed",
-        "value": 9
-      },
-      {
-        "type": "buff_impression",
-        "value": 4
-      }
-    ]
-  },
-  {
-    "id": "tebyoshi",
-    "name": "手拍子",
-    "plan": "logic",
-    "type": "active",
-    "rarity": "R",
-    "cost": 5,
-    "image": "logic/手拍子.png",
-    "effects": [
-      {
-        "type": "score_scale_impression",
-        "ratio": 1.5
-      }
-    ]
-  },
-  {
-    "id": "tebyoshi_plus",
-    "name": "手拍子+",
-    "plan": "logic",
-    "type": "active",
-    "rarity": "R",
-    "cost": 5,
-    "image": "logic/手拍子_plus.png",
-    "effects": [
-      {
-        "type": "score_scale_impression",
-        "ratio": 2
-      }
-    ]
-  },
-  {
-    "id": "eieio",
-    "name": "えいえいおー",
-    "plan": "logic",
-    "type": "mental",
-    "rarity": "R",
-    "cost": 2,
-    "image": "logic/えいえいおー.png",
-    "effects": [
-      {
-        "type": "buff_genki",
-        "value": 1
-      },
-      {
-        "type": "buff_motivation",
-        "value": 3
-      }
-    ]
-  },
-  {
-    "id": "eieio_plus",
-    "name": "えいえいおー+",
-    "plan": "logic",
-    "type": "mental",
-    "rarity": "R",
-    "cost": 2,
-    "image": "logic/えいえいおー_plus.png",
-    "effects": [
-      {
-        "type": "buff_genki",
-        "value": 2
-      },
-      {
-        "type": "buff_motivation",
-        "value": 4
-      }
-    ]
-  },
-  {
-    "id": "omoidashiwarai",
-    "name": "思い出し笑い",
-    "plan": "logic",
-    "type": "mental",
-    "rarity": "R",
-    "cost": 2,
-    "image": "logic/思い出し笑い.png",
-    "effects": [
-      {
-        "type": "buff_impression",
-        "value": 3
-      },
-      {
-        "type": "condition_gate",
-        "condition": [
-          {
-            "type": "impression",
-            "compare": ">=",
-            "value": 3
-          }
-        ],
-        "subEffects": [
-          {
-            "type": "buff_motivation",
-            "value": 2
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "omoidashiwarai_plus",
-    "name": "思い出し笑い+",
-    "plan": "logic",
-    "type": "mental",
-    "rarity": "R",
-    "cost": 2,
-    "image": "logic/思い出し笑い_plus.png",
-    "effects": [
-      {
-        "type": "buff_impression",
-        "value": 4
-      },
-      {
-        "type": "condition_gate",
-        "condition": [
-          {
-            "type": "impression",
-            "compare": ">=",
-            "value": 1
-          }
-        ],
-        "subEffects": [
-          {
-            "type": "buff_motivation",
-            "value": 3
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "raburiuinku",
-    "name": "ラブリーウインク",
-    "plan": "logic",
-    "type": "active",
-    "rarity": "SR",
-    "cost": 5,
-    "image": "logic/ラブリーウインク.png",
-    "effects": [
-      {
-        "type": "buff_impression",
-        "value": 4
-      },
-      {
-        "type": "score_scale_impression",
-        "ratio": 0.6
-      }
-    ]
-  },
-  {
-    "id": "pasuterukibun",
-    "name": "パステル気分",
-    "plan": "logic",
-    "type": "mental",
-    "rarity": "R",
-    "cost": 3,
-    "image": "logic/パステル気分.png",
-    "effects": [
-      {
-        "type": "buff_genki",
-        "value": 5
-      },
-      {
-        "type": "condition_gate",
-        "condition": [
-          {
-            "type": "motivation",
-            "compare": ">=",
-            "value": 3
-          }
-        ],
-        "subEffects": [
-          {
-            "type": "buff_impression",
-            "value": 3
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "hagemashi",
-    "name": "励まし",
-    "plan": "logic",
-    "type": "mental",
-    "rarity": "R",
-    "cost": 4,
-    "image": "logic/励まし.png",
-    "effects": [
-      {
-        "type": "buff_motivation",
-        "value": 3
-      },
-      {
-        "type": "condition_gate",
-        "condition": [
-          {
-            "type": "motivation",
-            "compare": ">=",
-            "value": 6
-          }
-        ],
-        "subEffects": [
-          {
-            "type": "buff_impression",
-            "value": 4
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "risutato",
-    "name": "リスタート",
-    "plan": "logic",
-    "type": "mental",
-    "rarity": "R",
-    "cost": 4,
-    "image": "logic/リスタート.png",
-    "effects": [
-      {
-        "type": "buff_genki",
-        "value": 2
-      },
-      {
-        "type": "buff_impression",
-        "value": 3
-      }
-    ]
-  },
-  {
-    "id": "logic_200%スマイル",
-    "name": "200%スマイル",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/200%スマイル.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_200%スマイル_plus",
-    "name": "200%スマイル+",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/200%スマイル_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_あのときの約束",
-    "name": "あのときの約束",
-    "rarity": "SSR",
-    "type": "active",
-    "plan": "logic",
-    "image": "logic/あのときの約束.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_あのときの約束_plus",
-    "name": "あのときの約束+",
-    "rarity": "SSR",
-    "type": "active",
-    "plan": "logic",
-    "image": "logic/あのときの約束_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_あふれる思い出",
-    "name": "あふれる思い出",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/あふれる思い出.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_あふれる思い出_plus",
-    "name": "あふれる思い出+",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/あふれる思い出_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ありがとうの言葉",
-    "name": "ありがとうの言葉",
-    "rarity": "SR",
-    "type": "active",
-    "plan": "logic",
-    "image": "logic/ありがとうの言葉.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ありがとうの言葉_plus",
-    "name": "ありがとうの言葉+",
-    "rarity": "SR",
-    "type": "active",
-    "plan": "logic",
-    "image": "logic/ありがとうの言葉_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_おまもりミラクル",
-    "name": "おまもりミラクル",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/おまもりミラクル.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_おまもりミラクル_plus",
-    "name": "おまもりミラクル+",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/おまもりミラクル_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_がむしゃら",
-    "name": "がむしゃら",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/がむしゃら.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_がむしゃら_plus",
-    "name": "がむしゃら+",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/がむしゃら_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_きらきら紙吹雪",
-    "name": "きらきら紙吹雪",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/きらきら紙吹雪.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_きらきら紙吹雪_plus",
-    "name": "きらきら紙吹雪+",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/きらきら紙吹雪_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ひなたぼっこ",
-    "name": "ひなたぼっこ",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/ひなたぼっこ.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ひなたぼっこ_plus",
-    "name": "ひなたぼっこ+",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/ひなたぼっこ_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ふれあい",
-    "name": "ふれあい",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/ふれあい.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ふれあい_plus",
-    "name": "ふれあい+",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/ふれあい_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_みんな大好き",
-    "name": "みんな大好き",
-    "rarity": "SR",
-    "type": "active",
-    "plan": "logic",
-    "image": "logic/みんな大好き.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_みんな大好き_plus",
-    "name": "みんな大好き+",
-    "rarity": "SR",
-    "type": "active",
-    "plan": "logic",
-    "image": "logic/みんな大好き_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_もう少しだけ",
-    "name": "もう少しだけ",
-    "rarity": "R",
-    "type": "active",
-    "plan": "logic",
-    "image": "logic/もう少しだけ.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_もう少しだけ_plus",
-    "name": "もう少しだけ+",
-    "rarity": "R",
-    "type": "active",
-    "plan": "logic",
-    "image": "logic/もう少しだけ_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_やる気は満点",
-    "name": "やる気は満点",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/やる気は満点.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_やる気は満点_plus",
-    "name": "やる気は満点+",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/やる気は満点_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ゆめみごこち",
-    "name": "ゆめみごこち",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/ゆめみごこち.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ゆめみごこち_plus",
-    "name": "ゆめみごこち+",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/ゆめみごこち_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ゆるふわおしゃべり",
-    "name": "ゆるふわおしゃべり",
-    "rarity": "R",
-    "type": "active",
-    "plan": "logic",
-    "image": "logic/ゆるふわおしゃべり.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ゆるふわおしゃべり_plus",
-    "name": "ゆるふわおしゃべり+",
-    "rarity": "R",
-    "type": "active",
-    "plan": "logic",
-    "image": "logic/ゆるふわおしゃべり_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_アイコンタクトの基本",
-    "name": "アイコンタクトの基本",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "costType": "hp",
-    "image": "logic/アイコンタクトの基本.png",
-    "effect": "体力消費3 / やる気が3以上の場合、使用可 / 元気の100％分パラメーター上昇",
-    "effects": [
-      {
-        "type": "consume_hp",
-        "value": 3
-      },
-      {
-        "type": "score_scale_genki",
-        "ratio": 1
-      }
-    ],
-    "conditions": [
-      {
-        "type": "motivation",
-        "value": 3,
-        "compare": ">="
-      }
-    ],
-    "usageLimit": "once_per_lesson"
-  },
-  {
-    "id": "logic_アイコンタクトの基本_plus",
-    "name": "アイコンタクトの基本+",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "costType": "hp",
-    "image": "logic/アイコンタクトの基本_plus.png",
-    "effect": "体力消費2 / やる気が3以上の場合、使用可 / 元気の120％分パラメーター上昇",
-    "effects": [
-      {
-        "type": "consume_hp",
-        "value": 2
-      },
-      {
-        "type": "score_scale_genki",
-        "ratio": 1.2
-      }
-    ],
-    "conditions": [
-      {
-        "type": "motivation",
-        "value": 3,
-        "compare": ">="
-      }
-    ],
-    "usageLimit": "once_per_lesson"
-  },
-  {
-    "id": "logic_イメトレ",
-    "name": "イメトレ",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/イメトレ.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_イメトレ_plus",
-    "name": "イメトレ+",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/イメトレ_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_エクセレント♪",
-    "name": "エクセレント♪",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/エクセレント♪.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_オトメゴコロ",
-    "name": "オトメゴコロ",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/オトメゴコロ.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_オトメゴコロ_plus",
-    "name": "オトメゴコロ+",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/オトメゴコロ_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_キセキの魔法",
-    "name": "キセキの魔法",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/キセキの魔法.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_キセキの魔法_plus",
-    "name": "キセキの魔法+",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/キセキの魔法_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_キラメキ",
-    "name": "キラメキ",
-    "rarity": "SR",
-    "type": "active",
-    "plan": "logic",
-    "image": "logic/キラメキ.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_キラメキ_plus",
-    "name": "キラメキ+",
-    "rarity": "SR",
-    "type": "active",
-    "plan": "logic",
-    "image": "logic/キラメキ_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_セリフの基本",
-    "name": "セリフの基本",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/セリフの基本.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_セリフの基本_plus",
-    "name": "セリフの基本+",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/セリフの基本_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_セルフケアの基本",
-    "name": "セルフケアの基本",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/セルフケアの基本.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_セルフケアの基本_plus",
-    "name": "セルフケアの基本+",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/セルフケアの基本_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_デイドリーミング",
-    "name": "デイドリーミング",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/デイドリーミング.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_デイドリーミング_plus",
-    "name": "デイドリーミング+",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/デイドリーミング_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_トキメキ",
-    "name": "トキメキ",
-    "rarity": "SSR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/トキメキ.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_トキメキ_plus",
-    "name": "トキメキ+",
-    "rarity": "SSR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/トキメキ_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ノートの端の決意",
-    "name": "ノートの端の決意",
-    "rarity": "SSR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/ノートの端の決意.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ノートの端の決意_plus",
-    "name": "ノートの端の決意+",
-    "rarity": "SSR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/ノートの端の決意_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ハートの合図",
-    "name": "ハートの合図",
-    "rarity": "SR",
-    "type": "active",
-    "plan": "logic",
-    "image": "logic/ハートの合図.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ハートの合図_plus",
-    "name": "ハートの合図+",
-    "rarity": "SR",
-    "type": "active",
-    "plan": "logic",
-    "image": "logic/ハートの合図_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_パステル気分_plus",
-    "name": "パステル気分+",
-    "rarity": "R",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/パステル気分_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
+[
   {
     "id": "logic_ファンサの基本",
     "name": "ファンサの基本",
@@ -1024,7 +17,7 @@
     "usageLimit": "once_per_lesson"
   },
   {
-    "id": "logic_ファンサの基本_plus",
+    "id": "logic_ファンサの基本+",
     "name": "ファンサの基本+",
     "rarity": "N",
     "type": "active",
@@ -1041,84 +34,96 @@
     "usageLimit": "once_per_lesson"
   },
   {
-    "id": "logic_ファンシーチャーム",
-    "name": "ファンシーチャーム",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/ファンシーチャーム.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ファンシーチャーム_plus",
-    "name": "ファンシーチャーム+",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/ファンシーチャーム_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ラブリーウインク_plus",
-    "name": "ラブリーウインク+",
-    "rarity": "SR",
+    "id": "logic_アイコンタクトの基本",
+    "name": "アイコンタクトの基本",
+    "rarity": "N",
     "type": "active",
     "plan": "logic",
-    "image": "logic/ラブリーウインク_plus.png",
-    "effect": "効果未実装",
-    "effects": []
+    "cost": 0,
+    "image": "logic/アイコンタクトの基本.png",
+    "effect": "体力消費3 / やる気が3以上の場合、使用可 / 元気の100％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 3
+      },
+      {
+        "type": "consume_hp",
+        "value": 3
+      },
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "motivation",
+            "value": 3,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "score_scale_genki",
+            "ratio": 1
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "type": "motivation",
+        "value": 3,
+        "compare": ">="
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "costType": "hp",
+    "consumeHp": 3
   },
   {
-    "id": "logic_リスタート_plus",
-    "name": "リスタート+",
-    "rarity": "R",
-    "type": "mental",
+    "id": "logic_アイコンタクトの基本+",
+    "name": "アイコンタクトの基本+",
+    "rarity": "N",
+    "type": "active",
     "plan": "logic",
-    "image": "logic/リスタート_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_リズミカル",
-    "name": "リズミカル",
-    "rarity": "R",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/リズミカル.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_リズミカル_plus",
-    "name": "リズミカル+",
-    "rarity": "R",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/リズミカル_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ワクワクが止まらない",
-    "name": "ワクワクが止まらない",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/ワクワクが止まらない.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_ワクワクが止まらない_plus",
-    "name": "ワクワクが止まらない+",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/ワクワクが止まらない_plus.png",
-    "effect": "効果未実装",
-    "effects": []
+    "cost": 0,
+    "image": "logic/アイコンタクトの基本_plus.png",
+    "effect": "体力消費2 / やる気が3以上の場合、使用可 / 元気の120％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 2
+      },
+      {
+        "type": "consume_hp",
+        "value": 2
+      },
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "motivation",
+            "value": 3,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "score_scale_genki",
+            "ratio": 1.2
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "type": "motivation",
+        "value": 3,
+        "compare": ">="
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "costType": "hp",
+    "consumeHp": 2
   },
   {
     "id": "logic_仕草の基本",
@@ -1142,7 +147,7 @@
     "usageLimit": "once_per_lesson"
   },
   {
-    "id": "logic_仕草の基本_plus",
+    "id": "logic_仕草の基本+",
     "name": "仕草の基本+",
     "rarity": "N",
     "type": "active",
@@ -1163,118 +168,1150 @@
     "usageLimit": "once_per_lesson"
   },
   {
+    "id": "logic_可愛い仕草",
+    "name": "可愛い仕草",
+    "rarity": "N",
+    "type": "active",
+    "plan": "logic",
+    "cost": 5,
+    "image": "logic/可愛い仕草.png",
+    "effect": "好印象+2 / 好印象の100％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 2
+      },
+      {
+        "type": "score_scale_impression",
+        "ratio": 1
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_可愛い仕草+",
+    "name": "可愛い仕草+",
+    "rarity": "N",
+    "type": "active",
+    "plan": "logic",
+    "cost": 5,
+    "image": "logic/可愛い仕草_plus.png",
+    "effect": "好印象+3 / 好印象の120％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 3
+      },
+      {
+        "type": "score_scale_impression",
+        "ratio": 1.2
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_気分転換",
+    "name": "気分転換",
+    "rarity": "N",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/気分転換.png",
+    "effect": "体力消費5 / 元気の100％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 5
+      },
+      {
+        "type": "consume_hp",
+        "value": 5
+      },
+      {
+        "type": "score_scale_genki",
+        "ratio": 1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "costType": "hp",
+    "consumeHp": 5
+  },
+  {
+    "id": "logic_気分転換+",
+    "name": "気分転換+",
+    "rarity": "N",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/気分転換_plus.png",
+    "effect": "体力消費3 / 元気の110％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 3
+      },
+      {
+        "type": "consume_hp",
+        "value": 3
+      },
+      {
+        "type": "score_scale_genki",
+        "ratio": 1.1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "costType": "hp",
+    "consumeHp": 3
+  },
+  {
+    "id": "logic_笑顔の基本",
+    "name": "笑顔の基本",
+    "rarity": "N",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/笑顔の基本.png",
+    "effect": "元気+4 / 好印象+2",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 4
+      },
+      {
+        "type": "buff_impression",
+        "value": 2
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_笑顔の基本+",
+    "name": "笑顔の基本+",
+    "rarity": "N",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/笑顔の基本_plus.png",
+    "effect": "元気+6 / 好印象+3",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 6
+      },
+      {
+        "type": "buff_impression",
+        "value": 3
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_盛り上げの基本",
+    "name": "盛り上げの基本",
+    "rarity": "N",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/盛り上げの基本.png",
+    "effect": "好印象が1以上の場合、使用可 / 好印象+4",
+    "effects": [
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "impression",
+            "value": 1,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "buff_impression",
+            "value": 4
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "type": "impression",
+        "value": 1,
+        "compare": ">="
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_盛り上げの基本+",
+    "name": "盛り上げの基本+",
+    "rarity": "N",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 1,
+    "image": "logic/盛り上げの基本_plus.png",
+    "effect": "好印象が1以上の場合、使用可 / 好印象+5",
+    "effects": [
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "impression",
+            "value": 1,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "buff_impression",
+            "value": 5
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "type": "impression",
+        "value": 1,
+        "compare": ">="
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_セリフの基本",
+    "name": "セリフの基本",
+    "rarity": "N",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 3,
+    "image": "logic/セリフの基本.png",
+    "effect": "元気+2 / 好印象+2 / やる気+2",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_impression",
+        "value": 2
+      },
+      {
+        "type": "buff_motivation",
+        "value": 2
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_セリフの基本+",
+    "name": "セリフの基本+",
+    "rarity": "N",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/セリフの基本_plus.png",
+    "effect": "元気+2 / 好印象+3 / やる気+2",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_impression",
+        "value": 3
+      },
+      {
+        "type": "buff_motivation",
+        "value": 2
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_距離感の基本",
+    "name": "距離感の基本",
+    "rarity": "N",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/距離感の基本.png",
+    "effect": "元気+4 / やる気+2",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 4
+      },
+      {
+        "type": "buff_motivation",
+        "value": 2
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_距離感の基本+",
+    "name": "距離感の基本+",
+    "rarity": "N",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/距離感の基本_plus.png",
+    "effect": "元気+6 / やる気+3",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 6
+      },
+      {
+        "type": "buff_motivation",
+        "value": 3
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_セルフケアの基本",
+    "name": "セルフケアの基本",
+    "rarity": "N",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 3,
+    "image": "logic/セルフケアの基本.png",
+    "effect": "元気+2 / 好印象+2 / やる気+2",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_impression",
+        "value": 2
+      },
+      {
+        "type": "buff_motivation",
+        "value": 2
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_セルフケアの基本+",
+    "name": "セルフケアの基本+",
+    "rarity": "N",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/セルフケアの基本_plus.png",
+    "effect": "元気+2 / 好印象+2 / やる気+3",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_impression",
+        "value": 2
+      },
+      {
+        "type": "buff_motivation",
+        "value": 3
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_目線の基本",
+    "name": "目線の基本",
+    "rarity": "N",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/目線の基本.png",
+    "effect": "元気+1 / 好印象+2",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 1
+      },
+      {
+        "type": "buff_impression",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "logic_目線の基本+",
+    "name": "目線の基本+",
+    "rarity": "N",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/目線の基本_plus.png",
+    "effect": "元気+2 / 好印象+3",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_impression",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "logic_意識の基本",
+    "name": "意識の基本",
+    "rarity": "N",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/意識の基本.png",
+    "effect": "元気+1 / やる気+2",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 1
+      },
+      {
+        "type": "buff_motivation",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "logic_意識の基本+",
+    "name": "意識の基本+",
+    "rarity": "N",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/意識の基本_plus.png",
+    "effect": "元気+2 / やる気+3",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_motivation",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "logic_今日もおはよう",
+    "name": "今日もおはよう",
+    "rarity": "R",
+    "type": "active",
+    "plan": "logic",
+    "cost": 4,
+    "image": "logic/今日もおはよう.png",
+    "effect": "パラメーター+7 / 好印象+3",
+    "effects": [
+      {
+        "type": "score_fixed",
+        "value": 7
+      },
+      {
+        "type": "buff_impression",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "logic_今日もおはよう+",
+    "name": "今日もおはよう+",
+    "rarity": "R",
+    "type": "active",
+    "plan": "logic",
+    "cost": 4,
+    "image": "logic/今日もおはよう_plus.png",
+    "effect": "パラメーター+9 / 好印象+4",
+    "effects": [
+      {
+        "type": "score_fixed",
+        "value": 9
+      },
+      {
+        "type": "buff_impression",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "logic_ゆるふわおしゃべり",
+    "name": "ゆるふわおしゃべり",
+    "rarity": "R",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ゆるふわおしゃべり.png",
+    "effect": "体力消費4 / やる気+3 / 元気の60％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 4
+      },
+      {
+        "type": "consume_hp",
+        "value": 4
+      },
+      {
+        "type": "buff_motivation",
+        "value": 3
+      },
+      {
+        "type": "score_scale_genki",
+        "ratio": 0.6
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "costType": "hp",
+    "consumeHp": 4
+  },
+  {
+    "id": "logic_ゆるふわおしゃべり+",
+    "name": "ゆるふわおしゃべり+",
+    "rarity": "R",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ゆるふわおしゃべり_plus.png",
+    "effect": "体力消費4 / やる気+4 / 元気の80％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 4
+      },
+      {
+        "type": "consume_hp",
+        "value": 4
+      },
+      {
+        "type": "buff_motivation",
+        "value": 4
+      },
+      {
+        "type": "score_scale_genki",
+        "ratio": 0.8
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "costType": "hp",
+    "consumeHp": 4
+  },
+  {
+    "id": "logic_もう少しだけ",
+    "name": "もう少しだけ",
+    "rarity": "R",
+    "type": "active",
+    "plan": "logic",
+    "cost": 5,
+    "image": "logic/もう少しだけ.png",
+    "effect": "パラメーター+10 / やる気+3",
+    "effects": [
+      {
+        "type": "score_fixed",
+        "value": 10
+      },
+      {
+        "type": "buff_motivation",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "logic_もう少しだけ+",
+    "name": "もう少しだけ+",
+    "rarity": "R",
+    "type": "active",
+    "plan": "logic",
+    "cost": 5,
+    "image": "logic/もう少しだけ_plus.png",
+    "effect": "パラメーター+15 / やる気+4",
+    "effects": [
+      {
+        "type": "score_fixed",
+        "value": 15
+      },
+      {
+        "type": "buff_motivation",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "logic_手拍子",
+    "name": "手拍子",
+    "rarity": "R",
+    "type": "active",
+    "plan": "logic",
+    "cost": 5,
+    "image": "logic/手拍子.png",
+    "effect": "好印象の150％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "score_scale_impression",
+        "ratio": 1.5
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_手拍子+",
+    "name": "手拍子+",
+    "rarity": "R",
+    "type": "active",
+    "plan": "logic",
+    "cost": 5,
+    "image": "logic/手拍子_plus.png",
+    "effect": "好印象の200％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "score_scale_impression",
+        "ratio": 2
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
     "id": "logic_元気な挨拶",
     "name": "元気な挨拶",
     "rarity": "R",
     "type": "active",
     "plan": "logic",
+    "cost": 0,
     "image": "logic/元気な挨拶.png",
-    "effect": "効果未実装",
-    "effects": []
+    "effect": "体力消費4 / 元気の110％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 4
+      },
+      {
+        "type": "consume_hp",
+        "value": 4
+      },
+      {
+        "type": "score_scale_genki",
+        "ratio": 1.1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "costType": "hp",
+    "consumeHp": 4
   },
   {
-    "id": "logic_元気な挨拶_plus",
+    "id": "logic_元気な挨拶+",
     "name": "元気な挨拶+",
     "rarity": "R",
     "type": "active",
     "plan": "logic",
+    "cost": 0,
     "image": "logic/元気な挨拶_plus.png",
-    "effect": "効果未実装",
-    "effects": []
+    "effect": "体力消費3 / 元気の120％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 3
+      },
+      {
+        "type": "consume_hp",
+        "value": 3
+      },
+      {
+        "type": "score_scale_genki",
+        "ratio": 1.2
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "costType": "hp",
+    "consumeHp": 3
   },
   {
-    "id": "logic_冒険心",
-    "name": "冒険心",
-    "rarity": "N",
+    "id": "logic_おまもりミラクル",
+    "name": "おまもりミラクル",
+    "rarity": "R",
+    "type": "active",
+    "plan": "logic",
+    "cost": 3,
+    "image": "logic/おまもりミラクル.png",
+    "effect": "好印象+2 / 好印象の60％分パラメーター上昇 / 除外以外にあるTトラブルカードが2枚以上の場合、好印象の40%分パラメータ上昇",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 2
+      },
+      {
+        "type": "score_scale_impression",
+        "ratio": 0.6
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_おまもりミラクル+",
+    "name": "おまもりミラクル+",
+    "rarity": "R",
+    "type": "active",
+    "plan": "logic",
+    "cost": 3,
+    "image": "logic/おまもりミラクル_plus.png",
+    "effect": "好印象+3 / 好印象の80％分パラメーター上昇 / 除外以外にあるTトラブルカードが2枚以上の場合、好印象の40%分パラメータ上昇",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 3
+      },
+      {
+        "type": "score_scale_impression",
+        "ratio": 0.8
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_がむしゃら",
+    "name": "がむしゃら",
+    "rarity": "R",
+    "type": "active",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/がむしゃら.png",
+    "effect": "元気+2 / やる気+2 / 除外以外にあるTトラブルカードが2枚以上の場合、元気の50%分パラメータ上昇",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_motivation",
+        "value": 2
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_がむしゃら+",
+    "name": "がむしゃら+",
+    "rarity": "R",
+    "type": "active",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/がむしゃら_plus.png",
+    "effect": "元気+2 / やる気+3 / 除外以外にあるTトラブルカードが2枚以上の場合、元気の50%分パラメータ上昇",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_motivation",
+        "value": 3
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_デイドリーミング",
+    "name": "デイドリーミング",
+    "rarity": "R",
     "type": "active",
     "plan": "logic",
     "cost": 0,
-    "image": "logic/冒険心.png",
-    "effect": "効果未実装",
-    "effects": []
+    "image": "logic/デイドリーミング.png",
+    "effect": "体力消費3 / 元気が30以上の場合、使用可 / 元気+3",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 3
+      },
+      {
+        "type": "consume_hp",
+        "value": 3
+      },
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "genki",
+            "value": 30,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "buff_genki",
+            "value": 3
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "type": "genki",
+        "value": 30,
+        "compare": ">="
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true,
+    "costType": "hp",
+    "consumeHp": 3
   },
   {
-    "id": "logic_冒険心_plus",
-    "name": "冒険心+",
-    "rarity": "N",
+    "id": "logic_デイドリーミング+",
+    "name": "デイドリーミング+",
+    "rarity": "R",
     "type": "active",
     "plan": "logic",
     "cost": 0,
-    "image": "logic/冒険心_plus.png",
-    "effect": "効果未実装",
-    "effects": []
+    "image": "logic/デイドリーミング_plus.png",
+    "effect": "体力消費3 / 元気が30以上の場合、使用可 / 元気+6",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 3
+      },
+      {
+        "type": "consume_hp",
+        "value": 3
+      },
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "genki",
+            "value": 30,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "buff_genki",
+            "value": 6
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "type": "genki",
+        "value": 30,
+        "compare": ">="
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true,
+    "costType": "hp",
+    "consumeHp": 3
   },
   {
-    "id": "logic_励まし_plus",
+    "id": "logic_リスタート",
+    "name": "リスタート",
+    "rarity": "R",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 4,
+    "image": "logic/リスタート.png",
+    "effect": "元気+2 / 好印象+3",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_impression",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "logic_リスタート+",
+    "name": "リスタート+",
+    "rarity": "R",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 3,
+    "image": "logic/リスタート_plus.png",
+    "effect": "元気+2 / 好印象+4",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_impression",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "logic_えいえいおー",
+    "name": "えいえいおー",
+    "rarity": "R",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/えいえいおー.png",
+    "effect": "元気+1 / やる気+3",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 1
+      },
+      {
+        "type": "buff_motivation",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "logic_えいえいおー+",
+    "name": "えいえいおー+",
+    "rarity": "R",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/えいえいおー_plus.png",
+    "effect": "元気+2 / やる気+4",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_motivation",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "logic_リズミカル",
+    "name": "リズミカル",
+    "rarity": "R",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/リズミカル.png",
+    "effect": "元気+6",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 6
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_リズミカル+",
+    "name": "リズミカル+",
+    "rarity": "R",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/リズミカル_plus.png",
+    "effect": "元気+8",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 8
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_思い出し笑い",
+    "name": "思い出し笑い",
+    "rarity": "R",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/思い出し笑い.png",
+    "effect": "好印象+3 / 好印象が3以上の場合、やる気+2",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 3
+      },
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "impression",
+            "value": 3,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "buff_motivation",
+            "value": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "logic_思い出し笑い+",
+    "name": "思い出し笑い+",
+    "rarity": "R",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/思い出し笑い_plus.png",
+    "effect": "好印象+4 / 好印象が3以上の場合、やる気+3",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 4
+      },
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "impression",
+            "value": 3,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "buff_motivation",
+            "value": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "logic_パステル気分",
+    "name": "パステル気分",
+    "rarity": "R",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 3,
+    "image": "logic/パステル気分.png",
+    "effect": "元気+5 / やる気が3以上の場合、好印象+3",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 5
+      },
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "motivation",
+            "value": 3,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "buff_impression",
+            "value": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "logic_パステル気分+",
+    "name": "パステル気分+",
+    "rarity": "R",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 3,
+    "image": "logic/パステル気分_plus.png",
+    "effect": "元気+7 / やる気が3以上の場合、好印象+4",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 7
+      },
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "motivation",
+            "value": 3,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "buff_impression",
+            "value": 4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "logic_励まし",
+    "name": "励まし",
+    "rarity": "R",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 4,
+    "image": "logic/励まし.png",
+    "effect": "やる気+3 / やる気が6以上の場合、好印象+4",
+    "effects": [
+      {
+        "type": "buff_motivation",
+        "value": 3
+      },
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "motivation",
+            "value": 6,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "buff_impression",
+            "value": 4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "logic_励まし+",
     "name": "励まし+",
     "rarity": "R",
     "type": "mental",
     "plan": "logic",
+    "cost": 4,
     "image": "logic/励まし_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_夢色リップ",
-    "name": "夢色リップ",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/夢色リップ.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_夢色リップ_plus",
-    "name": "夢色リップ+",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/夢色リップ_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_届いて！",
-    "name": "届いて！",
-    "rarity": "SSR",
-    "type": "active",
-    "plan": "logic",
-    "image": "logic/届いて！.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_届いて！_plus",
-    "name": "届いて！+",
-    "rarity": "SSR",
-    "type": "active",
-    "plan": "logic",
-    "image": "logic/届いて！_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_幸せな時間",
-    "name": "幸せな時間",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/幸せな時間.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_幸せな時間_plus",
-    "name": "幸せな時間+",
-    "rarity": "SR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/幸せな時間_plus.png",
-    "effect": "効果未実装",
-    "effects": []
+    "effect": "やる気+4 / やる気が6以上の場合、好印象+5",
+    "effects": [
+      {
+        "type": "buff_motivation",
+        "value": 4
+      },
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "motivation",
+            "value": 6,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "buff_impression",
+            "value": 5
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "logic_幸せのおまじない",
@@ -1282,92 +1319,564 @@
     "rarity": "R",
     "type": "mental",
     "plan": "logic",
+    "cost": 8,
     "image": "logic/幸せのおまじない.png",
-    "effect": "効果未実装",
-    "effects": []
+    "effect": "好印象+7",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 7
+      }
+    ],
+    "usageLimit": "once_per_lesson"
   },
   {
-    "id": "logic_幸せのおまじない_plus",
+    "id": "logic_幸せのおまじない+",
     "name": "幸せのおまじない+",
     "rarity": "R",
     "type": "mental",
     "plan": "logic",
+    "cost": 8,
     "image": "logic/幸せのおまじない_plus.png",
-    "effect": "効果未実装",
-    "effects": []
+    "effect": "好印象+9",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 9
+      }
+    ],
+    "usageLimit": "once_per_lesson"
   },
   {
-    "id": "logic_成長痛",
-    "name": "成長痛",
-    "rarity": "N",
+    "id": "logic_ラブリーウインク",
+    "name": "ラブリーウインク",
+    "rarity": "SR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 5,
+    "image": "logic/ラブリーウインク.png",
+    "effect": "好印象+4 / 好印象の60％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 4
+      },
+      {
+        "type": "score_scale_impression",
+        "ratio": 0.6
+      }
+    ]
+  },
+  {
+    "id": "logic_ラブリーウインク+",
+    "name": "ラブリーウインク+",
+    "rarity": "SR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 5,
+    "image": "logic/ラブリーウインク_plus.png",
+    "effect": "好印象+5 / 好印象の80％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 5
+      },
+      {
+        "type": "score_scale_impression",
+        "ratio": 0.8
+      }
+    ]
+  },
+  {
+    "id": "logic_ありがとうの言葉",
+    "name": "ありがとうの言葉",
+    "rarity": "SR",
     "type": "active",
     "plan": "logic",
     "cost": 0,
-    "image": "logic/成長痛.png",
-    "effect": "効果未実装",
-    "effects": []
+    "image": "logic/ありがとうの言葉.png",
+    "effect": "体力消費3 / 元気+9 / 元気の40％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 3
+      },
+      {
+        "type": "consume_hp",
+        "value": 3
+      },
+      {
+        "type": "buff_genki",
+        "value": 9
+      },
+      {
+        "type": "score_scale_genki",
+        "ratio": 0.4
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "costType": "hp",
+    "consumeHp": 3
   },
   {
-    "id": "logic_成長痛_plus",
-    "name": "成長痛+",
-    "rarity": "N",
+    "id": "logic_ありがとうの言葉+",
+    "name": "ありがとうの言葉+",
+    "rarity": "SR",
     "type": "active",
     "plan": "logic",
     "cost": 0,
-    "image": "logic/成長痛_plus.png",
-    "effect": "効果未実装",
-    "effects": []
+    "image": "logic/ありがとうの言葉_plus.png",
+    "effect": "体力消費3 / 元気+11 / 元気の70％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 3
+      },
+      {
+        "type": "consume_hp",
+        "value": 3
+      },
+      {
+        "type": "buff_genki",
+        "value": 11
+      },
+      {
+        "type": "score_scale_genki",
+        "ratio": 0.7
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "costType": "hp",
+    "consumeHp": 3
   },
   {
-    "id": "logic_手書きのメッセージ",
-    "name": "手書きのメッセージ",
-    "rarity": "SSR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/手書きのメッセージ.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_手書きのメッセージ_plus",
-    "name": "手書きのメッセージ+",
-    "rarity": "SSR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/手書きのメッセージ_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_星屑センセーション",
-    "name": "星屑センセーション",
-    "rarity": "SSR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/星屑センセーション.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_星屑センセーション_plus",
-    "name": "星屑センセーション+",
-    "rarity": "SSR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/星屑センセーション_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_最強パフォーマー",
-    "name": "最強パフォーマー",
-    "rarity": "N",
+    "id": "logic_ハートの合図",
+    "name": "ハートの合図",
+    "rarity": "SR",
     "type": "active",
     "plan": "logic",
     "cost": 0,
-    "image": "logic/最強パフォーマー.png",
-    "effect": "効果未実装",
-    "effects": []
+    "image": "logic/ハートの合図.png",
+    "effect": "体力消費3 / 元気の130％分パラメーター上昇させ、元気を半分にする",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 3
+      },
+      {
+        "type": "consume_hp",
+        "value": 3
+      },
+      {
+        "type": "score_scale_genki",
+        "ratio": 1.3
+      },
+      {
+        "type": "half_genki"
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "costType": "hp",
+    "consumeHp": 3
+  },
+  {
+    "id": "logic_ハートの合図+",
+    "name": "ハートの合図+",
+    "rarity": "SR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ハートの合図_plus.png",
+    "effect": "体力消費4 / 元気の180％分パラメーター上昇させ、元気を半分にする",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 4
+      },
+      {
+        "type": "consume_hp",
+        "value": 4
+      },
+      {
+        "type": "score_scale_genki",
+        "ratio": 1.8
+      },
+      {
+        "type": "half_genki"
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "costType": "hp",
+    "consumeHp": 4
+  },
+  {
+    "id": "logic_キラメキ",
+    "name": "キラメキ",
+    "rarity": "SR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 3,
+    "image": "logic/キラメキ.png",
+    "effect": "元気+5 / 好印象の200％分パラメーター上昇 / 消費体力増加2ターン",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 5
+      },
+      {
+        "type": "score_scale_impression",
+        "ratio": 2
+      },
+      {
+        "type": "debuff_cost_increase",
+        "value": 1,
+        "duration": 2
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_キラメキ+",
+    "name": "キラメキ+",
+    "rarity": "SR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 3,
+    "image": "logic/キラメキ_plus.png",
+    "effect": "元気+5 / 好印象の250％分パラメーター上昇 / 消費体力増加2ターン",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 5
+      },
+      {
+        "type": "score_scale_impression",
+        "ratio": 2.5
+      },
+      {
+        "type": "debuff_cost_increase",
+        "value": 1,
+        "duration": 2
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_みんな大好き",
+    "name": "みんな大好き",
+    "rarity": "SR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/みんな大好き.png",
+    "effect": "やる気消費3 / 好印象の90％分パラメーター上昇 / スキルカード使用数追加+1",
+    "effects": [
+      {
+        "type": "consume_motivation",
+        "value": 3
+      },
+      {
+        "type": "consume_motivation",
+        "value": 3
+      },
+      {
+        "type": "score_scale_impression",
+        "ratio": 0.9
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "logic_みんな大好き+",
+    "name": "みんな大好き+",
+    "rarity": "SR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/みんな大好き_plus.png",
+    "effect": "やる気消費2 / 好印象の120％分パラメーター上昇 / スキルカード使用数追加+1",
+    "effects": [
+      {
+        "type": "consume_motivation",
+        "value": 2
+      },
+      {
+        "type": "consume_motivation",
+        "value": 2
+      },
+      {
+        "type": "score_scale_impression",
+        "ratio": 1.2
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "logic_きらきら紙吹雪",
+    "name": "きらきら紙吹雪",
+    "rarity": "SR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/きらきら紙吹雪.png",
+    "effect": "やる気消費3 / 元気の110％分パラメーター上昇 / 次のターン、スキルカードを引く",
+    "effects": [
+      {
+        "type": "consume_motivation",
+        "value": 3
+      },
+      {
+        "type": "consume_motivation",
+        "value": 3
+      },
+      {
+        "type": "score_scale_genki",
+        "ratio": 1.1
+      },
+      {
+        "type": "draw_card",
+        "value": 1
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "logic_きらきら紙吹雪+",
+    "name": "きらきら紙吹雪+",
+    "rarity": "SR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/きらきら紙吹雪_plus.png",
+    "effect": "やる気消費2 / 元気の110％分パラメーター上昇 / 次のターン、スキルカードを2枚引く",
+    "effects": [
+      {
+        "type": "consume_motivation",
+        "value": 2
+      },
+      {
+        "type": "consume_motivation",
+        "value": 2
+      },
+      {
+        "type": "score_scale_genki",
+        "ratio": 1.1
+      },
+      {
+        "type": "draw_card",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "logic_あふれる思い出",
+    "name": "あふれる思い出",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 3,
+    "image": "logic/あふれる思い出.png",
+    "effect": "元気+2 / やる気+4",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_motivation",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "logic_あふれる思い出+",
+    "name": "あふれる思い出+",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 3,
+    "image": "logic/あふれる思い出_plus.png",
+    "effect": "元気+4 / やる気+5",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 4
+      },
+      {
+        "type": "buff_motivation",
+        "value": 5
+      }
+    ]
+  },
+  {
+    "id": "logic_ふれあい",
+    "name": "ふれあい",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 5,
+    "image": "logic/ふれあい.png",
+    "effect": "元気+3 / 好印象+4",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 3
+      },
+      {
+        "type": "buff_impression",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "logic_ふれあい+",
+    "name": "ふれあい+",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 5,
+    "image": "logic/ふれあい_plus.png",
+    "effect": "元気+6 / 好印象+5",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 6
+      },
+      {
+        "type": "buff_impression",
+        "value": 5
+      }
+    ]
+  },
+  {
+    "id": "logic_幸せな時間",
+    "name": "幸せな時間",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 5,
+    "image": "logic/幸せな時間.png",
+    "effect": "好印象+6",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 6
+      }
+    ]
+  },
+  {
+    "id": "logic_幸せな時間+",
+    "name": "幸せな時間+",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 5,
+    "image": "logic/幸せな時間_plus.png",
+    "effect": "好印象+8",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 8
+      }
+    ]
+  },
+  {
+    "id": "logic_ファンシーチャーム",
+    "name": "ファンシーチャーム",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 4,
+    "image": "logic/ファンシーチャーム.png",
+    "effect": "好印象+3 / 以降、メンタルスキルカード使用時、好印象+1",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 3
+      },
+      {
+        "type": "buff_impression",
+        "value": 1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_ファンシーチャーム+",
+    "name": "ファンシーチャーム+",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 4,
+    "image": "logic/ファンシーチャーム_plus.png",
+    "effect": "好印象+5 / 以降、メンタルスキルカード使用時、好印象+1",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 5
+      },
+      {
+        "type": "buff_impression",
+        "value": 1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_ワクワクが止まらない",
+    "name": "ワクワクが止まらない",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 3,
+    "image": "logic/ワクワクが止まらない.png",
+    "effect": "やる気+3 / 以降、メンタルスキルカード使用時、やる気+1",
+    "effects": [
+      {
+        "type": "buff_motivation",
+        "value": 3
+      },
+      {
+        "type": "buff_motivation",
+        "value": 1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_ワクワクが止まらない+",
+    "name": "ワクワクが止まらない+",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 3,
+    "image": "logic/ワクワクが止まらない_plus.png",
+    "effect": "やる気+5 / 以降、メンタルスキルカード使用時、やる気+1",
+    "effects": [
+      {
+        "type": "buff_motivation",
+        "value": 5
+      },
+      {
+        "type": "buff_motivation",
+        "value": 1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
   },
   {
     "id": "logic_本番前夜",
@@ -1375,19 +1884,239 @@
     "rarity": "SR",
     "type": "mental",
     "plan": "logic",
+    "cost": 5,
     "image": "logic/本番前夜.png",
-    "effect": "効果未実装",
-    "effects": []
+    "effect": "レッスン開始時手札に入る / 好印象+4 / やる気+3",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 4
+      },
+      {
+        "type": "buff_motivation",
+        "value": 3
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "startInHand": true
   },
   {
-    "id": "logic_本番前夜_plus",
+    "id": "logic_本番前夜+",
     "name": "本番前夜+",
     "rarity": "SR",
     "type": "mental",
     "plan": "logic",
+    "cost": 5,
     "image": "logic/本番前夜_plus.png",
-    "effect": "効果未実装",
-    "effects": []
+    "effect": "レッスン開始時手札に入る / 好印象+5 / やる気+4",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 5
+      },
+      {
+        "type": "buff_motivation",
+        "value": 4
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "startInHand": true
+  },
+  {
+    "id": "logic_ひなたぼっこ",
+    "name": "ひなたぼっこ",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ひなたぼっこ.png",
+    "effect": "元気+11 / やる気+5 / 消費体力増加2ターン",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 11
+      },
+      {
+        "type": "buff_motivation",
+        "value": 5
+      },
+      {
+        "type": "debuff_cost_increase",
+        "value": 1,
+        "duration": 2
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_ひなたぼっこ+",
+    "name": "ひなたぼっこ+",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ひなたぼっこ_plus.png",
+    "effect": "元気+11 / やる気+7 / 消費体力増加2ターン",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 11
+      },
+      {
+        "type": "buff_motivation",
+        "value": 7
+      },
+      {
+        "type": "debuff_cost_increase",
+        "value": 1,
+        "duration": 2
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_イメトレ",
+    "name": "イメトレ",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 4,
+    "image": "logic/イメトレ.png",
+    "effect": "元気+7 / やる気+4",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 7
+      },
+      {
+        "type": "buff_motivation",
+        "value": 4
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_イメトレ+",
+    "name": "イメトレ+",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 4,
+    "image": "logic/イメトレ_plus.png",
+    "effect": "元気+11 / やる気+5",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 11
+      },
+      {
+        "type": "buff_motivation",
+        "value": 5
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_やる気は満点",
+    "name": "やる気は満点",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 1,
+    "image": "logic/やる気は満点.png",
+    "effect": "元気+11 / 好印象+4",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 11
+      },
+      {
+        "type": "buff_impression",
+        "value": 4
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_やる気は満点+",
+    "name": "やる気は満点+",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 1,
+    "image": "logic/やる気は満点_plus.png",
+    "effect": "元気+2 / 好印象+5",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_impression",
+        "value": 5
+      }
+    ],
+    "usageLimit": "once_per_lesson"
+  },
+  {
+    "id": "logic_ゆめみごこち",
+    "name": "ゆめみごこち",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ゆめみごこち.png",
+    "effect": "好印象消費2 / やる気+4 / スキルカード使用数追加+1",
+    "effects": [
+      {
+        "type": "consume_impression",
+        "value": 2
+      },
+      {
+        "type": "consume_impression",
+        "value": 2
+      },
+      {
+        "type": "buff_motivation",
+        "value": 4
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "logic_ゆめみごこち+",
+    "name": "ゆめみごこち+",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ゆめみごこち_plus.png",
+    "effect": "好印象消費1 / やる気+5 / スキルカード使用数追加+1",
+    "effects": [
+      {
+        "type": "consume_impression",
+        "value": 1
+      },
+      {
+        "type": "consume_impression",
+        "value": 1
+      },
+      {
+        "type": "buff_motivation",
+        "value": 5
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      }
+    ],
+    "unique": true
   },
   {
     "id": "logic_止められない想い",
@@ -1395,178 +2124,319 @@
     "rarity": "SR",
     "type": "mental",
     "plan": "logic",
+    "cost": 0,
     "image": "logic/止められない想い.png",
-    "effect": "効果未実装",
-    "effects": []
+    "effect": "体力消費4 / やる気+3 / 好印象+3",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 4
+      },
+      {
+        "type": "consume_hp",
+        "value": 4
+      },
+      {
+        "type": "buff_motivation",
+        "value": 3
+      },
+      {
+        "type": "buff_impression",
+        "value": 3
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true,
+    "costType": "hp",
+    "consumeHp": 4
   },
   {
-    "id": "logic_止められない想い_plus",
+    "id": "logic_止められない想い+",
     "name": "止められない想い+",
     "rarity": "SR",
     "type": "mental",
     "plan": "logic",
+    "cost": 0,
     "image": "logic/止められない想い_plus.png",
-    "effect": "効果未実装",
-    "effects": []
+    "effect": "体力消費4 / やる気+4 / 好印象+5",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 4
+      },
+      {
+        "type": "consume_hp",
+        "value": 4
+      },
+      {
+        "type": "buff_motivation",
+        "value": 4
+      },
+      {
+        "type": "buff_impression",
+        "value": 5
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true,
+    "costType": "hp",
+    "consumeHp": 4
+  },
+  {
+    "id": "logic_オトメゴコロ",
+    "name": "オトメゴコロ",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/オトメゴコロ.png",
+    "effect": "やる気消費3 / 好印象+4 / スキルカード使用数追加+1",
+    "effects": [
+      {
+        "type": "consume_motivation",
+        "value": 3
+      },
+      {
+        "type": "consume_motivation",
+        "value": 3
+      },
+      {
+        "type": "buff_impression",
+        "value": 4
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "logic_オトメゴコロ+",
+    "name": "オトメゴコロ+",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/オトメゴコロ_plus.png",
+    "effect": "やる気消費3 / 好印象+5 / スキルカード使用数追加+1",
+    "effects": [
+      {
+        "type": "consume_motivation",
+        "value": 3
+      },
+      {
+        "type": "consume_motivation",
+        "value": 3
+      },
+      {
+        "type": "buff_impression",
+        "value": 5
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "logic_冒険心",
+    "name": "冒険心",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 3,
+    "image": "logic/冒険心.png",
+    "effect": "好印象+6 / スキルカード使用数追加+1 / スキルカードを引く",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 6
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      },
+      {
+        "type": "draw_card",
+        "value": 1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_冒険心+",
+    "name": "冒険心+",
+    "rarity": "SR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 2,
+    "image": "logic/冒険心_plus.png",
+    "effect": "好印象+7 / スキルカード使用数追加+1 / スキルカードを引く",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 7
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      },
+      {
+        "type": "draw_card",
+        "value": 1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
   },
   {
     "id": "logic_気まぐれハート",
     "name": "気まぐれハート",
-    "rarity": "N",
-    "type": "active",
+    "rarity": "SR",
+    "type": "mental",
     "plan": "logic",
-    "cost": 0,
+    "cost": 2,
     "image": "logic/気まぐれハート.png",
-    "effect": "効果未実装",
-    "effects": []
+    "effect": "元気+3 / やる気+5 / スキルカード使用数追加+1",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 3
+      },
+      {
+        "type": "buff_motivation",
+        "value": 5
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
   },
   {
-    "id": "logic_気まぐれハート_plus",
+    "id": "logic_気まぐれハート+",
     "name": "気まぐれハート+",
-    "rarity": "N",
-    "type": "active",
+    "rarity": "SR",
+    "type": "mental",
     "plan": "logic",
-    "cost": 0,
+    "cost": 1,
     "image": "logic/気まぐれハート_plus.png",
-    "effect": "効果未実装",
-    "effects": []
+    "effect": "元気+3 / やる気+6 / スキルカード使用数追加+1",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 3
+      },
+      {
+        "type": "buff_motivation",
+        "value": 6
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
   },
   {
-    "id": "logic_盛り上げの基本",
-    "name": "盛り上げの基本",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/盛り上げの基本.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_盛り上げの基本_plus",
-    "name": "盛り上げの基本+",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/盛り上げの基本_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_私がスター",
-    "name": "私がスター",
-    "rarity": "SSR",
+    "id": "logic_成長痛",
+    "name": "成長痛",
+    "rarity": "SR",
     "type": "mental",
     "plan": "logic",
-    "image": "logic/私がスター.png",
-    "effect": "効果未実装",
-    "effects": []
+    "cost": 5,
+    "image": "logic/成長痛.png",
+    "effect": "元気+2 / やる気+3 / 好印象+4",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_motivation",
+        "value": 3
+      },
+      {
+        "type": "buff_impression",
+        "value": 4
+      }
+    ],
+    "unique": true
   },
   {
-    "id": "logic_私がスター_plus",
-    "name": "私がスター+",
-    "rarity": "SSR",
+    "id": "logic_成長痛+",
+    "name": "成長痛+",
+    "rarity": "SR",
     "type": "mental",
     "plan": "logic",
-    "image": "logic/私がスター_plus.png",
-    "effect": "効果未実装",
-    "effects": []
+    "cost": 5,
+    "image": "logic/成長痛_plus.png",
+    "effect": "元気+3 / やる気+4 / 好印象+5",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 3
+      },
+      {
+        "type": "buff_motivation",
+        "value": 4
+      },
+      {
+        "type": "buff_impression",
+        "value": 5
+      }
+    ],
+    "unique": true
   },
   {
-    "id": "logic_究極スマイル",
-    "name": "究極スマイル",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/究極スマイル.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_笑顔の基本",
-    "name": "笑顔の基本",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/笑顔の基本.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_笑顔の基本_plus",
-    "name": "笑顔の基本+",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/笑顔の基本_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_虹色ドリーマー",
-    "name": "虹色ドリーマー",
-    "rarity": "SSR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/虹色ドリーマー.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_虹色ドリーマー_plus",
-    "name": "虹色ドリーマー+",
-    "rarity": "SSR",
-    "type": "mental",
-    "plan": "logic",
-    "image": "logic/虹色ドリーマー_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_距離感の基本",
-    "name": "距離感の基本",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/距離感の基本.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_距離感の基本_plus",
-    "name": "距離感の基本+",
-    "rarity": "N",
-    "type": "active",
-    "plan": "logic",
-    "cost": 0,
-    "image": "logic/距離感の基本_plus.png",
-    "effect": "効果未実装",
-    "effects": []
-  },
-  {
-    "id": "logic_輝くキミへ",
-    "name": "輝くキミへ",
+    "id": "logic_200%スマイル",
+    "name": "200%スマイル",
     "rarity": "SSR",
     "type": "active",
     "plan": "logic",
-    "image": "logic/輝くキミへ.png",
-    "effect": "効果未実装",
-    "effects": []
+    "cost": 6,
+    "image": "logic/200%スマイル.png",
+    "effect": "好印象+5 / 好印象の100％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 5
+      },
+      {
+        "type": "score_scale_impression",
+        "ratio": 1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
   },
   {
-    "id": "logic_輝くキミへ_plus",
-    "name": "輝くキミへ+",
+    "id": "logic_200%スマイル+",
+    "name": "200%スマイル+",
     "rarity": "SSR",
     "type": "active",
     "plan": "logic",
-    "image": "logic/輝くキミへ_plus.png",
-    "effect": "効果未実装",
-    "effects": []
+    "cost": 6,
+    "image": "logic/200%スマイル_plus.png",
+    "effect": "好印象+6 / 好印象の170％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 6
+      },
+      {
+        "type": "score_scale_impression",
+        "ratio": 1.7
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
   },
   {
     "id": "logic_開花",
@@ -1574,18 +2444,2159 @@
     "rarity": "SSR",
     "type": "active",
     "plan": "logic",
+    "cost": 5,
     "image": "logic/開花.png",
-    "effect": "効果未実装",
-    "effects": []
+    "effect": "やる気+6 / やる気の200％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "buff_motivation",
+        "value": 6
+      },
+      {
+        "type": "score_scale_motivation",
+        "ratio": 2
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
   },
   {
-    "id": "logic_開花_plus",
+    "id": "logic_開花+",
     "name": "開花+",
     "rarity": "SSR",
     "type": "active",
     "plan": "logic",
+    "cost": 5,
     "image": "logic/開花_plus.png",
-    "effect": "効果未実装",
+    "effect": "やる気+8 / やる気の300％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "buff_motivation",
+        "value": 8
+      },
+      {
+        "type": "score_scale_motivation",
+        "ratio": 3
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_届いて！",
+    "name": "届いて！",
+    "rarity": "SSR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/届いて！.png",
+    "effect": "体力消費2 / 元気の160％分パラメーター上昇させ、元気を0にする",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 2
+      },
+      {
+        "type": "consume_hp",
+        "value": 2
+      },
+      {
+        "type": "score_scale_genki",
+        "ratio": 1.6
+      },
+      {
+        "type": "set_genki",
+        "value": 0
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true,
+    "costType": "hp",
+    "consumeHp": 2
+  },
+  {
+    "id": "logic_届いて！+",
+    "name": "届いて！+",
+    "rarity": "SSR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/届いて！_plus.png",
+    "effect": "体力消費2 / 元気の220％分パラメーター上昇させ、元気を0にする",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 2
+      },
+      {
+        "type": "consume_hp",
+        "value": 2
+      },
+      {
+        "type": "score_scale_genki",
+        "ratio": 2.2
+      },
+      {
+        "type": "set_genki",
+        "value": 0
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true,
+    "costType": "hp",
+    "consumeHp": 2
+  },
+  {
+    "id": "logic_輝くキミへ",
+    "name": "輝くキミへ",
+    "rarity": "SSR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/輝くキミへ.png",
+    "effect": "やる気消費4 / スキルカード使用数追加+1 / 以降、スキルカード使用時、好印象の30％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "consume_motivation",
+        "value": 4
+      },
+      {
+        "type": "consume_motivation",
+        "value": 4
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      },
+      {
+        "type": "score_scale_impression",
+        "ratio": 0.3
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_輝くキミへ+",
+    "name": "輝くキミへ+",
+    "rarity": "SSR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/輝くキミへ_plus.png",
+    "effect": "やる気消費4 / スキルカード使用数追加+1 / 以降、スキルカード使用時、好印象の50％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "consume_motivation",
+        "value": 4
+      },
+      {
+        "type": "consume_motivation",
+        "value": 4
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      },
+      {
+        "type": "score_scale_impression",
+        "ratio": 0.5
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_あのときの約束",
+    "name": "あのときの約束",
+    "rarity": "SSR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/あのときの約束.png",
+    "effect": "好印象消費4 / 元気+9 / 元気の100％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "consume_impression",
+        "value": 4
+      },
+      {
+        "type": "consume_impression",
+        "value": 4
+      },
+      {
+        "type": "buff_genki",
+        "value": 9
+      },
+      {
+        "type": "score_scale_genki",
+        "ratio": 1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_あのときの約束+",
+    "name": "あのときの約束+",
+    "rarity": "SSR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/あのときの約束_plus.png",
+    "effect": "好印象消費4 / 元気+14 / 元気の130％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "consume_impression",
+        "value": 4
+      },
+      {
+        "type": "consume_impression",
+        "value": 4
+      },
+      {
+        "type": "buff_genki",
+        "value": 14
+      },
+      {
+        "type": "score_scale_genki",
+        "ratio": 1.3
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_キセキの魔法",
+    "name": "キセキの魔法",
+    "rarity": "SSR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/キセキの魔法.png",
+    "effect": "体力消費5 / 好印象の250％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 5
+      },
+      {
+        "type": "consume_hp",
+        "value": 5
+      },
+      {
+        "type": "score_scale_impression",
+        "ratio": 2.5
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true,
+    "costType": "hp",
+    "consumeHp": 5
+  },
+  {
+    "id": "logic_キセキの魔法+",
+    "name": "キセキの魔法+",
+    "rarity": "SSR",
+    "type": "active",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/キセキの魔法_plus.png",
+    "effect": "体力消費5 / 好印象の340％分パラメーター上昇",
+    "effects": [
+      {
+        "type": "consume_hp",
+        "value": 5
+      },
+      {
+        "type": "consume_hp",
+        "value": 5
+      },
+      {
+        "type": "score_scale_impression",
+        "ratio": 3.4
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true,
+    "costType": "hp",
+    "consumeHp": 5
+  },
+  {
+    "id": "logic_私がスター",
+    "name": "私がスター",
+    "rarity": "SSR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/私がスター.png",
+    "effect": "好印象消費2 / ターン追加+1 / スキルカード使用数追加+1",
+    "effects": [
+      {
+        "type": "consume_impression",
+        "value": 2
+      },
+      {
+        "type": "consume_impression",
+        "value": 2
+      },
+      {
+        "type": "add_turn",
+        "value": 1
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_私がスター+",
+    "name": "私がスター+",
+    "rarity": "SSR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/私がスター_plus.png",
+    "effect": "好印象消費1 / ターン追加+1 / スキルカード使用数追加+1",
+    "effects": [
+      {
+        "type": "consume_impression",
+        "value": 1
+      },
+      {
+        "type": "consume_impression",
+        "value": 1
+      },
+      {
+        "type": "add_turn",
+        "value": 1
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_星屑センセーション",
+    "name": "星屑センセーション",
+    "rarity": "SSR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/星屑センセーション.png",
+    "effect": "やる気消費3 / 好印象+5 / スキルカード使用数追加+1",
+    "effects": [
+      {
+        "type": "consume_motivation",
+        "value": 3
+      },
+      {
+        "type": "consume_motivation",
+        "value": 3
+      },
+      {
+        "type": "buff_impression",
+        "value": 5
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_星屑センセーション+",
+    "name": "星屑センセーション+",
+    "rarity": "SSR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/星屑センセーション_plus.png",
+    "effect": "やる気消費3 / 好印象+7 / スキルカード使用数追加+1",
+    "effects": [
+      {
+        "type": "consume_motivation",
+        "value": 3
+      },
+      {
+        "type": "consume_motivation",
+        "value": 3
+      },
+      {
+        "type": "buff_impression",
+        "value": 7
+      },
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_ノートの端の決意",
+    "name": "ノートの端の決意",
+    "rarity": "SSR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 4,
+    "image": "logic/ノートの端の決意.png",
+    "effect": "好印象+3 / やる気+3 / 消費体力減少3ターン",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 3
+      },
+      {
+        "type": "buff_motivation",
+        "value": 3
+      },
+      {
+        "type": "buff_cost_reduction",
+        "duration": 3
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_ノートの端の決意+",
+    "name": "ノートの端の決意+",
+    "rarity": "SSR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 4,
+    "image": "logic/ノートの端の決意_plus.png",
+    "effect": "好印象+5 / やる気+3 / 消費体力減少3ターン",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 5
+      },
+      {
+        "type": "buff_motivation",
+        "value": 3
+      },
+      {
+        "type": "buff_cost_reduction",
+        "duration": 3
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_手書きのメッセージ",
+    "name": "手書きのメッセージ",
+    "rarity": "SSR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/手書きのメッセージ.png",
+    "effect": "好印象消費2 / 元気+9 / 元気+9",
+    "effects": [
+      {
+        "type": "consume_impression",
+        "value": 2
+      },
+      {
+        "type": "consume_impression",
+        "value": 2
+      },
+      {
+        "type": "buff_genki",
+        "value": 9
+      },
+      {
+        "type": "buff_genki",
+        "value": 9
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_手書きのメッセージ+",
+    "name": "手書きのメッセージ+",
+    "rarity": "SSR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/手書きのメッセージ_plus.png",
+    "effect": "好印象消費1 / 元気+10 / 元気+10",
+    "effects": [
+      {
+        "type": "consume_impression",
+        "value": 1
+      },
+      {
+        "type": "consume_impression",
+        "value": 1
+      },
+      {
+        "type": "buff_genki",
+        "value": 10
+      },
+      {
+        "type": "buff_genki",
+        "value": 10
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_トキメキ",
+    "name": "トキメキ",
+    "rarity": "SSR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 10,
+    "image": "logic/トキメキ.png",
+    "effect": "好印象+8 / やる気+5",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 8
+      },
+      {
+        "type": "buff_motivation",
+        "value": 5
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_トキメキ+",
+    "name": "トキメキ+",
+    "rarity": "SSR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 9,
+    "image": "logic/トキメキ_plus.png",
+    "effect": "好印象+10 / やる気+6",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 10
+      },
+      {
+        "type": "buff_motivation",
+        "value": 6
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_虹色ドリーマー",
+    "name": "虹色ドリーマー",
+    "rarity": "SSR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 9,
+    "image": "logic/虹色ドリーマー.png",
+    "effect": "好印象+1 / 以降、ターン終了時、好印象が3以上の場合、好印象+3",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 1
+      },
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "impression",
+            "value": 3,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "buff_impression",
+            "value": 3
+          }
+        ]
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_虹色ドリーマー+",
+    "name": "虹色ドリーマー+",
+    "rarity": "SSR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 9,
+    "image": "logic/虹色ドリーマー_plus.png",
+    "effect": "好印象+4 / 以降、ターン終了時、好印象が3以上の場合、好印象+3",
+    "effects": [
+      {
+        "type": "buff_impression",
+        "value": 4
+      },
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "impression",
+            "value": 3,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "buff_impression",
+            "value": 3
+          }
+        ]
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_夢色リップ",
+    "name": "夢色リップ",
+    "rarity": "SSR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 4,
+    "image": "logic/夢色リップ.png",
+    "effect": "元気+2 / やる気+4 / パラメーター上昇量増加10％",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_motivation",
+        "value": 4
+      },
+      {
+        "type": "buff_score_bonus",
+        "value": 10,
+        "duration": -1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_夢色リップ+",
+    "name": "夢色リップ+",
+    "rarity": "SSR",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 4,
+    "image": "logic/夢色リップ_plus.png",
+    "effect": "元気+2 / やる気+5 / パラメーター上昇量増加20％",
+    "effects": [
+      {
+        "type": "buff_genki",
+        "value": 2
+      },
+      {
+        "type": "buff_motivation",
+        "value": 5
+      },
+      {
+        "type": "buff_score_bonus",
+        "value": 20,
+        "duration": -1
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_エクセレント♪",
+    "name": "エクセレント♪",
+    "rarity": "Legend",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 5,
+    "image": "logic/エクセレント♪.png",
+    "effect": "スキルカード使用数追加+1 / 以降、ターン開始後、手札にあるスキルカード（R）が1枚以上の場合、ランダムな手札にあるスキルカード（R）2枚をコストを消費せず使用",
+    "effects": [
+      {
+        "type": "add_card_play_count",
+        "value": 1
+      },
+      {
+        "type": "trigger_random_hand_card",
+        "targetRarity": "R",
+        "count": 2,
+        "ignoreCost": true
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_究極スマイル",
+    "name": "究極スマイル",
+    "rarity": "Legend",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 7,
+    "image": "logic/究極スマイル.png",
+    "effect": "好印象が6以上の場合、使用可 / 好印象強化+100% / すべてのスキルカードの好印象值增加+5",
+    "effects": [
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "impression",
+            "value": 6,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "buff_impression_gain",
+            "value": 100,
+            "duration": 1
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "type": "impression",
+        "value": 6,
+        "compare": ">="
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_最強パフォーマー",
+    "name": "最強パフォーマー",
+    "rarity": "Legend",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 6,
+    "image": "logic/最強パフォーマー.png",
+    "effect": "やる気が9以上の場合、使用可 / スキルカード使用数追加+1 / やる気+5",
+    "effects": [
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "motivation",
+            "value": 9,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "add_card_play_count",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "type": "condition_gate",
+        "condition": [
+          {
+            "type": "motivation",
+            "value": 9,
+            "compare": ">="
+          }
+        ],
+        "subEffects": [
+          {
+            "type": "buff_motivation",
+            "value": 5
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "type": "motivation",
+        "value": 9,
+        "compare": ">="
+      }
+    ],
+    "usageLimit": "once_per_lesson",
+    "unique": true
+  },
+  {
+    "id": "logic_アルバイター",
+    "name": "アルバイター",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/アルバイター.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_アルバイター",
+    "name": "アルバイター",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/アルバイター.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_超高学歴アイドル",
+    "name": "超高学歴アイドル",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/超高学歴アイドル.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_超高学歴アイドル",
+    "name": "超高学歴アイドル",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/超高学歴アイドル.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_内気系少女",
+    "name": "内気系少女",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/内気系少女.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_内気系少女",
+    "name": "内気系少女",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/内気系少女.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_元気いっぱい",
+    "name": "元気いっぱい",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/元気いっぱい.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_元気いっぱい",
+    "name": "元気いっぱい",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/元気いっぱい.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_未完の大器",
+    "name": "未完の大器",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/未完の大器.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_未完の大器",
+    "name": "未完の大器",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/未完の大器.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_初めての未来",
+    "name": "初めての未来",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/初めての未来.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_初めての未来",
+    "name": "初めての未来",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/初めての未来.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_初めての場所",
+    "name": "初めての場所",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/初めての場所.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_初めての場所",
+    "name": "初めての場所",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/初めての場所.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_初めてのお相手",
+    "name": "初めてのお相手",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/初めてのお相手.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_初めてのお相手",
+    "name": "初めてのお相手",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/初めてのお相手.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_初めての結晶",
+    "name": "初めての結晶",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/初めての結晶.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_初めての結晶",
+    "name": "初めての結晶",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/初めての結晶.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_初めての想い",
+    "name": "初めての想い",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/初めての想い.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_初めての想い",
+    "name": "初めての想い",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/初めての想い.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_初めての息",
+    "name": "初めての息",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/初めての息.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_初めての息",
+    "name": "初めての息",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/初めての息.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_初めての野望",
+    "name": "初めての野望",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/初めての野望.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_初めての野望",
+    "name": "初めての野望",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/初めての野望.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_Colorful Cute!",
+    "name": "Colorful Cute!",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/Colorful Cute!.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_Colorful Cute!+",
+    "name": "Colorful Cute!+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/Colorful Cute!_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_苦しいのが好き",
+    "name": "苦しいのが好き",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/苦しいのが好き.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_苦しいのが好き+",
+    "name": "苦しいのが好き+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/苦しいのが好き_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_純白の妖精",
+    "name": "純白の妖精",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/純白の妖精.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_純白の妖精+",
+    "name": "純白の妖精+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/純白の妖精_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_いっしょうけんめい",
+    "name": "いっしょうけんめい",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/いっしょうけんめい.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_いっしょうけんめい+",
+    "name": "いっしょうけんめい+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/いっしょうけんめい_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_打倒お姉ちゃん",
+    "name": "打倒お姉ちゃん",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/打倒お姉ちゃん.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_打倒お姉ちゃん+",
+    "name": "打倒お姉ちゃん+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/打倒お姉ちゃん_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_紫電一閃",
+    "name": "紫電一閃",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/紫電一閃.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_紫電一閃+",
+    "name": "紫電一閃+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/紫電一閃_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_なに聴いてるの？",
+    "name": "なに聴いてるの？",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/なに聴いてるの？.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_なに聴いてるの？+",
+    "name": "なに聴いてるの？+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/なに聴いてるの？_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_こうかい･･････？",
+    "name": "こうかい･･････？",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/こうかい･･････？.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_こうかい･･････？+",
+    "name": "こうかい･･････？+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/こうかい･･････？_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_ディテールが肝心",
+    "name": "ディテールが肝心",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ディテールが肝心.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_ディテールが肝心+",
+    "name": "ディテールが肝心+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ディテールが肝心_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_草笛ハーモニカ",
+    "name": "草笛ハーモニカ",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/草笛ハーモニカ.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_草笛ハーモニカ+",
+    "name": "草笛ハーモニカ+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/草笛ハーモニカ_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_味見はいかが",
+    "name": "味見はいかが",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/味見はいかが.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_味見はいかが+",
+    "name": "味見はいかが+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/味見はいかが_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_よそ見はダメ♪",
+    "name": "よそ見はダメ♪",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/よそ見はダメ♪.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_よそ見はダメ♪+",
+    "name": "よそ見はダメ♪+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/よそ見はダメ♪_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_本気の趣味",
+    "name": "本気の趣味",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/本気の趣味.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_本気の趣味+",
+    "name": "本気の趣味+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/本気の趣味_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_もう怖くないから",
+    "name": "もう怖くないから",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/もう怖くないから.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_もう怖くないから+",
+    "name": "もう怖くないから+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/もう怖くないから_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_お嬢様の晴れ舞台",
+    "name": "お嬢様の晴れ舞台",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/お嬢様の晴れ舞台.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_お嬢様の晴れ舞台+",
+    "name": "お嬢様の晴れ舞台+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/お嬢様の晴れ舞台_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_絡まる想い",
+    "name": "絡まる想い",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/絡まる想い.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_絡まる想い+",
+    "name": "絡まる想い+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/絡まる想い_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_おっきなおにぎり",
+    "name": "おっきなおにぎり",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/おっきなおにぎり.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_おっきなおにぎり+",
+    "name": "おっきなおにぎり+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/おっきなおにぎり_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_POW！",
+    "name": "POW！",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/POW！.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_POW！+",
+    "name": "POW！+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/POW！_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_昼下がりのそよ風",
+    "name": "昼下がりのそよ風",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/昼下がりのそよ風.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_昼下がりのそよ風+",
+    "name": "昼下がりのそよ風+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/昼下がりのそよ風_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_金魚すくいで勝負",
+    "name": "金魚すくいで勝負",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/金魚すくいで勝負.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_金魚すくいで勝負+",
+    "name": "金魚すくいで勝負+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/金魚すくいで勝負_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_夏の宵の線香花火",
+    "name": "夏の宵の線香花火",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/夏の宵の線香花火.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_夏の宵の線香花火+",
+    "name": "夏の宵の線香花火+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/夏の宵の線香花火_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_さっぱりひといき",
+    "name": "さっぱりひといき",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/さっぱりひといき.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_さっぱりひといき+",
+    "name": "さっぱりひといき+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/さっぱりひといき_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_月夜のランウェイ",
+    "name": "月夜のランウェイ",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/月夜のランウェイ.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_月夜のランウェイ+",
+    "name": "月夜のランウェイ+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/月夜のランウェイ_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_悪戦苦闘ハンドメイド",
+    "name": "悪戦苦闘ハンドメイド",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/悪戦苦闘ハンドメイド.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_悪戦苦闘ハンドメイド+",
+    "name": "悪戦苦闘ハンドメイド+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/悪戦苦闘ハンドメイド_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_また、明日",
+    "name": "また、明日",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/また、明日.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_また、明日+",
+    "name": "また、明日+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/また、明日_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_メリクリで～す♪",
+    "name": "メリクリで～す♪",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/メリクリで～す♪.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_メリクリで～す♪+",
+    "name": "メリクリで～す♪+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/メリクリで～す♪_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_愛を込めて",
+    "name": "愛を込めて",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/愛を込めて.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_愛を込めて+",
+    "name": "愛を込めて+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/愛を込めて_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_自慢のお姉ちゃんだぞ",
+    "name": "自慢のお姉ちゃんだぞ",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/自慢のお姉ちゃんだぞ.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_自慢のお姉ちゃんだぞ+",
+    "name": "自慢のお姉ちゃんだぞ+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/自慢のお姉ちゃんだぞ_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_広がり続ける世界",
+    "name": "広がり続ける世界",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/広がり続ける世界.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_広がり続ける世界+",
+    "name": "広がり続ける世界+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/広がり続ける世界_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_エウレカ！",
+    "name": "エウレカ！",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/エウレカ！.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_エウレカ！+",
+    "name": "エウレカ！+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/エウレカ！_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_あた、飛べる",
+    "name": "あた、飛べる",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/あた、飛べる.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_あた、飛べる+",
+    "name": "あた、飛べる+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/あた、飛べる_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_あなたにあげる",
+    "name": "あなたにあげる",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/あなたにあげる.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_あなたにあげる+",
+    "name": "あなたにあげる+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/あなたにあげる_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_ちいさなおひさま",
+    "name": "ちいさなおひさま",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ちいさなおひさま.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_ちいさなおひさま+",
+    "name": "ちいさなおひさま+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ちいさなおひさま_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_浮き上がる気持ち",
+    "name": "浮き上がる気持ち",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/浮き上がる気持ち.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_浮き上がる気持ち+",
+    "name": "浮き上がる気持ち+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/浮き上がる気持ち_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_わたしらしい色",
+    "name": "わたしらしい色",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/わたしらしい色.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_わたしらしい色+",
+    "name": "わたしらしい色+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/わたしらしい色_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_戦う理由",
+    "name": "戦う理由",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/戦う理由.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_戦う理由+",
+    "name": "戦う理由+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/戦う理由_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_憧れのアイドル",
+    "name": "憧れのアイドル",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/憧れのアイドル.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_憧れのアイドル+",
+    "name": "憧れのアイドル+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/憧れのアイドル_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_つかみ取った未来",
+    "name": "つかみ取った未来",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/つかみ取った未来.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_つかみ取った未来+",
+    "name": "つかみ取った未来+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/つかみ取った未来_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_ドラマチックホリデー",
+    "name": "ドラマチックホリデー",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ドラマチックホリデー.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_ドラマチックホリデー+",
+    "name": "ドラマチックホリデー+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ドラマチックホリデー_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_爆盛れ最強ルック♪",
+    "name": "爆盛れ最強ルック♪",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/爆盛れ最強ルック♪.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_爆盛れ最強ルック♪+",
+    "name": "爆盛れ最強ルック♪+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/爆盛れ最強ルック♪_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_微熱ノスタルジー",
+    "name": "微熱ノスタルジー",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/微熱ノスタルジー.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_微熱ノスタルジー+",
+    "name": "微熱ノスタルジー+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/微熱ノスタルジー_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_空まで一直線",
+    "name": "空まで一直線",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/空まで一直線.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_空まで一直線+",
+    "name": "空まで一直線+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/空まで一直線_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_私は、決して",
+    "name": "私は、決して",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/私は、決して.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_私は、決して+",
+    "name": "私は、決して+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/私は、決して_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_夢と現の境界線",
+    "name": "夢と現の境界線",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/夢と現の境界線.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_夢と現の境界線+",
+    "name": "夢と現の境界線+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/夢と現の境界線_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_ダメダメクッキング",
+    "name": "ダメダメクッキング",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ダメダメクッキング.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_ダメダメクッキング+",
+    "name": "ダメダメクッキング+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ダメダメクッキング_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_お泊り猛勉強",
+    "name": "お泊り猛勉強",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/お泊り猛勉強.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_お泊り猛勉強+",
+    "name": "お泊り猛勉強+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/お泊り猛勉強_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_その本、おもしろい？",
+    "name": "その本、おもしろい？",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/その本、おもしろい？.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_その本、おもしろい？+",
+    "name": "その本、おもしろい？+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/その本、おもしろい？_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_ほかほか焼き芋",
+    "name": "ほかほか焼き芋",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ほかほか焼き芋.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_ほかほか焼き芋+",
+    "name": "ほかほか焼き芋+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/ほかほか焼き芋_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_対象、ロックオン",
+    "name": "対象、ロックオン",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/対象、ロックオン.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_対象、ロックオン+",
+    "name": "対象、ロックオン+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/対象、ロックオン_plus.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_あこがれ不良ムーブ",
+    "name": "あこがれ不良ムーブ",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/あこがれ不良ムーブ.png",
+    "effect": "",
+    "effects": []
+  },
+  {
+    "id": "logic_あこがれ不良ムーブ+",
+    "name": "あこがれ不良ムーブ+",
+    "rarity": "",
+    "type": "mental",
+    "plan": "logic",
+    "cost": 0,
+    "image": "logic/あこがれ不良ムーブ_plus.png",
+    "effect": "",
     "effects": []
   }
 ]

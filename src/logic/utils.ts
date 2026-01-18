@@ -10,7 +10,7 @@ export const shuffle = (cards: Card[]) => {
 };
 
 export const drawCards = (currentDeck: Card[], currentDiscard: Card[], count: number, currentHand: Card[] = []) => {
-    let deck = [...currentDeck];
+    let deck = shuffle([...currentDeck]);
     let discard = [...currentDiscard];
     const hand: Card[] = [];
     const drawnIds = new Set(currentHand.map(c => c.id));

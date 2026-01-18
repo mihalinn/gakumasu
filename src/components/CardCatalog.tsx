@@ -37,7 +37,7 @@ export function CardCatalog({ isOpen = true, onClose, renderMode = 'modal' }: Ca
     const [searchTerm, setSearchTerm] = useState("");
     const [activeTab, setActiveTab] = useState<'all' | 'active' | 'mental' | 'other'>('all');
     const [filterPlan, setFilterPlan] = useState<'all' | 'logic' | 'sense' | 'free'>('all');
-    const [filterRarity, setFilterRarity] = useState<'all' | 'SSR' | 'SR' | 'R' | 'N'>('all');
+    const [filterRarity, setFilterRarity] = useState<'all' | 'Legend' | 'SSR' | 'SR' | 'R' | 'N'>('all');
     const [filterUpgrade, setFilterUpgrade] = useState<'all' | 'enhanced' | 'basic'>('all');
 
     // Load cards exactly like HandView
@@ -159,6 +159,7 @@ export function CardCatalog({ isOpen = true, onClose, renderMode = 'modal' }: Ca
                                 <span className="text-[10px] text-slate-400 font-bold">レアリティ</span>
                                 <div className="flex gap-0.5 bg-black/20 rounded p-0.5">
                                     <FilterButton label="すべて" active={filterRarity === 'all'} onClick={() => setFilterRarity('all')} />
+                                    <FilterButton label="Legend" active={filterRarity === 'Legend'} color="text-fuchsia-400" onClick={() => setFilterRarity('Legend')} />
                                     <FilterButton label="SSR" active={filterRarity === 'SSR'} color="text-yellow-400" onClick={() => setFilterRarity('SSR')} />
                                     <FilterButton label="SR" active={filterRarity === 'SR'} color="text-blue-400" onClick={() => setFilterRarity('SR')} />
                                     <FilterButton label="R" active={filterRarity === 'R'} color="text-slate-300" onClick={() => setFilterRarity('R')} />
@@ -211,9 +212,10 @@ export function CardCatalog({ isOpen = true, onClose, renderMode = 'modal' }: Ca
                                     <div>
                                         <div className="flex items-start justify-between gap-2">
                                             <h3 className="font-bold text-sm text-slate-200 truncate" title={card.name}>{card.name}</h3>
-                                            <span className={`text-[10px] font-mono px-1 rounded border shrink-0 ${card.rarity === 'SSR' ? 'text-yellow-400 border-yellow-500/30 bg-yellow-500/10' :
-                                                card.rarity === 'SR' ? 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10' :
-                                                    'text-slate-400 border-slate-500/30'
+                                            <span className={`text-[10px] font-mono px-1 rounded border shrink-0 ${card.rarity === 'Legend' ? 'text-fuchsia-400 border-fuchsia-500/30 bg-fuchsia-500/10' :
+                                                card.rarity === 'SSR' ? 'text-yellow-400 border-yellow-500/30 bg-yellow-500/10' :
+                                                    card.rarity === 'SR' ? 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10' :
+                                                        'text-slate-400 border-slate-500/30'
                                                 }`}>
                                                 {card.rarity || 'N'}
                                             </span>

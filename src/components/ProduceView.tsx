@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { Card, LessonAttribute } from '../types/index'
+import { CardDetailOverlay } from './CardDetailOverlay';
 
 interface ProduceViewProps {
   state: any; // Ideally this would be GameState from types
@@ -13,6 +14,7 @@ interface ProduceViewProps {
 
 export function ProduceView({ state, endTurn, resetSimulation, playCard, usePDrink, turnAttributes, plan }: ProduceViewProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [hoveredCard, setHoveredCard] = useState<Card | null>(null);
 
   // Logicプランでない場合のみ集中を表示 -> センスとアノマリーのみ表示に変更 (未選択時は非表示)
   const showConcentration = plan === 'sense' || plan === 'anomaly';
@@ -129,20 +131,15 @@ export function ProduceView({ state, endTurn, resetSimulation, playCard, usePDri
               </div>
             </div>
           </div>
-          <button
-            onClick={endTurn}
-            disabled={state.turn >= state.maxTurns}
-            className={`px-6 py-2 font-bold rounded-lg border transition-colors ${state.turn >= state.maxTurns
-              ? 'bg-slate-800 text-slate-600 border-white/5 cursor-not-allowed'
-              : 'bg-slate-800 hover:bg-slate-700 text-white border-white/10'
-              }`}
-          >
-            スキップ
-          </button>
+
         </div>
 
         {/* Main Stage Area */}
         <div className="flex-1 bg-slate-900/30 rounded-xl border border-white/5 relative overflow-hidden flex items-center justify-center">
+
+          {/* Detailed Card Info Overlay */}
+          {hoveredCard && <CardDetailOverlay card={hoveredCard} />}
+
           {/* Character Status Overlay */}
           {/* Left Status Overlay: Motivation, Good Impression, Concentration, Buffs */}
           <div className="absolute top-4 left-4 z-10">
@@ -268,10 +265,12 @@ export function ProduceView({ state, endTurn, resetSimulation, playCard, usePDri
                   key={`${card.id}-${idx}`}
                   onClick={() => canPlay && playCard(card.id)}
                   disabled={!canPlay}
+                  onMouseEnter={() => setHoveredCard(card)}
+                  onMouseLeave={() => setHoveredCard(null)}
                   className={`
                         w-24 h-32 rounded-lg border p-1 flex flex-col items-center justify-between shrink-0 transition-all duration-300 shadow-lg
                         ${canPlay
-                      ? 'bg-slate-800 border-white/10 hover:scale-105 hover:border-white/30 hover:shadow-blue-500/10 cursor-pointer'
+                      ? 'bg-slate-800 border-white/10 hover:scale-110 hover:-translate-y-2 hover:border-white/40 hover:shadow-cyan-500/20 cursor-pointer z-10 hover:z-20'
                       : 'bg-slate-900/50 border-white/5 opacity-50 cursor-not-allowed grayscale shadow-none'
                     }
                     `}
@@ -360,7 +359,17 @@ export function ProduceView({ state, endTurn, resetSimulation, playCard, usePDri
           </div>
         </div>
 
-        <div className="mt-auto">
+        <div className="mt-auto flex flex-col gap-3">
+          <button
+            onClick={endTurn}
+            disabled={state.turn >= state.maxTurns}
+            className={`w-full py-3 font-bold rounded-lg border transition-colors shadow-lg ${state.turn >= state.maxTurns
+              ? 'bg-slate-800 text-slate-600 border-white/5 cursor-not-allowed'
+              : 'bg-blue-600 hover:bg-blue-500 text-white border-blue-400/30 hover:shadow-blue-500/20'
+              }`}
+          >
+            ターン終了 (スキップ)
+          </button>
           <button
             onClick={resetSimulation}
             className="w-full py-2 bg-slate-800 hover:bg-red-500/20 hover:text-red-400 text-slate-500 text-xs font-bold rounded border border-white/5 hover:border-red-500/30 transition-all duration-200"
